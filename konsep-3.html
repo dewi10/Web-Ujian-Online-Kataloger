@@ -1,0 +1,345 @@
+<!DOCTYPE html><html lang="id"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ANALISIS KEBUTUHAN DESAIN SISTEM APLIKASI CAT UJIAN KOMPETENSI KATALOGER PUSKOD BALOGHAN KEMHAN</title>
+<style>
+:root {
+  --navy:#1A2B4A;--navy2:#0F1C30;--steel:#3D6096;--gold:#BF9B2F;--gold-l:#F5EAC8;--gold-d:#8A6F1E;
+  --bg:#F5F7FA;--surf:#FFFFFF;--surf2:#ECF0F7;--bdr:#CDD5E3;
+  --tx:#1A2B4A;--txs:#3D5068;--txm:#637085;
+  --ok:#1A6B3C;--okb:#E6F5ED;--wn:#8A4F00;--wnb:#FFF3E0;--cr:#8A1A1A;--crb:#FDEAEA;
+  --r:6px;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0C1520;--surf:#142030;--surf2:#1C2D42;--bdr:#2A3D56;
+  --tx:#DDE5F0;--txs:#9BB4D0;--txm:#6A88A8;
+  --gold:#CFA832;--gold-l:#2A2010;--gold-d:#9A7A20;--steel:#5A88C8;
+  --ok:#3DA86A;--okb:#0A2018;--wn:#CCA04A;--wnb:#201500;--cr:#E05050;--crb:#200808;
+}}
+:root[data-theme=dark]{--bg:#0C1520;--surf:#142030;--surf2:#1C2D42;--bdr:#2A3D56;--tx:#DDE5F0;--txs:#9BB4D0;--txm:#6A88A8;--gold:#CFA832;--gold-l:#2A2010;--gold-d:#9A7A20;--steel:#5A88C8;--ok:#3DA86A;--okb:#0A2018;--wn:#CCA04A;--wnb:#201500;--cr:#E05050;--crb:#200808;}
+:root[data-theme=light]{--bg:#F5F7FA;--surf:#FFFFFF;--surf2:#ECF0F7;--bdr:#CDD5E3;--tx:#1A2B4A;--txs:#3D5068;--txm:#637085;--gold:#BF9B2F;--gold-l:#F5EAC8;--gold-d:#8A6F1E;--steel:#3D6096;--ok:#1A6B3C;--okb:#E6F5ED;--wn:#8A4F00;--wnb:#FFF3E0;--cr:#8A1A1A;--crb:#FDEAEA;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;font-size:15px;line-height:1.7;color:var(--tx);background:var(--bg)}
+/* Header */
+.hdr{background:linear-gradient(165deg,var(--navy2) 0%,var(--navy) 65%,#223A6A 100%);color:#fff;position:relative;overflow:hidden}
+.hdr::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(255,255,255,.015) 80px,rgba(255,255,255,.015) 81px);pointer-events:none}
+.hband{background:var(--gold);height:4px}
+.hinner{max-width:1200px;margin:0 auto;padding:32px 40px 36px;display:flex;align-items:flex-start;gap:22px;position:relative;z-index:1}
+.emblem{flex-shrink:0;width:64px;height:64px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:var(--navy2);font-family:Georgia,serif;box-shadow:0 0 0 3px rgba(255,255,255,.15);text-align:center;line-height:1.2}
+.htxt{}
+.orglbl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:6px;font-weight:500}
+.dtitle{font-family:Georgia,'Times New Roman',serif;font-size:clamp(17px,2vw,24px);font-weight:700;line-height:1.3;color:#fff;text-wrap:balance;margin-bottom:10px}
+.dtitle em{color:var(--gold);font-style:normal}
+.dmeta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.mchip{font-size:11px;letter-spacing:.04em;color:rgba(255,255,255,.65);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:3px;padding:3px 9px}
+.mchip strong{color:rgba(255,255,255,.9);font-weight:600}
+/* Status bar */
+.sbar{background:var(--navy);border-bottom:2px solid var(--gold)}
+.sbinner{max-width:1200px;margin:0 auto;padding:10px 40px;display:flex;gap:24px;flex-wrap:wrap}
+.si{display:flex;align-items:center;gap:7px}
+.sdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sdot.ok{background:#4ADE80}.sdot.wn{background:#FCD34D}.sdot.cr{background:#F87171}
+.slbl{font-size:11px;color:rgba(255,255,255,.7)}.slbl strong{color:#fff;font-weight:600}
+/* Layout */
+.wrap{max-width:1200px;margin:0 auto;padding:32px 20px;display:grid;grid-template-columns:230px 1fr;gap:32px;align-items:start}
+/* TOC */
+.toc{position:sticky;top:16px;background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden}
+.toch{background:var(--surf2);padding:10px 15px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--txm);border-bottom:1px solid var(--bdr)}
+.tocl{list-style:none;padding:5px 0}
+.tocl li a{display:flex;align-items:center;gap:8px;padding:6px 13px;text-decoration:none;color:var(--txs);font-size:12.5px;line-height:1.4;transition:background .12s,color .12s}
+.tocl li a:hover{background:var(--surf2);color:var(--tx)}
+.tnum{display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;border-radius:50%;background:var(--surf2);color:var(--txm);font-size:10px;font-weight:700;flex-shrink:0;border:1px solid var(--bdr)}
+.tocl li a:hover .tnum{background:var(--gold);color:var(--navy2);border-color:var(--gold)}
+/* Main */
+.main{min-width:0}
+.sec{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;margin-bottom:22px}
+.sech{padding:17px 24px 15px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:13px}
+.sbadge{display:inline-flex;align-items:center;justify-content:center;width:33px;height:33px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:700;font-family:Georgia,serif;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.sech h2{font-family:Georgia,'Times New Roman',serif;font-size:16px;font-weight:700;color:var(--tx);line-height:1.3;text-wrap:balance}
+.sech .ssub{font-size:12px;color:var(--txm);font-weight:400}
+.sbody{padding:20px 24px}
+/* Typography */
+.sbody h3{font-family:Georgia,serif;font-size:14px;font-weight:700;color:var(--steel);margin:20px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--bdr)}
+.sbody h3:first-child{margin-top:0}
+.sbody p{color:var(--txs);font-size:14px;margin-bottom:10px;max-width:72ch}
+.sbody ul,.sbody ol{margin:6px 0 12px 20px;color:var(--txs);font-size:14px}
+.sbody li{margin-bottom:4px}
+/* Tables */
+.tw{overflow-x:auto;margin:10px 0 16px;border-radius:var(--r);border:1px solid var(--bdr)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead tr{background:var(--navy)}
+thead th{padding:9px 12px;color:#fff;font-weight:600;text-align:left;letter-spacing:.04em;font-size:11px;text-transform:uppercase;white-space:nowrap}
+tbody tr{border-bottom:1px solid var(--bdr)}
+tbody tr:last-child{border-bottom:none}
+tbody tr:nth-child(even){background:var(--surf2)}
+tbody tr:hover{background:var(--gold-l)}
+td{padding:8px 12px;color:var(--txs);vertical-align:top;line-height:1.5}
+td:first-child{font-weight:500;color:var(--tx)}
+/* Badges */
+.b{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:.04em;vertical-align:middle}
+.bh{background:var(--crb);color:var(--cr)}
+.bm{background:var(--wnb);color:var(--wn)}
+.bl{background:var(--okb);color:var(--ok)}
+.bt{background:var(--surf2);color:var(--steel);border:1px solid var(--bdr)}
+.be{background:#E0F0FF;color:#1A5A8A}
+.bg2{background:#FFF0D8;color:#7A4A00}
+/* Info boxes */
+.ib{border-left:3px solid var(--steel);background:var(--surf2);padding:10px 14px;border-radius:0 var(--r) var(--r) 0;margin:10px 0;font-size:13.5px;color:var(--txs)}
+.ib.gold{border-color:var(--gold)}.ib.ok{border-color:var(--ok);background:var(--okb);color:var(--ok)}
+.ib.cr{border-color:var(--cr);background:var(--crb)}.ib.wn{border-color:var(--wn);background:var(--wnb)}
+.ib strong{color:var(--tx)}
+/* Cards */
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px;margin:10px 0}
+.card{background:var(--surf2);border:1px solid var(--bdr);border-radius:var(--r);padding:12px 14px}
+.ci{font-size:18px;margin-bottom:6px}.ct{font-weight:700;font-size:13px;color:var(--tx);margin-bottom:3px}.cd{font-size:12px;color:var(--txm);line-height:1.5}
+.twoc{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+/* Compare */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.cbox{border-radius:var(--r);overflow:hidden;border:1px solid var(--bdr)}
+.chead{padding:7px 12px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.chead.ex{background:#1A5A8A;color:#fff}.chead.gp{background:var(--gold-d);color:#fff}
+.cbody{padding:11px 13px;font-size:13px;color:var(--txs)}
+.cbody li{margin-bottom:4px}
+/* Spec list */
+.sl{list-style:none;margin:6px 0}
+.sl li{display:flex;gap:11px;padding:6px 0;border-bottom:1px solid var(--bdr);font-size:13px;align-items:flex-start}
+.sl li:last-child{border-bottom:none}
+.sk{min-width:170px;color:var(--txm);font-size:12px;font-weight:500;letter-spacing:.02em;flex-shrink:0}
+.sv{color:var(--txs)}
+/* Phase */
+.ph{display:flex;border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;margin:10px 0;font-size:12px}
+.pi{flex:1;padding:8px 10px;background:var(--surf2);border-right:1px solid var(--bdr);text-align:center}
+.pi:last-child{border-right:none}
+.pn{font-weight:800;color:var(--gold);font-size:13px;display:block}.pm{color:var(--txs);font-weight:500;font-size:11px}
+/* Code */
+code{font-family:'Courier New',Consolas,monospace;font-size:12.5px;background:var(--surf2);border:1px solid var(--bdr);padding:1px 5px;border-radius:3px;color:var(--steel)}
+pre{background:var(--navy2);color:#A8D8F0;border-radius:var(--r);padding:14px 17px;overflow-x:auto;font-size:12px;font-family:'Courier New',Consolas,monospace;line-height:1.6;margin:10px 0;border:1px solid rgba(255,255,255,.06)}
+pre .kw{color:#7DD3FC}pre .st{color:#86EFAC}pre .cm{color:#6B7A8A;font-style:italic}
+/* Footer */
+.ftr{max-width:1200px;margin:0 auto;padding:16px 20px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;border-top:1px solid var(--bdr);font-size:12px;color:var(--txm)}
+.fo{font-weight:600;color:var(--txs)}
+/* Responsive */
+@media(max-width:820px){
+  .wrap{grid-template-columns:1fr;padding:16px 12px}
+  .toc{position:static}.hinner{padding:22px 16px 26px;flex-direction:column;gap:12px}
+  .sbinner{padding:8px 16px;gap:10px}.twoc,.cmp{grid-template-columns:1fr}
+  .ph{flex-wrap:wrap}.pi{flex:none;width:50%}
+  .cg{grid-template-columns:1fr}.sbody{padding:14px 14px}
+}
+@media print{
+  :root{
+    --navy:#1A2B4A;--navy2:#0F1C30;--steel:#3D6096;--gold:#BF9B2F;--gold-l:#F5EAC8;--gold-d:#8A6F1E;
+    --bg:#fff;--surf:#fff;--surf2:#F0F3F8;--bdr:#C8D0DC;
+    --tx:#111;--txs:#333;--txm:#555;
+    --ok:#1A6B3C;--okb:#E6F5ED;--wn:#8A4F00;--wnb:#FFF3E0;--cr:#8A1A1A;--crb:#FDEAEA;
+  }
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  body{background:#fff;font-size:11pt;line-height:1.6}
+  .hdr,.sbar,aside,.toc,.ftr{display:none!important}
+  .wrap{display:block;max-width:100%;padding:0;margin:0}
+  .main{width:100%;max-width:100%}
+  .sec{page-break-inside:auto;break-inside:auto;border:none;margin-bottom:20pt;border-radius:0;overflow:visible}
+  .sech{padding:10px 0 8px;border-bottom:2px solid #1A2B4A;margin-bottom:10pt}
+  .sech h2{font-size:14pt;font-weight:700;color:#1A2B4A}
+  .sech .ssub{font-size:9pt;color:#555}
+  .sbadge{width:26px;height:26px;font-size:12px}
+  .sbody{padding:8pt 0}
+  .sbody h3{font-size:12pt!important;font-weight:700!important;color:#1A2B4A!important;margin:14pt 0 6pt!important;border-bottom:1px solid #C8D0DC;padding-bottom:3pt}
+  .sbody p,.sbody li{font-size:10.5pt}
+  h2,h3{page-break-after:avoid;break-after:avoid}
+  img,.card,.cbox,.ib,.sbody ul,.sbody ol{page-break-inside:avoid;break-inside:avoid}
+  .sbody p+ul,.sbody p+ol{page-break-before:avoid;break-before:avoid}
+  .mock-grid{grid-template-columns:1fr!important;gap:12pt}
+  .mock-frame,.mock-wrap{page-break-inside:avoid;break-inside:avoid;overflow:visible!important}
+  .mock-frame{box-shadow:none!important;border:1px solid #ccc!important}
+  .tw{overflow-x:visible}
+  table{font-size:9pt;page-break-inside:auto}
+  thead{display:table-header-group}
+  tr{page-break-inside:avoid;break-inside:avoid}
+  pre{white-space:pre-wrap;word-break:break-all;background:#F0F3F8!important;color:#1A2B4A!important;border:1px solid #C8D0DC;font-size:8.5pt;page-break-inside:avoid}
+  pre .kw{color:#1A5080!important}pre .st{color:#1A6B3C!important}pre .cm{color:#666!important}
+  code{background:#F0F3F8!important;color:#3D6096!important;border:1px solid #C8D0DC}
+  svg{max-width:100%!important;height:auto!important;display:block;page-break-inside:avoid}
+  .cg{grid-template-columns:repeat(3,1fr)!important}
+  .twoc,.cmp{grid-template-columns:1fr 1fr!important}
+  .ph{flex-wrap:wrap;overflow:visible!important}
+  .pi{flex:none;width:calc(100%/4);min-width:100px}
+  div[style*="overflow-x"]{overflow:visible!important}
+  div[style*="page-break"]{page-break-before:always;break-before:page}
+  a{color:inherit;text-decoration:none}
+  @page{margin:20mm 18mm 20mm 22mm;size:A4}
+}
+</style>
+
+<style>
+body{margin:0;padding:0}
+.wrap{display:block;max-width:100%;padding:24px 32px;margin:0 auto}
+.main{display:block;width:100%}
+aside,.hdr,.sbar,.ftr{display:none}
+</style>
+</head><body>
+<div class="wrap"><main class="main">
+<section class="sec" id="s3">
+      <div class="sech"><div class="sbadge">3</div><div><h2>Pengembangan Backend (API &amp; Database)</h2><div class="ssub">Stack aktual PHP Native + MySQL, skema tabel nyata, dan rekomendasi peningkatan</div></div></div>
+      <div class="sbody">
+        <p>Bagian ini mendokumentasikan arsitektur backend aplikasi yang saat ini berjalan — mulai dari teknologi yang digunakan, struktur tabel database aktual, hingga masalah teknis yang teridentifikasi beserta langkah perbaikannya. Pemahaman mendalam terhadap lapisan ini penting sebelum melakukan pengembangan fitur baru maupun penguatan keamanan sistem.</p>
+
+        <h3>3.1 Stack Teknologi Saat Ini</h3>
+        <p>Aplikasi dibangun menggunakan PHP Native tanpa framework, dengan MySQL sebagai basis data, dan memanfaatkan mekanisme session PHP bawaan untuk autentikasi. Berikut komponen teknis lengkapnya.</p>
+        <div class="tw"><table><thead><tr><th>Komponen</th><th>Teknologi Aktual</th><th>Lokasi</th></tr></thead>
+        <tbody>
+          <tr><td>Backend</td><td><span class="b bt">PHP Native</span> (tanpa framework)</td><td>Seluruh file <code>.php</code> di root dan <code>pages/</code></td></tr>
+          <tr><td>Database</td><td><span class="b bt">MySQL</span> · db_ujian_online</td><td><code>config/database.php</code></td></tr>
+          <tr><td>Koneksi DB</td><td><code>mysqli_connect()</code></td><td><code>config/database.php</code></td></tr>
+          <tr><td>Autentikasi</td><td>PHP <code>$_SESSION</code></td><td><code>session_start()</code> tiap halaman</td></tr>
+          <tr><td>State Ujian</td><td>Function custom PHP</td><td><code>config/siswa_ujian_aktif.php</code></td></tr>
+          <tr><td>Auto-Save</td><td>AJAX + PHP endpoint</td><td><code>pages/siswa/ujian/update-jawaban.php</code></td></tr>
+          <tr><td>Timer</td><td>JS countdown + AJAX sync</td><td><code>pages/siswa/ujian/timer.php</code></td></tr>
+        </tbody></table></div>
+
+        <h3>3.2 Skema Database Aktual</h3>
+        <p>Database <code>db_ujian_online</code> terdiri dari 13 tabel utama. Tabel berikut menjabarkan kolom kunci, charset yang digunakan, serta catatan penting untuk setiap tabel — termasuk tabel-tabel yang masih menggunakan charset <code>latin1</code> dan perlu dimigrasikan.</p>
+        <div class="tw"><table><thead><tr><th>Tabel</th><th>Kolom Kunci</th><th>Charset</th><th>Catatan</th></tr></thead>
+        <tbody>
+          <tr><td><code>admin</code></td><td>id_admin, kode_admin, nama_admin, username, password</td><td><span class="b bg2">latin1</span></td><td>Password MD5 — kerentanan kritis</td></tr>
+          <tr><td><code>aplikasi</code></td><td>id, nama_aplikasi, alamat, no_telp, email, logo</td><td>utf8mb4</td><td>Branding: nama "Puskod Baranahan Kemhan", alamat Pondok Labu</td></tr>
+          <tr><td><code>guru</code></td><td>id_guru (=NIP), kode_guru, nama_guru, nip, username, password</td><td><span class="b bg2">latin1</span></td><td>Operator/pengawas ujian; password MD5</td></tr>
+          <tr><td><code>siswa</code></td><td>id_siswa (=NIP), kode_siswa, nama_siswa, username, password</td><td><span class="b bg2">latin1</span></td><td>Peserta ujian; ID berbasis NIP</td></tr>
+          <tr><td><code>kelas</code></td><td>id_kelas, nama_kelas</td><td>—</td><td>Kelompok: Ahli Pertama (8), Ahli Madya (9), Ahli Muda (10,11)</td></tr>
+          <tr><td><code>mapel</code></td><td>id_mapel, nama_mapel, id_guru</td><td>—</td><td>Bidang kompetensi: NSN, Identifikasi, Regulasi, LSA, dll.</td></tr>
+          <tr><td><code>ujian</code></td><td>id_ujian, kode_ujian, judul, tipe_soal, id_kelas, id_mapel, tanggal, jam, waktu, nilai_kelulusan, status_aktif</td><td><span class="b bg2">latin1</span></td><td><code>tipe_soal</code>: 1=MCQ, 2=Essay; 110+ sesi aktual</td></tr>
+          <tr><td><code>soal</code></td><td>id_soal, kode_soal, soal, gambar, id_ujian, tipe</td><td>utf8mb4</td><td>Soal terikat langsung ke <code>id_ujian</code> — tidak reusable</td></tr>
+          <tr><td><code>jawaban</code></td><td>id_jawaban, id_soal, jawaban, is_correct</td><td>—</td><td>Pilihan MCQ; <code>is_correct</code> = kunci jawaban</td></tr>
+          <tr><td><code>hasil</code></td><td>id_hasil, id_siswa, id_ujian, id_soal, id_jawaban, essay</td><td><span class="b bg2">latin1</span></td><td>Jawaban per soal; <code>essay</code>=NULL jika MCQ</td></tr>
+          <tr><td><code>nilai</code></td><td>id_nilai, id_ujian, id_siswa, nilai</td><td><span class="b bg2">latin1</span></td><td>Nilai final; <code>0</code> jika essay belum dinilai</td></tr>
+          <tr><td><code>peserta</code></td><td>id_siswa, id_kelas, id_ujian</td><td>utf8mb4</td><td>Mapping peserta ke sesi ujian</td></tr>
+          <tr><td><code>riwayat</code></td><td>id_riwayat, id_ujian, id_siswa, …</td><td>—</td><td>Rekam ujian yang diselesaikan (tombol "Selesai" diklik)</td></tr>
+          <tr><td><code>ujian_jadwal_riwayat</code></td><td>id_riwayat_jadwal, id_ujian, tanggal, jam, waktu</td><td>—</td><td>Riwayat perubahan jadwal sesi</td></tr>
+        </tbody></table></div>
+
+        <h3>3.3 Masalah Teknis Prioritas</h3>
+        <p>Audit kode dan struktur database mengungkap beberapa masalah teknis yang harus ditangani sebelum sistem dikembangkan lebih lanjut. Masalah-masalah ini diurutkan berdasarkan tingkat risiko terhadap keamanan dan integritas data.</p>
+        <div class="ib cr"><strong>KRITIS — MD5 Password:</strong> Tabel <code>admin</code>, <code>guru</code>, <code>siswa</code> menyimpan password dengan MD5. MD5 sudah terbukti tidak aman (rainbow tables). Harus dimigrasi ke <code>password_hash($pass, PASSWORD_BCRYPT)</code>.</div>
+        <div class="ib wn"><strong>PENTING — SQL Injection:</strong> Pola <code>mysqli_real_escape_string()</code> dipakai di beberapa tempat, namun perlu audit menyeluruh. Transisi ke prepared statements (MySQLi bind_param) untuk semua query dengan input user.</div>
+        <div class="ib wn"><strong>PENTING — Charset latin1:</strong> Tabel inti pakai latin1 — karakter unicode (nama dengan aksara khusus) bisa corrupt. Perlu migrasi ke utf8mb4 setelah backup penuh.</div>
+        <div class="ib gold"><strong>DESAIN — Soal Terikat ke Sesi:</strong> Kolom <code>soal.id_ujian</code> berarti soal hanya bisa dipakai satu sesi. Untuk bank soal reusable, perlu tabel relasi terpisah <code>ujian_soal</code>.</div>
+
+        <h3>3.4 Query Migrasi yang Disarankan</h3>
+        <p>Berikut adalah perintah SQL dan perubahan kode PHP yang dapat langsung dieksekusi oleh pengembang untuk menerapkan perbaikan yang diprioritaskan. Lakukan backup penuh sebelum menjalankan perintah <code>ALTER TABLE</code>.</p>
+        <pre><span class="cm">-- 1. Migrasi password ke bcrypt (di login.php dan form create user)</span>
+<span class="cm">-- GANTI:</span>
+$password = <span class="st">md5</span>($_POST[<span class="st">'password'</span>]);
+<span class="cm">-- MENJADI:</span>
+$password = <span class="st">password_hash</span>($_POST[<span class="st">'password'</span>], PASSWORD_BCRYPT);
+<span class="cm">-- VERIFIKASI LOGIN:</span>
+<span class="st">password_verify</span>($_POST[<span class="st">'password'</span>], $row[<span class="st">'password'</span>])
+
+<span class="cm">-- 2. Migrasi charset tabel kritis (jalankan setelah backup penuh!)</span>
+<span class="kw">ALTER TABLE</span> siswa  <span class="kw">CONVERT TO CHARACTER SET</span> utf8mb4 <span class="kw">COLLATE</span> utf8mb4_unicode_ci;
+<span class="kw">ALTER TABLE</span> guru   <span class="kw">CONVERT TO CHARACTER SET</span> utf8mb4 <span class="kw">COLLATE</span> utf8mb4_unicode_ci;
+<span class="kw">ALTER TABLE</span> admin  <span class="kw">CONVERT TO CHARACTER SET</span> utf8mb4 <span class="kw">COLLATE</span> utf8mb4_unicode_ci;
+<span class="kw">ALTER TABLE</span> ujian  <span class="kw">CONVERT TO CHARACTER SET</span> utf8mb4 <span class="kw">COLLATE</span> utf8mb4_unicode_ci;
+<span class="kw">ALTER TABLE</span> hasil  <span class="kw">CONVERT TO CHARACTER SET</span> utf8mb4 <span class="kw">COLLATE</span> utf8mb4_unicode_ci;
+<span class="kw">ALTER TABLE</span> nilai  <span class="kw">CONVERT TO CHARACTER SET</span> utf8mb4 <span class="kw">COLLATE</span> utf8mb4_unicode_ci;
+
+<span class="cm">-- 3. Tambah kolom tingkat kesulitan soal</span>
+<span class="kw">ALTER TABLE</span> soal <span class="kw">ADD COLUMN</span> tingkat_kesulitan
+  <span class="kw">ENUM</span>(<span class="st">'mudah'</span>,<span class="st">'sedang'</span>,<span class="st">'sulit'</span>) <span class="kw">DEFAULT</span> <span class="st">'sedang'</span>;</pre>
+        <h3>3.5 Visi Teknis Backend</h3>
+        <p>Pengembangan backend sistem CAT PUSKOD BALOGHAN KEMHAN difokuskan pada <strong>ketersediaan tinggi</strong> (<em>high availability</em>) dan integritas data yang mutlak. Mengingat peran kataloger yang krusial dalam kodifikasi materiil pertahanan, backend harus mampu menangani beban akses serentak saat periode ujian nasional berlangsung. Sistem mematuhi standar keamanan data instansi pemerintah — setiap request harus melewati lapisan otorisasi ketat dan enkripsi data transit guna mencegah intersepsi informasi sensitif.</p>
+
+        <h3>3.6 Desain Relasional Lanjutan (ERD)</h3>
+        <p>Database dirancang dengan normalisasi tingkat ketiga (3NF) untuk meminimalkan redundansi data:</p>
+        <ul class="sl">
+          <li><span class="sk">kataloger_info</span><span class="sv">Menyimpan data demografi dan riwayat kompetensi peserta per NIP</span></li>
+          <li><span class="sk">bank_soal</span><span class="sv">Terintegrasi dengan modul kategorisasi NSN (NATO Stock Number); mendukung pengacakan soal (<em>shuffling</em>) dinamis per peserta untuk menjamin objektivitas</span></li>
+          <li><span class="sk">sesi_ujian</span><span class="sv">Indexing pada kolom <code>nip</code> dan <code>session_id</code> untuk mempercepat query pemantauan real-time</span></li>
+          <li><span class="sk">jawaban_audit</span><span class="sv">Audit trail lengkap setiap perubahan jawaban; mendukung rekonstruksi histori pengerjaan</span></li>
+        </ul>
+        <div class="ib gold"><strong>Strategi Penguncian (Optimistic Locking):</strong> Diterapkan pada tabel transaksi jawaban untuk mencegah <em>race condition</em> saat banyak peserta submit bersamaan — memastikan tidak ada data yang tertimpa secara tidak sengaja.</div>
+
+        <h3>3.7 Spesifikasi API RESTful</h3>
+        <p>Seluruh endpoint menggunakan format JSON standar industri dengan kontrak API yang terdokumentasi:</p>
+        <div class="tw"><table><thead><tr><th>Komponen</th><th>Spesifikasi</th><th>Tujuan</th></tr></thead>
+        <tbody>
+          <tr><td>Autentikasi</td><td>JSON Web Token (JWT) dengan <em>expiring token</em></td><td>Keamanan sesi — token kedaluwarsa membatasi risiko pembajakan sesi</td></tr>
+          <tr><td>Rate Limiting</td><td>Batas request per IP per menit</td><td>Mencegah serangan brute force pada halaman login</td></tr>
+          <tr><td>Error Handling</td><td>HTTP status code standar + pesan JSON</td><td>Konsistensi respons error untuk debugging client</td></tr>
+          <tr><td>Logging</td><td>Centralized log (Winston/Log4j)</td><td>Audit waktu akses, lokasi IP, error DB, query timeout</td></tr>
+        </tbody></table></div>
+
+        <h3>3.8 SOP Backup Database Terotomatisasi</h3>
+        <p>Perlindungan data menggunakan skrip shell yang di-trigger oleh Cron Job setiap malam untuk memastikan backup konsisten tanpa mengunci tabel aktif:</p>
+        <pre><span class="cm"># Backup otomatis tanpa lock tabel aktif</span>
+mysqldump --single-transaction --quick --lock-tables=<span class="kw">false</span> db_ujian_kataloger \
+  | gzip > /storage/backup/db_cat_$(date +%Y%m%d_%H%M).sql.gz</pre>
+        <p>File hasil backup otomatis diunggah ke penyimpanan terenkripsi eksternal (<em>off-site</em>) sebagai langkah mitigasi bencana sesuai <strong>Disaster Recovery Plan</strong> instansi.</p>
+        <div style="overflow-x:auto;margin:14px 0">
+        <svg viewBox="0 0 640 388" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:640px;display:block;font-family:Calibri,'Segoe UI',Arial,sans-serif">
+          <defs><marker id="fc13ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#1A2B4A"/></marker><marker id="fc13ahg" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#16a34a"/></marker><marker id="fc13ahr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#dc2626"/></marker></defs>
+          <rect width="640" height="388" fill="#f8fafc" rx="8" stroke="#e2e8f0" stroke-width="1"/>
+          <text x="320" y="13" text-anchor="middle" fill="#94a3b8" font-size="10" font-style="italic">Flowchart — SOP Backup Database Terotomatisasi (Cron Job Harian)</text>
+          <rect x="210" y="18" width="220" height="24" rx="12" fill="#1A2B4A"/><text x="320" y="34" text-anchor="middle" fill="#BF9B2F" font-weight="bold" font-size="11">MULAI — Cron Job 23:00</text>
+          <line x1="320" y1="42" x2="320" y2="56" stroke="#1A2B4A" stroke-width="1.5" marker-end="url(#fc13ah)"/>
+          <rect x="110" y="58" width="420" height="28" rx="4" fill="#1A2B4A"/><text x="320" y="76" text-anchor="middle" fill="white" font-size="10.5">mysqldump --single-transaction --quick --lock-tables=false</text>
+          <line x1="320" y1="86" x2="320" y2="100" stroke="#1A2B4A" stroke-width="1.5" marker-end="url(#fc13ah)"/>
+          <rect x="110" y="102" width="420" height="28" rx="4" fill="#1A2B4A"/><text x="320" y="120" text-anchor="middle" fill="white" font-size="10.5">Kompres file dengan gzip → db_cat_YYYYMMDD_HHMM.sql.gz</text>
+          <line x1="320" y1="130" x2="320" y2="144" stroke="#1A2B4A" stroke-width="1.5" marker-end="url(#fc13ah)"/>
+          <rect x="110" y="146" width="420" height="28" rx="4" fill="#1A2B4A"/><text x="320" y="164" text-anchor="middle" fill="white" font-size="10.5">Simpan lokal → /storage/backup/</text>
+          <line x1="320" y1="174" x2="320" y2="188" stroke="#1A2B4A" stroke-width="1.5" marker-end="url(#fc13ah)"/>
+          <rect x="110" y="190" width="420" height="28" rx="4" fill="#3D6096"/><text x="320" y="208" text-anchor="middle" fill="white" font-size="10.5">Upload ke penyimpanan off-site terenkripsi (cloud)</text>
+          <line x1="320" y1="218" x2="320" y2="234" stroke="#1A2B4A" stroke-width="1.5" marker-end="url(#fc13ah)"/>
+          <polygon points="320,234 410,254 320,274 230,254" fill="white" stroke="#1A2B4A" stroke-width="1.5"/>
+          <text x="320" y="258" text-anchor="middle" fill="#1A2B4A" font-size="10.5" font-weight="bold">Verifikasi File OK?</text>
+          <line x1="410" y1="254" x2="510" y2="254" stroke="#dc2626" stroke-width="1.5" marker-end="url(#fc13ahr)"/>
+          <rect x="512" y="240" width="100" height="28" rx="4" fill="#FDEAEA" stroke="#dc2626"/><text x="562" y="252" text-anchor="middle" fill="#8b1a1a" font-size="9">Alert Admin</text><text x="562" y="263" text-anchor="middle" fill="#8b1a1a" font-size="9">via email/log</text>
+          <line x1="320" y1="274" x2="320" y2="288" stroke="#16a34a" stroke-width="1.5" marker-end="url(#fc13ahg)"/>
+          <rect x="110" y="290" width="420" height="28" rx="4" fill="#16a34a"/><text x="320" y="308" text-anchor="middle" fill="white" font-size="10.5">Tulis log "Backup sukses" + timestamp + ukuran file</text>
+          <line x1="320" y1="318" x2="320" y2="332" stroke="#16a34a" stroke-width="1.5" marker-end="url(#fc13ahg)"/>
+          <rect x="110" y="334" width="420" height="28" rx="4" fill="#E6F5ED" stroke="#16a34a"/><text x="320" y="352" text-anchor="middle" fill="#1A6B3C" font-size="10.5">Hapus backup lama (&gt;30 hari) untuk efisiensi storage</text>
+          <line x1="320" y1="362" x2="320" y2="374" stroke="#16a34a" stroke-width="1.5" marker-end="url(#fc13ahg)"/>
+          <rect x="210" y="375" width="220" height="10" rx="5" fill="#16a34a"/><text x="320" y="381" text-anchor="middle" fill="white" font-size="8" font-weight="bold">SELESAI</text>
+        </svg></div>
+
+        <h3>3.9 Strategi Skalabilitas &amp; Kinerja</h3>
+        <div style="overflow-x:auto;margin:14px 0">
+        <svg viewBox="0 0 640 310" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:640px;display:block;font-family:Calibri,'Segoe UI',Arial,sans-serif">
+          <defs><marker id="fc14ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#3D6096"/></marker></defs>
+          <rect width="640" height="310" fill="#f8fafc" rx="8" stroke="#e2e8f0" stroke-width="1"/>
+          <text x="320" y="13" text-anchor="middle" fill="#94a3b8" font-size="10" font-style="italic">Arsitektur Skalabilitas — Load Balancing, Caching &amp; Database Replication</text>
+          <rect x="60" y="20" width="150" height="34" rx="4" fill="#1A2B4A"/><text x="135" y="41" text-anchor="middle" fill="#CBD5E1" font-size="10">Browser Client 1</text>
+          <rect x="245" y="20" width="150" height="34" rx="4" fill="#1A2B4A"/><text x="320" y="41" text-anchor="middle" fill="#CBD5E1" font-size="10">Browser Client 2</text>
+          <rect x="430" y="20" width="150" height="34" rx="4" fill="#1A2B4A"/><text x="505" y="41" text-anchor="middle" fill="#CBD5E1" font-size="10">Browser Client N</text>
+          <line x1="135" y1="54" x2="250" y2="82" stroke="#3D6096" stroke-width="1.5" marker-end="url(#fc14ah)"/>
+          <line x1="320" y1="54" x2="320" y2="82" stroke="#3D6096" stroke-width="1.5" marker-end="url(#fc14ah)"/>
+          <line x1="505" y1="54" x2="390" y2="82" stroke="#3D6096" stroke-width="1.5" marker-end="url(#fc14ah)"/>
+          <rect x="130" y="84" width="380" height="34" rx="6" fill="#BF9B2F"/><text x="320" y="98" text-anchor="middle" fill="#1A2B4A" font-weight="bold" font-size="11">Nginx Reverse Proxy / Load Balancer</text><text x="320" y="111" text-anchor="middle" fill="#3A2800" font-size="9">Distribusi trafik · SSL termination · Rate limiting</text>
+          <line x1="240" y1="118" x2="200" y2="142" stroke="#3D6096" stroke-width="1.5" marker-end="url(#fc14ah)"/>
+          <line x1="400" y1="118" x2="440" y2="142" stroke="#3D6096" stroke-width="1.5" marker-end="url(#fc14ah)"/>
+          <rect x="60" y="144" width="260" height="34" rx="4" fill="#3D6096"/><text x="190" y="158" text-anchor="middle" fill="white" font-size="10.5">App Server 1 (PHP)</text><text x="190" y="171" text-anchor="middle" fill="#CBD5E1" font-size="9">Ujian · Auth · Nilai</text>
+          <rect x="320" y="144" width="260" height="34" rx="4" fill="#3D6096"/><text x="450" y="158" text-anchor="middle" fill="white" font-size="10.5">App Server 2 (PHP)</text><text x="450" y="171" text-anchor="middle" fill="#CBD5E1" font-size="9">Ujian · Auth · Nilai</text>
+          <line x1="190" y1="178" x2="270" y2="208" stroke="#3D6096" stroke-width="1.5" marker-end="url(#fc14ah)"/>
+          <line x1="450" y1="178" x2="370" y2="208" stroke="#3D6096" stroke-width="1.5" marker-end="url(#fc14ah)"/>
+          <rect x="185" y="210" width="270" height="34" rx="4" fill="#8b1a1a"/><text x="320" y="224" text-anchor="middle" fill="#BF9B2F" font-weight="bold" font-size="11">Redis Cache</text><text x="320" y="237" text-anchor="middle" fill="#fca5a5" font-size="9">Soal sering diakses · Session cache · Kurangi beban DB</text>
+          <line x1="320" y1="244" x2="320" y2="258" stroke="#3D6096" stroke-width="1.5" marker-end="url(#fc14ah)"/>
+          <rect x="80" y="260" width="220" height="36" rx="4" fill="#0F1C30" stroke="#1A2B4A"/><text x="190" y="274" text-anchor="middle" fill="#BF9B2F" font-weight="bold" font-size="10.5">MySQL Master</text><text x="190" y="287" text-anchor="middle" fill="#94a3b8" font-size="9">Write: simpan jawaban, nilai</text>
+          <rect x="340" y="260" width="220" height="36" rx="4" fill="#0F1C30" stroke="#1A2B4A"/><text x="450" y="274" text-anchor="middle" fill="#BF9B2F" font-weight="bold" font-size="10.5">MySQL Slave</text><text x="450" y="287" text-anchor="middle" fill="#94a3b8" font-size="9">Read: ambil soal, data peserta</text>
+          <line x1="300" y1="278" x2="340" y2="278" stroke="#3D6096" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#fc14ah)"/>
+          <text x="320" y="305" text-anchor="middle" fill="#94a3b8" font-size="8.5" font-style="italic">Replikasi: Master → Slave (pemisahan read/write)</text>
+        </svg></div>
+        <div class="cg">
+          <div class="card"><div class="ci">⚡</div><div class="ct">Query Caching (Redis)</div><div class="cd">Soal yang sering diakses di-cache sehingga beban database utama berkurang signifikan saat ujian puncak</div></div>
+          <div class="card"><div class="ci">⚖️</div><div class="ct">Load Balancing</div><div class="cd">Reverse proxy (Nginx) mendistribusikan trafik ke beberapa instance server untuk menghindari bottleneck</div></div>
+          <div class="card"><div class="ci">🗄️</div><div class="ct">Database Replication</div><div class="cd">Master-Slave: pisahkan proses baca (ambil soal) dan tulis (simpan jawaban) untuk responsivitas optimal</div></div>
+          <div class="card"><div class="ci">📊</div><div class="ct">API Analytics</div><div class="cd">Endpoint statistik performa kataloger untuk keperluan manajerial PUSKOD secara otomatis</div></div>
+          <div class="card"><div class="ci">🔔</div><div class="ct">Server Monitoring</div><div class="cd">Dashboard kesehatan server dengan notifikasi real-time saat lonjakan memori atau CPU terdeteksi</div></div>
+        </div>
+
+        <h3>3.10 Penutup Arsitektur Backend</h3>
+        <div class="ib ok"><strong>Komitmen Teknis:</strong> Pengembangan backend ini merupakan perwujudan komitmen PUSKOD BALOGHAN KEMHAN dalam menyelenggarakan tata kelola ujian kompetensi yang modern. Dengan arsitektur yang kokoh, prosedur backup terotomatisasi, dan sistem keamanan berlapis, sistem CAT ini siap menjadi tulang punggung penilaian profesionalitas kataloger di masa depan.</div>
+      </div>
+    </section>
+</main></div>
+</body></html>

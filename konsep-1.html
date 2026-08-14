@@ -1,0 +1,388 @@
+<!DOCTYPE html><html lang="id"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ANALISIS KEBUTUHAN DESAIN SISTEM APLIKASI CAT UJIAN KOMPETENSI KATALOGER PUSKOD BALOGHAN KEMHAN</title>
+<style>
+:root {
+  --navy:#1A2B4A;--navy2:#0F1C30;--steel:#3D6096;--gold:#BF9B2F;--gold-l:#F5EAC8;--gold-d:#8A6F1E;
+  --bg:#F5F7FA;--surf:#FFFFFF;--surf2:#ECF0F7;--bdr:#CDD5E3;
+  --tx:#1A2B4A;--txs:#3D5068;--txm:#637085;
+  --ok:#1A6B3C;--okb:#E6F5ED;--wn:#8A4F00;--wnb:#FFF3E0;--cr:#8A1A1A;--crb:#FDEAEA;
+  --r:6px;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0C1520;--surf:#142030;--surf2:#1C2D42;--bdr:#2A3D56;
+  --tx:#DDE5F0;--txs:#9BB4D0;--txm:#6A88A8;
+  --gold:#CFA832;--gold-l:#2A2010;--gold-d:#9A7A20;--steel:#5A88C8;
+  --ok:#3DA86A;--okb:#0A2018;--wn:#CCA04A;--wnb:#201500;--cr:#E05050;--crb:#200808;
+}}
+:root[data-theme=dark]{--bg:#0C1520;--surf:#142030;--surf2:#1C2D42;--bdr:#2A3D56;--tx:#DDE5F0;--txs:#9BB4D0;--txm:#6A88A8;--gold:#CFA832;--gold-l:#2A2010;--gold-d:#9A7A20;--steel:#5A88C8;--ok:#3DA86A;--okb:#0A2018;--wn:#CCA04A;--wnb:#201500;--cr:#E05050;--crb:#200808;}
+:root[data-theme=light]{--bg:#F5F7FA;--surf:#FFFFFF;--surf2:#ECF0F7;--bdr:#CDD5E3;--tx:#1A2B4A;--txs:#3D5068;--txm:#637085;--gold:#BF9B2F;--gold-l:#F5EAC8;--gold-d:#8A6F1E;--steel:#3D6096;--ok:#1A6B3C;--okb:#E6F5ED;--wn:#8A4F00;--wnb:#FFF3E0;--cr:#8A1A1A;--crb:#FDEAEA;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;font-size:15px;line-height:1.7;color:var(--tx);background:var(--bg)}
+/* Header */
+.hdr{background:linear-gradient(165deg,var(--navy2) 0%,var(--navy) 65%,#223A6A 100%);color:#fff;position:relative;overflow:hidden}
+.hdr::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(255,255,255,.015) 80px,rgba(255,255,255,.015) 81px);pointer-events:none}
+.hband{background:var(--gold);height:4px}
+.hinner{max-width:1200px;margin:0 auto;padding:32px 40px 36px;display:flex;align-items:flex-start;gap:22px;position:relative;z-index:1}
+.emblem{flex-shrink:0;width:64px;height:64px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:var(--navy2);font-family:Georgia,serif;box-shadow:0 0 0 3px rgba(255,255,255,.15);text-align:center;line-height:1.2}
+.htxt{}
+.orglbl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:6px;font-weight:500}
+.dtitle{font-family:Georgia,'Times New Roman',serif;font-size:clamp(17px,2vw,24px);font-weight:700;line-height:1.3;color:#fff;text-wrap:balance;margin-bottom:10px}
+.dtitle em{color:var(--gold);font-style:normal}
+.dmeta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.mchip{font-size:11px;letter-spacing:.04em;color:rgba(255,255,255,.65);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:3px;padding:3px 9px}
+.mchip strong{color:rgba(255,255,255,.9);font-weight:600}
+/* Status bar */
+.sbar{background:var(--navy);border-bottom:2px solid var(--gold)}
+.sbinner{max-width:1200px;margin:0 auto;padding:10px 40px;display:flex;gap:24px;flex-wrap:wrap}
+.si{display:flex;align-items:center;gap:7px}
+.sdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sdot.ok{background:#4ADE80}.sdot.wn{background:#FCD34D}.sdot.cr{background:#F87171}
+.slbl{font-size:11px;color:rgba(255,255,255,.7)}.slbl strong{color:#fff;font-weight:600}
+/* Layout */
+.wrap{max-width:1200px;margin:0 auto;padding:32px 20px;display:grid;grid-template-columns:230px 1fr;gap:32px;align-items:start}
+/* TOC */
+.toc{position:sticky;top:16px;background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden}
+.toch{background:var(--surf2);padding:10px 15px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--txm);border-bottom:1px solid var(--bdr)}
+.tocl{list-style:none;padding:5px 0}
+.tocl li a{display:flex;align-items:center;gap:8px;padding:6px 13px;text-decoration:none;color:var(--txs);font-size:12.5px;line-height:1.4;transition:background .12s,color .12s}
+.tocl li a:hover{background:var(--surf2);color:var(--tx)}
+.tnum{display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;border-radius:50%;background:var(--surf2);color:var(--txm);font-size:10px;font-weight:700;flex-shrink:0;border:1px solid var(--bdr)}
+.tocl li a:hover .tnum{background:var(--gold);color:var(--navy2);border-color:var(--gold)}
+/* Main */
+.main{min-width:0}
+.sec{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;margin-bottom:22px}
+.sech{padding:17px 24px 15px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:13px}
+.sbadge{display:inline-flex;align-items:center;justify-content:center;width:33px;height:33px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:700;font-family:Georgia,serif;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.sech h2{font-family:Georgia,'Times New Roman',serif;font-size:16px;font-weight:700;color:var(--tx);line-height:1.3;text-wrap:balance}
+.sech .ssub{font-size:12px;color:var(--txm);font-weight:400}
+.sbody{padding:20px 24px}
+/* Typography */
+.sbody h3{font-family:Georgia,serif;font-size:14px;font-weight:700;color:var(--steel);margin:20px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--bdr)}
+.sbody h3:first-child{margin-top:0}
+.sbody p{color:var(--txs);font-size:14px;margin-bottom:10px;max-width:72ch}
+.sbody ul,.sbody ol{margin:6px 0 12px 20px;color:var(--txs);font-size:14px}
+.sbody li{margin-bottom:4px}
+/* Tables */
+.tw{overflow-x:auto;margin:10px 0 16px;border-radius:var(--r);border:1px solid var(--bdr)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead tr{background:var(--navy)}
+thead th{padding:9px 12px;color:#fff;font-weight:600;text-align:left;letter-spacing:.04em;font-size:11px;text-transform:uppercase;white-space:nowrap}
+tbody tr{border-bottom:1px solid var(--bdr)}
+tbody tr:last-child{border-bottom:none}
+tbody tr:nth-child(even){background:var(--surf2)}
+tbody tr:hover{background:var(--gold-l)}
+td{padding:8px 12px;color:var(--txs);vertical-align:top;line-height:1.5}
+td:first-child{font-weight:500;color:var(--tx)}
+/* Badges */
+.b{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:.04em;vertical-align:middle}
+.bh{background:var(--crb);color:var(--cr)}
+.bm{background:var(--wnb);color:var(--wn)}
+.bl{background:var(--okb);color:var(--ok)}
+.bt{background:var(--surf2);color:var(--steel);border:1px solid var(--bdr)}
+.be{background:#E0F0FF;color:#1A5A8A}
+.bg2{background:#FFF0D8;color:#7A4A00}
+/* Info boxes */
+.ib{border-left:3px solid var(--steel);background:var(--surf2);padding:10px 14px;border-radius:0 var(--r) var(--r) 0;margin:10px 0;font-size:13.5px;color:var(--txs)}
+.ib.gold{border-color:var(--gold)}.ib.ok{border-color:var(--ok);background:var(--okb);color:var(--ok)}
+.ib.cr{border-color:var(--cr);background:var(--crb)}.ib.wn{border-color:var(--wn);background:var(--wnb)}
+.ib strong{color:var(--tx)}
+/* Cards */
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px;margin:10px 0}
+.card{background:var(--surf2);border:1px solid var(--bdr);border-radius:var(--r);padding:12px 14px}
+.ci{font-size:18px;margin-bottom:6px}.ct{font-weight:700;font-size:13px;color:var(--tx);margin-bottom:3px}.cd{font-size:12px;color:var(--txm);line-height:1.5}
+.twoc{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+/* Compare */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.cbox{border-radius:var(--r);overflow:hidden;border:1px solid var(--bdr)}
+.chead{padding:7px 12px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.chead.ex{background:#1A5A8A;color:#fff}.chead.gp{background:var(--gold-d);color:#fff}
+.cbody{padding:11px 13px;font-size:13px;color:var(--txs)}
+.cbody li{margin-bottom:4px}
+/* Spec list */
+.sl{list-style:none;margin:6px 0}
+.sl li{display:flex;gap:11px;padding:6px 0;border-bottom:1px solid var(--bdr);font-size:13px;align-items:flex-start}
+.sl li:last-child{border-bottom:none}
+.sk{min-width:170px;color:var(--txm);font-size:12px;font-weight:500;letter-spacing:.02em;flex-shrink:0}
+.sv{color:var(--txs)}
+/* Phase */
+.ph{display:flex;border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;margin:10px 0;font-size:12px}
+.pi{flex:1;padding:8px 10px;background:var(--surf2);border-right:1px solid var(--bdr);text-align:center}
+.pi:last-child{border-right:none}
+.pn{font-weight:800;color:var(--gold);font-size:13px;display:block}.pm{color:var(--txs);font-weight:500;font-size:11px}
+/* Code */
+code{font-family:'Courier New',Consolas,monospace;font-size:12.5px;background:var(--surf2);border:1px solid var(--bdr);padding:1px 5px;border-radius:3px;color:var(--steel)}
+pre{background:var(--navy2);color:#A8D8F0;border-radius:var(--r);padding:14px 17px;overflow-x:auto;font-size:12px;font-family:'Courier New',Consolas,monospace;line-height:1.6;margin:10px 0;border:1px solid rgba(255,255,255,.06)}
+pre .kw{color:#7DD3FC}pre .st{color:#86EFAC}pre .cm{color:#6B7A8A;font-style:italic}
+/* Footer */
+.ftr{max-width:1200px;margin:0 auto;padding:16px 20px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;border-top:1px solid var(--bdr);font-size:12px;color:var(--txm)}
+.fo{font-weight:600;color:var(--txs)}
+/* Responsive */
+@media(max-width:820px){
+  .wrap{grid-template-columns:1fr;padding:16px 12px}
+  .toc{position:static}.hinner{padding:22px 16px 26px;flex-direction:column;gap:12px}
+  .sbinner{padding:8px 16px;gap:10px}.twoc,.cmp{grid-template-columns:1fr}
+  .ph{flex-wrap:wrap}.pi{flex:none;width:50%}
+  .cg{grid-template-columns:1fr}.sbody{padding:14px 14px}
+}
+@media print{
+  :root{
+    --navy:#1A2B4A;--navy2:#0F1C30;--steel:#3D6096;--gold:#BF9B2F;--gold-l:#F5EAC8;--gold-d:#8A6F1E;
+    --bg:#fff;--surf:#fff;--surf2:#F0F3F8;--bdr:#C8D0DC;
+    --tx:#111;--txs:#333;--txm:#555;
+    --ok:#1A6B3C;--okb:#E6F5ED;--wn:#8A4F00;--wnb:#FFF3E0;--cr:#8A1A1A;--crb:#FDEAEA;
+  }
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  body{background:#fff;font-size:11pt;line-height:1.6}
+  .hdr,.sbar,aside,.toc,.ftr{display:none!important}
+  .wrap{display:block;max-width:100%;padding:0;margin:0}
+  .main{width:100%;max-width:100%}
+  .sec{page-break-inside:auto;break-inside:auto;border:none;margin-bottom:20pt;border-radius:0;overflow:visible}
+  .sech{padding:10px 0 8px;border-bottom:2px solid #1A2B4A;margin-bottom:10pt}
+  .sech h2{font-size:14pt;font-weight:700;color:#1A2B4A}
+  .sech .ssub{font-size:9pt;color:#555}
+  .sbadge{width:26px;height:26px;font-size:12px}
+  .sbody{padding:8pt 0}
+  .sbody h3{font-size:12pt!important;font-weight:700!important;color:#1A2B4A!important;margin:14pt 0 6pt!important;border-bottom:1px solid #C8D0DC;padding-bottom:3pt}
+  .sbody p,.sbody li{font-size:10.5pt}
+  h2,h3{page-break-after:avoid;break-after:avoid}
+  img,.card,.cbox,.ib,.sbody ul,.sbody ol{page-break-inside:avoid;break-inside:avoid}
+  .sbody p+ul,.sbody p+ol{page-break-before:avoid;break-before:avoid}
+  .mock-grid{grid-template-columns:1fr!important;gap:12pt}
+  .mock-frame,.mock-wrap{page-break-inside:avoid;break-inside:avoid;overflow:visible!important}
+  .mock-frame{box-shadow:none!important;border:1px solid #ccc!important}
+  .tw{overflow-x:visible}
+  table{font-size:9pt;page-break-inside:auto}
+  thead{display:table-header-group}
+  tr{page-break-inside:avoid;break-inside:avoid}
+  pre{white-space:pre-wrap;word-break:break-all;background:#F0F3F8!important;color:#1A2B4A!important;border:1px solid #C8D0DC;font-size:8.5pt;page-break-inside:avoid}
+  pre .kw{color:#1A5080!important}pre .st{color:#1A6B3C!important}pre .cm{color:#666!important}
+  code{background:#F0F3F8!important;color:#3D6096!important;border:1px solid #C8D0DC}
+  svg{max-width:100%!important;height:auto!important;display:block;page-break-inside:avoid}
+  .cg{grid-template-columns:repeat(3,1fr)!important}
+  .twoc,.cmp{grid-template-columns:1fr 1fr!important}
+  .ph{flex-wrap:wrap;overflow:visible!important}
+  .pi{flex:none;width:calc(100%/4);min-width:100px}
+  div[style*="overflow-x"]{overflow:visible!important}
+  div[style*="page-break"]{page-break-before:always;break-before:page}
+  a{color:inherit;text-decoration:none}
+  @page{margin:20mm 18mm 20mm 22mm;size:A4}
+}
+</style>
+
+<style>
+body{margin:0;padding:0}
+.wrap{display:block;max-width:100%;padding:24px 32px;margin:0 auto}
+.main{display:block;width:100%}
+aside,.hdr,.sbar,.ftr{display:none}
+</style>
+</head><body>
+<div class="wrap"><main class="main">
+<section class="sec" id="s1">
+      <div class="sech"><div class="sbadge">1</div><div><h2>Analisis Kebutuhan Desain Sistem</h2><div class="ssub">Pendahuluan, latar belakang, tujuan, proses bisnis, stakeholder, kebutuhan fungsional &amp; non-fungsional, desain sistem, basis data, antarmuka &amp; pengujian</div></div></div>
+      <div class="sbody">
+
+        <h3>1.1 Pendahuluan</h3>
+        <p>Dokumen ini merupakan analisis kebutuhan desain sistem untuk Aplikasi Computer Assisted Test (CAT) Ujian Kompetensi Kataloger yang dikelola oleh Pusat Kodifikasi Badan Logistik Pertahanan Kementerian Pertahanan Republik Indonesia (PUSKOD BALOGHAN KEMHAN). Analisis dilakukan berdasarkan kondisi aplikasi yang saat ini telah berjalan secara aktif, mencakup evaluasi fitur eksisting, identifikasi celah (gap), serta rekomendasi pengembangan dan penguatan sistem.</p>
+        <p>Jabatan Fungsional Kataloger merupakan jabatan karier Pegawai Negeri Sipil (PNS) yang melaksanakan tugas kegiatan kodifikasi materiil pertahanan berdasarkan sistem NATO Stock Number (NSN). Sebagai satu-satunya instansi National Codification Bureau (NCB) di Indonesia, PUSKOD BALOGHAN KEMHAN bertanggung jawab atas standar dan kualitas seluruh kataloger di lingkungan Kemhan dan TNI. Ujian kompetensi menjadi instrumen utama untuk memastikan standar tersebut terpenuhi secara objektif dan terukur.</p>
+
+        <h3>1.2 Latar Belakang</h3>
+        <p>Sebelum sistem CAT diimplementasikan, proses ujian kompetensi kataloger dilakukan secara konvensional yang mengandung sejumlah kelemahan: potensi subjektivitas penilaian, risiko kebocoran soal, ketidakefisienan administrasi, serta keterbatasan skalabilitas peserta. Kebutuhan akan sistem ujian yang objektif, terstandardisasi, dan dapat diselenggarakan secara bersamaan untuk banyak peserta mendorong pengembangan platform berbasis web ini.</p>
+        <p>Aplikasi CAT saat ini telah berhasil digunakan dalam penyelenggaraan lebih dari 110 sesi ujian kompetensi dengan ratusan peserta ber-NIP aktual dari berbagai satuan kerja (Satker) di lingkungan Kemhan. Seiring meningkatnya jumlah peserta dan kompleksitas kebutuhan, diperlukan analisis menyeluruh untuk mengidentifikasi area yang perlu diperkuat — terutama dari sisi keamanan data, kelengkapan fitur penilaian essay, dan perlindungan integritas ujian.</p>
+        <div class="ib gold"><strong>Dasar Hukum:</strong> Peraturan Menteri Negara Pendayagunaan Aparatur Negara tentang Jabatan Fungsional Kataloger; Peraturan Pemerintah tentang Pegawai Negeri Sipil; STANAG NATO terkait sistem kodifikasi NSN yang menjadi acuan kompetensi teknis.</div>
+
+        <h3>1.3 Tujuan</h3>
+        <p>Analisis ini bertujuan untuk:</p>
+        <ul>
+          <li><strong>Mendokumentasikan kondisi sistem saat ini</strong> — mencakup fitur yang sudah berjalan, struktur database aktual, dan alur proses ujian dari login hingga penerbitan nilai.</li>
+          <li><strong>Mengidentifikasi kebutuhan fungsional yang belum terpenuhi</strong> — seperti penilaian essay manual, monitoring live peserta, dan fitur anti-kecurangan.</li>
+          <li><strong>Memetakan kerentanan keamanan</strong> — termasuk sistem hashing password yang tidak aman (MD5) dan potensi celah SQL injection yang perlu segera ditangani.</li>
+          <li><strong>Memberikan rekomendasi teknis terstruktur</strong> — berupa roadmap pengembangan bertahap yang dapat dijadikan acuan tim pengembang dan manajemen PUSKOD BALOGHAN KEMHAN.</li>
+          <li><strong>Menjadi acuan pengujian dan penerimaan sistem (UAT)</strong> — dengan skenario uji yang konkret berdasarkan alur aplikasi nyata.</li>
+          <li><strong>Menyediakan kerangka dokumentasi teknis dan user manual</strong> — agar sistem dapat dioperasikan, dipelihara, dan dikembangkan secara berkelanjutan.</li>
+        </ul>
+
+        <h3>1.4 Deskripsi Aplikasi Eksisting</h3>
+        <p>Aplikasi Ujian Online PUSKOD BALOGHAN KEMHAN telah beroperasi sebagai platform Computer Based Test (CBT/CAT) untuk uji kompetensi Jabatan Fungsional Kataloger. Sistem dibangun di atas PHP Native dengan database MySQL (<code>db_ujian_online</code>), berjalan di server dengan root di <code>C:\xampp\htdocs\ujian\</code> (akses via <code>localhost/ujian/</code>).</p>
+        <div class="ib gold"><strong>Nama Resmi:</strong> "Pusat Kodifikasi Badan Logistik Pertahanan Kemhan" — Jl. Jati No.1, Pondok Labu, Jakarta Selatan 12450. Menangani ujian kompetensi berbasis NIP untuk kataloger ASN/PNS di lingkungan KEMHAN dan TNI.</div>
+
+        <h3>1.5 Pengguna Sistem</h3>
+        <p>Aplikasi ini memiliki tiga peran pengguna yang masing-masing memiliki hak akses berbeda. Seluruh pengguna mengakses sistem melalui halaman login yang sama (<code>login.php</code>), dan sistem membedakan tampilan berdasarkan role yang tersimpan di session setelah autentikasi berhasil.</p>
+        <div class="tw"><table><thead><tr><th>Role</th><th>Tabel DB</th><th>Login</th><th>Fungsi Utama</th></tr></thead>
+        <tbody>
+          <tr><td>Admin</td><td><code>admin</code></td><td>username + password (MD5)</td><td>Pengelolaan sistem penuh, konfigurasi aplikasi global</td></tr>
+          <tr><td>Guru / Operator</td><td><code>guru</code></td><td>username + password (MD5)</td><td>Buat sesi ujian, kelola soal, lihat &amp; cetak hasil</td></tr>
+          <tr><td>Siswa / Peserta</td><td><code>siswa</code></td><td>username + password; ID = NIP</td><td>Ikuti ujian, lihat hasil, akses riwayat</td></tr>
+        </tbody></table></div>
+
+        <h3>1.6 Jenjang Ujian Kompetensi yang Ditangani</h3>
+        <p>Ujian dikelompokkan berdasarkan jenjang jabatan kataloger sesuai ketentuan PermenPAN. Setiap kelompok (kelas) memiliki tipe soal dan ambang batas kelulusan (<em>passing grade</em>) yang berbeda, mencerminkan tingkat kompetensi yang dipersyaratkan.</p>
+        <div class="tw"><table><thead><tr><th>Kelas</th><th>Jenjang Kataloger</th><th>Tipe Ujian</th><th>Passing Grade</th></tr></thead>
+        <tbody>
+          <tr><td>Kelas 8</td><td>Kataloger Ahli Pertama</td><td>Pilihan Ganda (MCQ)</td><td>65</td></tr>
+          <tr><td>Kelas 9</td><td>Kataloger Ahli Madya</td><td>MCQ + Essay</td><td>70</td></tr>
+          <tr><td>Kelas 10</td><td>Kataloger Ahli Muda</td><td>Pilihan Ganda (MCQ)</td><td>50</td></tr>
+          <tr><td>Kelas 11</td><td>Kataloger Ahli Madya (lanjutan)</td><td>Pilihan Ganda (MCQ)</td><td>50</td></tr>
+        </tbody></table></div>
+
+        <h3>1.7 Kebutuhan Fungsional — Status Implementasi</h3>
+        <p>Tabel berikut merangkum seluruh kebutuhan fungsional sistem, status implementasinya saat ini, dan prioritas pengembangan lanjutan. Kolom status membedakan fitur yang <em>sudah berjalan</em> dengan yang <em>masih perlu dibangun</em>.</p>
+        <div class="tw"><table><thead><tr><th>Kode</th><th>Kebutuhan</th><th>Status</th><th>Prioritas</th></tr></thead>
+        <tbody>
+          <tr><td>KF-01</td><td>Login peserta, admin, operator</td><td><span class="b be">Sudah Ada</span></td><td>—</td></tr>
+          <tr><td>KF-02</td><td>Manajemen sesi ujian (jadwal, durasi, kelas, mapel, status aktif)</td><td><span class="b be">Sudah Ada</span></td><td>—</td></tr>
+          <tr><td>KF-03</td><td>Bank soal MCQ dengan gambar</td><td><span class="b be">Sudah Ada</span></td><td>—</td></tr>
+          <tr><td>KF-04</td><td>Bank soal Essay</td><td><span class="b be">Sudah Ada</span></td><td>—</td></tr>
+          <tr><td>KF-05</td><td>Timer ujian real-time dengan countdown</td><td><span class="b be">Sudah Ada</span></td><td>—</td></tr>
+          <tr><td>KF-06</td><td>Auto-save jawaban secara berkala</td><td><span class="b be">Sudah Ada</span></td><td>—</td></tr>
+          <tr><td>KF-07</td><td>Penilaian nilai MCQ otomatis setelah submit</td><td><span class="b be">Sudah Ada</span></td><td>—</td></tr>
+          <tr><td>KF-08</td><td>Penilaian essay manual oleh operator</td><td><span class="b bg2">Perlu Dibangun</span></td><td><span class="b bh">Tinggi</span></td></tr>
+          <tr><td>KF-09</td><td>Cetak laporan hasil per ujian dan per peserta</td><td><span class="b be">Sudah Ada</span></td><td>—</td></tr>
+          <tr><td>KF-10</td><td>Manajemen peserta per sesi (tabel <code>peserta</code>)</td><td><span class="b be">Sudah Ada</span></td><td>—</td></tr>
+          <tr><td>KF-11</td><td>Riwayat ujian selesai per peserta</td><td><span class="b be">Sudah Ada</span></td><td>—</td></tr>
+          <tr><td>KF-12</td><td>SKP dan PAK</td><td><span class="b be">Sudah Ada</span></td><td>—</td></tr>
+          <tr><td>KF-13</td><td>Monitoring peserta aktif live oleh pengawas</td><td><span class="b bg2">Belum Ada</span></td><td><span class="b bm">Menengah</span></td></tr>
+          <tr><td>KF-14</td><td>Anti-kecurangan (pindah tab, fullscreen)</td><td><span class="b bg2">Belum Ada</span></td><td><span class="b bh">Tinggi</span></td></tr>
+          <tr><td>KF-15</td><td>Import massal peserta dari Excel/CSV</td><td><span class="b bg2">Belum Ada</span></td><td><span class="b bm">Menengah</span></td></tr>
+          <tr><td>KF-16</td><td>Analitik statistik soal</td><td><span class="b bg2">Belum Ada</span></td><td><span class="b bl">Rendah</span></td></tr>
+        </tbody></table></div>
+
+        <h3>1.8 Kebutuhan Non-Fungsional</h3>
+        <p>Selain fitur fungsional, sistem harus memenuhi standar kualitas teknis berikut agar dapat beroperasi secara handal, aman, dan nyaman digunakan oleh seluruh peserta dan operator ujian.</p>
+        <ul class="sl">
+          <li><span class="sk">Performa</span><span class="sv">Halaman ujian load &lt;2 detik; auto-save latency &lt;500ms; mendukung semua peserta aktif bersamaan</span></li>
+          <li><span class="sk">Keamanan Password</span><span class="sv"><span class="b bh">KRITIS</span> Saat ini MD5 — harus segera migrasi ke <code>password_hash()</code> PHP (bcrypt)</span></li>
+          <li><span class="sk">Encoding Database</span><span class="sv">Tabel inti masih <code>latin1</code> — perlu migrasi ke <code>utf8mb4</code> agar nama/teks unicode aman</span></li>
+          <li><span class="sk">Kompatibilitas</span><span class="sv">Chrome, Firefox, Edge modern; desktop dan laptop; resolusi minimum 1024×768</span></li>
+          <li><span class="sk">Backup</span><span class="sv">Backup database harian otomatis; prosedur restore terdokumentasi; uji restore tiap bulan</span></li>
+          <li><span class="sk">Keamanan Jaringan</span><span class="sv">Akses via HTTPS; RBAC ketat; enkripsi data sensitif; logging seluruh aktivitas pengguna</span></li>
+          <li><span class="sk">Skalabilitas</span><span class="sv">Target kapasitas 500 pengguna serentak; arsitektur mendukung penambahan server tanpa downtime</span></li>
+        </ul>
+
+        <h3>1.9 Analisis Proses Bisnis</h3>
+        <p>Proses penyelenggaraan Ujian Kompetensi Kataloger mencakup serangkaian tahapan yang saling berkaitan dan harus didukung penuh oleh sistem CAT secara end-to-end. Tahapan tersebut adalah:</p>
+        <div class="ph">
+          <div class="pi"><span class="pn">①</span><span class="pm">Pendaftaran &amp; Verifikasi Peserta</span></div>
+          <div class="pi"><span class="pn">②</span><span class="pm">Penyusunan &amp; Validasi Soal</span></div>
+          <div class="pi"><span class="pn">③</span><span class="pm">Pembentukan Paket Soal</span></div>
+          <div class="pi"><span class="pn">④</span><span class="pm">Penjadwalan Ujian</span></div>
+          <div class="pi"><span class="pn">⑤</span><span class="pm">Pelaksanaan &amp; Penilaian Otomatis</span></div>
+          <div class="pi"><span class="pn">⑥</span><span class="pm">Verifikasi Hasil</span></div>
+          <div class="pi"><span class="pn">⑦</span><span class="pm">Penerbitan Laporan &amp; Arsip Digital</span></div>
+        </div>
+        <p>Digitalisasi seluruh tahapan ini mengurangi kesalahan manual, mempercepat penerbitan hasil, dan meningkatkan integritas serta akuntabilitas penyelenggaraan ujian kompetensi.</p>
+        <div style="overflow-x:auto;margin:14px 0">
+        <svg viewBox="0 0 640 444" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:640px;display:block;font-family:Calibri,'Segoe UI',Arial,sans-serif">
+          <defs><marker id="fc7ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#1A2B4A"/></marker><marker id="fc7ahg" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#16a34a"/></marker></defs>
+          <rect width="640" height="444" fill="#f8fafc" rx="8" stroke="#e2e8f0" stroke-width="1"/>
+          <text x="320" y="13" text-anchor="middle" fill="#94a3b8" font-size="10" font-style="italic">Flowchart — Alur Proses Bisnis Penyelenggaraan Ujian Kompetensi Kataloger</text>
+          <rect x="220" y="18" width="200" height="26" rx="13" fill="#8b1a1a"/><text x="320" y="35" text-anchor="middle" fill="white" font-weight="bold" font-size="12">MULAI</text>
+          <line x1="320" y1="44" x2="320" y2="58" stroke="#1A2B4A" stroke-width="1.5" marker-end="url(#fc7ah)"/>
+          <rect x="110" y="60" width="420" height="32" rx="4" fill="#1A2B4A"/>
+          <text x="320" y="73" text-anchor="middle" fill="#BF9B2F" font-size="10.5" font-weight="bold">① Pendaftaran &amp; Verifikasi Peserta</text>
+          <text x="320" y="86" text-anchor="middle" fill="#94a3c8" font-size="9">Registrasi NIP, verifikasi data kepegawaian, konfirmasi satker</text>
+          <line x1="320" y1="92" x2="320" y2="106" stroke="#1A2B4A" stroke-width="1.5" marker-end="url(#fc7ah)"/>
+          <rect x="110" y="108" width="420" height="32" rx="4" fill="#1A2B4A"/>
+          <text x="320" y="121" text-anchor="middle" fill="#BF9B2F" font-size="10.5" font-weight="bold">② Penyusunan &amp; Validasi Soal</text>
+          <text x="320" y="134" text-anchor="middle" fill="#94a3c8" font-size="9">Input bank soal berbasis NSN, review validator, approve soal</text>
+          <line x1="320" y1="140" x2="320" y2="154" stroke="#1A2B4A" stroke-width="1.5" marker-end="url(#fc7ah)"/>
+          <rect x="110" y="156" width="420" height="32" rx="4" fill="#1A2B4A"/>
+          <text x="320" y="169" text-anchor="middle" fill="#BF9B2F" font-size="10.5" font-weight="bold">③ Pembentukan Paket Soal</text>
+          <text x="320" y="182" text-anchor="middle" fill="#94a3c8" font-size="9">Randomisasi per peserta, komposisi MCQ &amp; Essay, finalisasi paket</text>
+          <line x1="320" y1="188" x2="320" y2="202" stroke="#1A2B4A" stroke-width="1.5" marker-end="url(#fc7ah)"/>
+          <rect x="110" y="204" width="420" height="32" rx="4" fill="#BF9B2F"/>
+          <text x="320" y="217" text-anchor="middle" fill="#1A2B4A" font-size="10.5" font-weight="bold">④ Penjadwalan Ujian</text>
+          <text x="320" y="230" text-anchor="middle" fill="#4A3800" font-size="9">Jadwal sesi, durasi, kelas, mata pelajaran, aktivasi status ujian</text>
+          <line x1="320" y1="236" x2="320" y2="250" stroke="#1A2B4A" stroke-width="1.5" marker-end="url(#fc7ah)"/>
+          <rect x="110" y="252" width="420" height="32" rx="4" fill="#16a34a"/>
+          <text x="320" y="265" text-anchor="middle" fill="white" font-size="10.5" font-weight="bold">⑤ Pelaksanaan &amp; Penilaian Otomatis</text>
+          <text x="320" y="278" text-anchor="middle" fill="#dcfce7" font-size="9">Ujian CAT, timer, auto-save, submit, kalkulasi nilai MCQ otomatis</text>
+          <line x1="320" y1="284" x2="320" y2="298" stroke="#1A2B4A" stroke-width="1.5" marker-end="url(#fc7ah)"/>
+          <rect x="110" y="300" width="420" height="32" rx="4" fill="#1A2B4A"/>
+          <text x="320" y="313" text-anchor="middle" fill="#BF9B2F" font-size="10.5" font-weight="bold">⑥ Verifikasi Hasil &amp; Penerbitan Laporan</text>
+          <text x="320" y="326" text-anchor="middle" fill="#94a3c8" font-size="9">Rekap nilai, verifikasi pimpinan, cetak laporan resmi instansi</text>
+          <line x1="320" y1="332" x2="320" y2="346" stroke="#1A2B4A" stroke-width="1.5" marker-end="url(#fc7ah)"/>
+          <rect x="110" y="348" width="420" height="32" rx="4" fill="#1A2B4A"/>
+          <text x="320" y="361" text-anchor="middle" fill="#BF9B2F" font-size="10.5" font-weight="bold">⑦ Arsip Digital</text>
+          <text x="320" y="374" text-anchor="middle" fill="#94a3c8" font-size="9">Simpan riwayat ujian, backup database, audit log permanen</text>
+          <line x1="320" y1="380" x2="320" y2="394" stroke="#16a34a" stroke-width="1.5" marker-end="url(#fc7ahg)"/>
+          <rect x="220" y="396" width="200" height="26" rx="13" fill="#16a34a"/><text x="320" y="413" text-anchor="middle" fill="white" font-weight="bold" font-size="12">SELESAI</text>
+        </svg></div>
+
+        <h3>1.10 Stakeholder &amp; Hak Akses</h3>
+        <p>Sistem melibatkan delapan kelompok pemangku kepentingan (stakeholder) dengan hak akses yang ditetapkan sesuai prinsip <em>least privilege</em> — setiap pengguna hanya dapat mengakses fungsi yang relevan dengan perannya.</p>
+        <div class="tw"><table><thead><tr><th>Stakeholder</th><th>Peran dalam Sistem</th><th>Level Akses</th></tr></thead>
+        <tbody>
+          <tr><td>Admin Sistem</td><td>Konfigurasi teknis, manajemen akun, backup-restore</td><td><span class="b bh">Penuh</span></td></tr>
+          <tr><td>Admin Ujian / Operator</td><td>Buat sesi, kelola soal, daftarkan peserta, lihat hasil</td><td><span class="b bm">Tinggi</span></td></tr>
+          <tr><td>Penyusun Soal</td><td>Input dan edit soal di bank soal</td><td><span class="b bm">Menengah</span></td></tr>
+          <tr><td>Validator Soal</td><td>Review dan approve soal sebelum digunakan</td><td><span class="b bm">Menengah</span></td></tr>
+          <tr><td>Pengawas Ujian</td><td>Monitoring peserta aktif selama ujian berlangsung</td><td><span class="b bl">Terbatas</span></td></tr>
+          <tr><td>Peserta / Siswa</td><td>Ikuti ujian, lihat nilai, akses riwayat pribadi</td><td><span class="b bl">Terbatas</span></td></tr>
+          <tr><td>Tim TI</td><td>Pemeliharaan server, update sistem, troubleshooting</td><td><span class="b bm">Tinggi</span></td></tr>
+          <tr><td>Pimpinan / Manajemen</td><td>Lihat laporan rekapitulasi dan statistik ujian</td><td><span class="b bt">Baca</span></td></tr>
+        </tbody></table></div>
+
+        <h3>1.11 Gambaran Desain Sistem</h3>
+        <p>Sistem CAT dirancang menggunakan arsitektur tiga lapis (<em>three-tier architecture</em>) yang memisahkan lapisan presentasi, logika bisnis, dan penyimpanan data secara jelas.</p>
+        <div class="cg">
+          <div class="card"><div class="ci">🖥️</div><div class="ct">Client Web</div><div class="cd">Browser peserta &amp; admin — menampilkan UI, mengirim request HTTP/HTTPS</div></div>
+          <div class="card"><div class="ci">⚙️</div><div class="ct">Application Server</div><div class="cd">PHP Native di XAMPP — memproses logika ujian, autentikasi, kalkulasi nilai</div></div>
+          <div class="card"><div class="ci">🗄️</div><div class="ct">Database Server</div><div class="cd">MySQL — menyimpan soal, jawaban, peserta, hasil, log aktivitas</div></div>
+        </div>
+        <p>Modul-modul internal saling berkomunikasi melalui include/require PHP. API endpoint disiapkan untuk kebutuhan integrasi masa depan dengan sistem kepegawaian (SIMPEG) maupun sistem lain di lingkungan Kemhan bila diperlukan.</p>
+        <div style="overflow-x:auto;margin:14px 0">
+        <svg viewBox="0 0 640 268" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:640px;display:block;font-family:Calibri,'Segoe UI',Arial,sans-serif">
+          <defs><marker id="fc8ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#3D6096"/></marker><marker id="fc8ahup" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto" orient="180"><polygon points="0 0,8 3,0 6" fill="#3D6096"/></marker></defs>
+          <rect width="640" height="268" fill="#f8fafc" rx="8" stroke="#e2e8f0" stroke-width="1"/>
+          <text x="320" y="13" text-anchor="middle" fill="#94a3b8" font-size="10" font-style="italic">Arsitektur Tiga Lapis (Three-Tier) — Sistem CAT PUSKOD BALOGHAN KEMHAN</text>
+          <rect x="30" y="20" width="580" height="56" rx="6" fill="#1A2B4A" stroke="#3D6096" stroke-width="1"/>
+          <text x="320" y="38" text-anchor="middle" fill="#BF9B2F" font-weight="bold" font-size="12">CLIENT LAYER</text>
+          <text x="320" y="53" text-anchor="middle" fill="#CBD5E1" font-size="10.5">Browser Peserta · Browser Admin / Operator · Perangkat Desktop &amp; Laptop</text>
+          <text x="320" y="68" text-anchor="middle" fill="#64748b" font-size="9">Menampilkan UI · Mengirim form input · Menerima respons server</text>
+          <line x1="330" y1="76" x2="330" y2="96" stroke="#3D6096" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#fc8ah)"/>
+          <line x1="310" y1="96" x2="310" y2="76" stroke="#3D6096" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#fc8ah)"/>
+          <text x="450" y="89" fill="#3D6096" font-size="9" font-style="italic">HTTP/HTTPS Request &amp; Response</text>
+          <rect x="30" y="98" width="580" height="56" rx="6" fill="#3D6096" stroke="#5A88C8" stroke-width="1"/>
+          <text x="320" y="116" text-anchor="middle" fill="white" font-weight="bold" font-size="12">APPLICATION SERVER (PHP Native + XAMPP)</text>
+          <text x="320" y="131" text-anchor="middle" fill="#CBD5E1" font-size="10.5">Autentikasi · Manajemen Ujian · Kalkulasi Nilai · Laporan · Backup</text>
+          <text x="320" y="146" text-anchor="middle" fill="#94a3b8" font-size="9">Logika bisnis · Session management · Include/require PHP · Query builder</text>
+          <line x1="330" y1="154" x2="330" y2="174" stroke="#3D6096" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#fc8ah)"/>
+          <line x1="310" y1="174" x2="310" y2="154" stroke="#3D6096" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#fc8ah)"/>
+          <text x="450" y="167" fill="#3D6096" font-size="9" font-style="italic">SQL Query &amp; Result Set</text>
+          <rect x="30" y="176" width="580" height="56" rx="6" fill="#0F1C30" stroke="#1A2B4A" stroke-width="1"/>
+          <text x="320" y="194" text-anchor="middle" fill="#BF9B2F" font-weight="bold" font-size="12">DATA LAYER (MySQL)</text>
+          <text x="320" y="209" text-anchor="middle" fill="#CBD5E1" font-size="10.5">db_ujian_online · 19 Tabel · Backup Harian · Audit Log Aktivitas</text>
+          <text x="320" y="224" text-anchor="middle" fill="#475569" font-size="9">Soal · Peserta · Jawaban · Nilai · Riwayat · Sesi · Admin · Log</text>
+        </svg></div>
+
+        <h3>1.12 Entitas Basis Data Utama</h3>
+        <p>Model data sistem terdiri dari entitas-entitas berikut yang saling terhubung melalui foreign key untuk menjaga integritas referensial dan histori perubahan data:</p>
+        <div class="cg">
+          <div class="card"><div class="ct">User &amp; Role</div><div class="cd">Akun admin, guru, siswa beserta level hak akses</div></div>
+          <div class="card"><div class="ct">Peserta</div><div class="cd">Data peserta per sesi ujian (NIP, nama, satker)</div></div>
+          <div class="card"><div class="ct">Soal &amp; Opsi Jawaban</div><div class="cd">Bank soal MCQ dan essay beserta pilihan jawaban</div></div>
+          <div class="card"><div class="ct">Paket Soal</div><div class="cd">Komposisi soal per sesi dengan opsi randomisasi</div></div>
+          <div class="card"><div class="ct">Jadwal &amp; Sesi</div><div class="cd">Waktu, durasi, kelas, mapel, status aktif/nonaktif</div></div>
+          <div class="card"><div class="ct">Jawaban Peserta</div><div class="cd">Rekaman auto-save per soal selama ujian berlangsung</div></div>
+          <div class="card"><div class="ct">Nilai &amp; Riwayat</div><div class="cd">Hasil akhir, status lulus/tidak, histori ujian selesai</div></div>
+          <div class="card"><div class="ct">Log Aktivitas</div><div class="cd">Audit trail seluruh aksi pengguna untuk akuntabilitas</div></div>
+        </div>
+
+        <h3>1.13 Antarmuka &amp; Rencana Pengujian</h3>
+        <p>Antarmuka sistem terdiri dari beberapa halaman utama yang dirancang untuk kemudahan penggunaan dan efisiensi proses ujian:</p>
+        <ul>
+          <li><strong>Dashboard Admin/Operator</strong> — manajemen sesi, soal, peserta, dan laporan</li>
+          <li><strong>Dashboard Peserta</strong> — daftar ujian tersedia dan riwayat ujian selesai</li>
+          <li><strong>Halaman Ujian (fullscreen)</strong> — tampilan soal, timer countdown, navigasi antar soal</li>
+          <li><strong>Halaman Monitoring Ujian</strong> — pantau peserta aktif secara real-time (direncanakan)</li>
+          <li><strong>Laporan &amp; Ekspor</strong> — grafik statistik, ekspor PDF dan Excel per sesi/per peserta</li>
+        </ul>
+        <p>Rencana pengujian sistem mencakup: <strong>unit testing</strong> per modul, <strong>integration testing</strong> antar modul, <strong>system testing</strong> end-to-end, <strong>UAT</strong> bersama pengguna nyata, <strong>load testing</strong> untuk simulasi 500 pengguna serentak, <strong>security testing</strong> (penetration test), dan <strong>disaster recovery testing</strong>. Dokumen ini menjadi dasar penyusunan SRS, UML, ERD, SOP, dan implementasi teknis selanjutnya.</p>
+      </div>
+    </section>
+</main></div>
+</body></html>

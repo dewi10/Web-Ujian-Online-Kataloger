@@ -1,0 +1,440 @@
+<!DOCTYPE html><html lang="id"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ANALISIS KEBUTUHAN DESAIN SISTEM APLIKASI CAT UJIAN KOMPETENSI KATALOGER PUSKOD BALOGHAN KEMHAN</title>
+<style>
+:root {
+  --navy:#1A2B4A;--navy2:#0F1C30;--steel:#3D6096;--gold:#BF9B2F;--gold-l:#F5EAC8;--gold-d:#8A6F1E;
+  --bg:#F5F7FA;--surf:#FFFFFF;--surf2:#ECF0F7;--bdr:#CDD5E3;
+  --tx:#1A2B4A;--txs:#3D5068;--txm:#637085;
+  --ok:#1A6B3C;--okb:#E6F5ED;--wn:#8A4F00;--wnb:#FFF3E0;--cr:#8A1A1A;--crb:#FDEAEA;
+  --r:6px;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0C1520;--surf:#142030;--surf2:#1C2D42;--bdr:#2A3D56;
+  --tx:#DDE5F0;--txs:#9BB4D0;--txm:#6A88A8;
+  --gold:#CFA832;--gold-l:#2A2010;--gold-d:#9A7A20;--steel:#5A88C8;
+  --ok:#3DA86A;--okb:#0A2018;--wn:#CCA04A;--wnb:#201500;--cr:#E05050;--crb:#200808;
+}}
+:root[data-theme=dark]{--bg:#0C1520;--surf:#142030;--surf2:#1C2D42;--bdr:#2A3D56;--tx:#DDE5F0;--txs:#9BB4D0;--txm:#6A88A8;--gold:#CFA832;--gold-l:#2A2010;--gold-d:#9A7A20;--steel:#5A88C8;--ok:#3DA86A;--okb:#0A2018;--wn:#CCA04A;--wnb:#201500;--cr:#E05050;--crb:#200808;}
+:root[data-theme=light]{--bg:#F5F7FA;--surf:#FFFFFF;--surf2:#ECF0F7;--bdr:#CDD5E3;--tx:#1A2B4A;--txs:#3D5068;--txm:#637085;--gold:#BF9B2F;--gold-l:#F5EAC8;--gold-d:#8A6F1E;--steel:#3D6096;--ok:#1A6B3C;--okb:#E6F5ED;--wn:#8A4F00;--wnb:#FFF3E0;--cr:#8A1A1A;--crb:#FDEAEA;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;font-size:15px;line-height:1.7;color:var(--tx);background:var(--bg)}
+/* Header */
+.hdr{background:linear-gradient(165deg,var(--navy2) 0%,var(--navy) 65%,#223A6A 100%);color:#fff;position:relative;overflow:hidden}
+.hdr::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(255,255,255,.015) 80px,rgba(255,255,255,.015) 81px);pointer-events:none}
+.hband{background:var(--gold);height:4px}
+.hinner{max-width:1200px;margin:0 auto;padding:32px 40px 36px;display:flex;align-items:flex-start;gap:22px;position:relative;z-index:1}
+.emblem{flex-shrink:0;width:64px;height:64px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:var(--navy2);font-family:Georgia,serif;box-shadow:0 0 0 3px rgba(255,255,255,.15);text-align:center;line-height:1.2}
+.htxt{}
+.orglbl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:6px;font-weight:500}
+.dtitle{font-family:Georgia,'Times New Roman',serif;font-size:clamp(17px,2vw,24px);font-weight:700;line-height:1.3;color:#fff;text-wrap:balance;margin-bottom:10px}
+.dtitle em{color:var(--gold);font-style:normal}
+.dmeta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.mchip{font-size:11px;letter-spacing:.04em;color:rgba(255,255,255,.65);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:3px;padding:3px 9px}
+.mchip strong{color:rgba(255,255,255,.9);font-weight:600}
+/* Status bar */
+.sbar{background:var(--navy);border-bottom:2px solid var(--gold)}
+.sbinner{max-width:1200px;margin:0 auto;padding:10px 40px;display:flex;gap:24px;flex-wrap:wrap}
+.si{display:flex;align-items:center;gap:7px}
+.sdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sdot.ok{background:#4ADE80}.sdot.wn{background:#FCD34D}.sdot.cr{background:#F87171}
+.slbl{font-size:11px;color:rgba(255,255,255,.7)}.slbl strong{color:#fff;font-weight:600}
+/* Layout */
+.wrap{max-width:1200px;margin:0 auto;padding:32px 20px;display:grid;grid-template-columns:230px 1fr;gap:32px;align-items:start}
+/* TOC */
+.toc{position:sticky;top:16px;background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden}
+.toch{background:var(--surf2);padding:10px 15px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--txm);border-bottom:1px solid var(--bdr)}
+.tocl{list-style:none;padding:5px 0}
+.tocl li a{display:flex;align-items:center;gap:8px;padding:6px 13px;text-decoration:none;color:var(--txs);font-size:12.5px;line-height:1.4;transition:background .12s,color .12s}
+.tocl li a:hover{background:var(--surf2);color:var(--tx)}
+.tnum{display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;border-radius:50%;background:var(--surf2);color:var(--txm);font-size:10px;font-weight:700;flex-shrink:0;border:1px solid var(--bdr)}
+.tocl li a:hover .tnum{background:var(--gold);color:var(--navy2);border-color:var(--gold)}
+/* Main */
+.main{min-width:0}
+.sec{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;margin-bottom:22px}
+.sech{padding:17px 24px 15px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:13px}
+.sbadge{display:inline-flex;align-items:center;justify-content:center;width:33px;height:33px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:700;font-family:Georgia,serif;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.sech h2{font-family:Georgia,'Times New Roman',serif;font-size:16px;font-weight:700;color:var(--tx);line-height:1.3;text-wrap:balance}
+.sech .ssub{font-size:12px;color:var(--txm);font-weight:400}
+.sbody{padding:20px 24px}
+/* Typography */
+.sbody h3{font-family:Georgia,serif;font-size:14px;font-weight:700;color:var(--steel);margin:20px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--bdr)}
+.sbody h3:first-child{margin-top:0}
+.sbody p{color:var(--txs);font-size:14px;margin-bottom:10px;max-width:72ch}
+.sbody ul,.sbody ol{margin:6px 0 12px 20px;color:var(--txs);font-size:14px}
+.sbody li{margin-bottom:4px}
+/* Tables */
+.tw{overflow-x:auto;margin:10px 0 16px;border-radius:var(--r);border:1px solid var(--bdr)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead tr{background:var(--navy)}
+thead th{padding:9px 12px;color:#fff;font-weight:600;text-align:left;letter-spacing:.04em;font-size:11px;text-transform:uppercase;white-space:nowrap}
+tbody tr{border-bottom:1px solid var(--bdr)}
+tbody tr:last-child{border-bottom:none}
+tbody tr:nth-child(even){background:var(--surf2)}
+tbody tr:hover{background:var(--gold-l)}
+td{padding:8px 12px;color:var(--txs);vertical-align:top;line-height:1.5}
+td:first-child{font-weight:500;color:var(--tx)}
+/* Badges */
+.b{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:.04em;vertical-align:middle}
+.bh{background:var(--crb);color:var(--cr)}
+.bm{background:var(--wnb);color:var(--wn)}
+.bl{background:var(--okb);color:var(--ok)}
+.bt{background:var(--surf2);color:var(--steel);border:1px solid var(--bdr)}
+.be{background:#E0F0FF;color:#1A5A8A}
+.bg2{background:#FFF0D8;color:#7A4A00}
+/* Info boxes */
+.ib{border-left:3px solid var(--steel);background:var(--surf2);padding:10px 14px;border-radius:0 var(--r) var(--r) 0;margin:10px 0;font-size:13.5px;color:var(--txs)}
+.ib.gold{border-color:var(--gold)}.ib.ok{border-color:var(--ok);background:var(--okb);color:var(--ok)}
+.ib.cr{border-color:var(--cr);background:var(--crb)}.ib.wn{border-color:var(--wn);background:var(--wnb)}
+.ib strong{color:var(--tx)}
+/* Cards */
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px;margin:10px 0}
+.card{background:var(--surf2);border:1px solid var(--bdr);border-radius:var(--r);padding:12px 14px}
+.ci{font-size:18px;margin-bottom:6px}.ct{font-weight:700;font-size:13px;color:var(--tx);margin-bottom:3px}.cd{font-size:12px;color:var(--txm);line-height:1.5}
+.twoc{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+/* Compare */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.cbox{border-radius:var(--r);overflow:hidden;border:1px solid var(--bdr)}
+.chead{padding:7px 12px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.chead.ex{background:#1A5A8A;color:#fff}.chead.gp{background:var(--gold-d);color:#fff}
+.cbody{padding:11px 13px;font-size:13px;color:var(--txs)}
+.cbody li{margin-bottom:4px}
+/* Spec list */
+.sl{list-style:none;margin:6px 0}
+.sl li{display:flex;gap:11px;padding:6px 0;border-bottom:1px solid var(--bdr);font-size:13px;align-items:flex-start}
+.sl li:last-child{border-bottom:none}
+.sk{min-width:170px;color:var(--txm);font-size:12px;font-weight:500;letter-spacing:.02em;flex-shrink:0}
+.sv{color:var(--txs)}
+/* Phase */
+.ph{display:flex;border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;margin:10px 0;font-size:12px}
+.pi{flex:1;padding:8px 10px;background:var(--surf2);border-right:1px solid var(--bdr);text-align:center}
+.pi:last-child{border-right:none}
+.pn{font-weight:800;color:var(--gold);font-size:13px;display:block}.pm{color:var(--txs);font-weight:500;font-size:11px}
+/* Code */
+code{font-family:'Courier New',Consolas,monospace;font-size:12.5px;background:var(--surf2);border:1px solid var(--bdr);padding:1px 5px;border-radius:3px;color:var(--steel)}
+pre{background:var(--navy2);color:#A8D8F0;border-radius:var(--r);padding:14px 17px;overflow-x:auto;font-size:12px;font-family:'Courier New',Consolas,monospace;line-height:1.6;margin:10px 0;border:1px solid rgba(255,255,255,.06)}
+pre .kw{color:#7DD3FC}pre .st{color:#86EFAC}pre .cm{color:#6B7A8A;font-style:italic}
+/* Footer */
+.ftr{max-width:1200px;margin:0 auto;padding:16px 20px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;border-top:1px solid var(--bdr);font-size:12px;color:var(--txm)}
+.fo{font-weight:600;color:var(--txs)}
+/* Responsive */
+@media(max-width:820px){
+  .wrap{grid-template-columns:1fr;padding:16px 12px}
+  .toc{position:static}.hinner{padding:22px 16px 26px;flex-direction:column;gap:12px}
+  .sbinner{padding:8px 16px;gap:10px}.twoc,.cmp{grid-template-columns:1fr}
+  .ph{flex-wrap:wrap}.pi{flex:none;width:50%}
+  .cg{grid-template-columns:1fr}.sbody{padding:14px 14px}
+}
+@media print{
+  :root{
+    --navy:#1A2B4A;--navy2:#0F1C30;--steel:#3D6096;--gold:#BF9B2F;--gold-l:#F5EAC8;--gold-d:#8A6F1E;
+    --bg:#fff;--surf:#fff;--surf2:#F0F3F8;--bdr:#C8D0DC;
+    --tx:#111;--txs:#333;--txm:#555;
+    --ok:#1A6B3C;--okb:#E6F5ED;--wn:#8A4F00;--wnb:#FFF3E0;--cr:#8A1A1A;--crb:#FDEAEA;
+  }
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  body{background:#fff;font-size:11pt;line-height:1.6}
+  .hdr,.sbar,aside,.toc,.ftr{display:none!important}
+  .wrap{display:block;max-width:100%;padding:0;margin:0}
+  .main{width:100%;max-width:100%}
+  .sec{page-break-inside:auto;break-inside:auto;border:none;margin-bottom:20pt;border-radius:0;overflow:visible}
+  .sech{padding:10px 0 8px;border-bottom:2px solid #1A2B4A;margin-bottom:10pt}
+  .sech h2{font-size:14pt;font-weight:700;color:#1A2B4A}
+  .sech .ssub{font-size:9pt;color:#555}
+  .sbadge{width:26px;height:26px;font-size:12px}
+  .sbody{padding:8pt 0}
+  .sbody h3{font-size:12pt!important;font-weight:700!important;color:#1A2B4A!important;margin:14pt 0 6pt!important;border-bottom:1px solid #C8D0DC;padding-bottom:3pt}
+  .sbody p,.sbody li{font-size:10.5pt}
+  h2,h3{page-break-after:avoid;break-after:avoid}
+  img,.card,.cbox,.ib,.sbody ul,.sbody ol{page-break-inside:avoid;break-inside:avoid}
+  .sbody p+ul,.sbody p+ol{page-break-before:avoid;break-before:avoid}
+  .mock-grid{grid-template-columns:1fr!important;gap:12pt}
+  .mock-frame,.mock-wrap{page-break-inside:avoid;break-inside:avoid;overflow:visible!important}
+  .mock-frame{box-shadow:none!important;border:1px solid #ccc!important}
+  .tw{overflow-x:visible}
+  table{font-size:9pt;page-break-inside:auto}
+  thead{display:table-header-group}
+  tr{page-break-inside:avoid;break-inside:avoid}
+  pre{white-space:pre-wrap;word-break:break-all;background:#F0F3F8!important;color:#1A2B4A!important;border:1px solid #C8D0DC;font-size:8.5pt;page-break-inside:avoid}
+  pre .kw{color:#1A5080!important}pre .st{color:#1A6B3C!important}pre .cm{color:#666!important}
+  code{background:#F0F3F8!important;color:#3D6096!important;border:1px solid #C8D0DC}
+  svg{max-width:100%!important;height:auto!important;display:block;page-break-inside:avoid}
+  .cg{grid-template-columns:repeat(3,1fr)!important}
+  .twoc,.cmp{grid-template-columns:1fr 1fr!important}
+  .ph{flex-wrap:wrap;overflow:visible!important}
+  .pi{flex:none;width:calc(100%/4);min-width:100px}
+  div[style*="overflow-x"]{overflow:visible!important}
+  div[style*="page-break"]{page-break-before:always;break-before:page}
+  a{color:inherit;text-decoration:none}
+  @page{margin:20mm 18mm 20mm 22mm;size:A4}
+}
+</style>
+
+<style>
+body{margin:0;padding:0}
+.wrap{display:block;max-width:100%;padding:24px 32px;margin:0 auto}
+.main{display:block;width:100%}
+aside,.hdr,.sbar,.ftr{display:none}
+</style>
+</head><body>
+<div class="wrap"><main class="main">
+<section class="sec" id="s5">
+      <div class="sech"><div class="sbadge">5</div><div><h2>Pengembangan Modul CAT</h2><div class="ssub">Bank soal aktual, mekanisme ujian, auto-save, timer, penilaian, dan anti-kecurangan</div></div></div>
+      <div class="sbody">
+        <p>Modul CAT adalah inti dari aplikasi ini — mencakup seluruh logika pengambilan soal, pengiriman jawaban, perhitungan nilai, dan perlindungan integritas ujian. Bagian ini mendokumentasikan mekanisme yang sudah berjalan, mengidentifikasi gap kritis seperti penilaian essay, dan merekomendasikan fitur anti-kecurangan yang perlu segera diimplementasikan.</p>
+
+        <h3>5.1 Materi Soal Ujian Kompetensi Kataloger</h3>
+        <p>Berdasarkan data soal aktual dalam database, ujian kompetensi kataloger mencakup enam bidang kompetensi berikut. Pemahaman terhadap distribusi materi ini penting untuk memastikan representasi soal yang seimbang di setiap sesi ujian.</p>
+        <div class="tw"><table><thead><tr><th>Bidang Kompetensi</th><th>Contoh Materi</th><th>Tipe</th></tr></thead>
+        <tbody>
+          <tr><td>Jabatan Fungsional Kataloger</td><td>Jenjang jabatan, BUP, PP ASN, PermenPAN Kataloger</td><td>MCQ</td></tr>
+          <tr><td>Kodifikasi NSN</td><td>Struktur NSN, FSC/FSG, NIIN, Nomor Sediaan Nasional</td><td>MCQ</td></tr>
+          <tr><td>Identifikasi Materiil</td><td>Tipe identifikasi, IIG, Type Identifikasi Uraian Sebagian</td><td>MCQ</td></tr>
+          <tr><td>LSA &amp; NCB</td><td>Transaksi LSA, waktu respons, DIC K27, NCB NCS</td><td>MCQ</td></tr>
+          <tr><td>Essay Ahli Madya</td><td>Motivasi menjadi Kataloger, penempatan Satker, saran peningkatan</td><td>Essay</td></tr>
+          <tr><td>Essay Terampil</td><td>Pengetahuan kodifikasi, profesionalisme kataloger</td><td>Essay</td></tr>
+        </tbody></table></div>
+
+        <h3>5.2 Auto-Save yang Sudah Berjalan</h3>
+        <div class="ib ok"><strong>Auto-Save Aktif:</strong> Fitur sudah berjalan di <code>update-jawaban.php</code>. Jawaban tersimpan saat peserta berpindah soal. Data aman meski koneksi terputus sementara — proteksi penting agar progress tidak hilang.</div>
+
+        <h3>5.3 Mekanisme Timer</h3>
+        <p>Timer adalah komponen kritis yang menentukan kapan sesi ujian berakhir. Berikut spesifikasi mekanisme timer yang berlaku, termasuk perilaku saat koneksi terputus dan tindakan otomatis saat waktu habis.</p>
+        <div style="overflow-x:auto;margin:14px 0">
+        <svg viewBox="0 0 620 530" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:620px;display:block;font-family:Calibri,'Segoe UI',Arial,sans-serif">
+          <defs>
+            <marker id="fc2ah" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,9 3.5,0 7" fill="#8b1a1a"/></marker>
+            <marker id="fc2ahg" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,9 3.5,0 7" fill="#16a34a"/></marker>
+            <marker id="fc2ahb" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,9 3.5,0 7" fill="#0066cc"/></marker>
+          </defs>
+          <rect width="620" height="530" fill="#fafafa" rx="8" stroke="#e5e7eb" stroke-width="1"/>
+          <text x="310" y="13" text-anchor="middle" fill="#9ca3af" font-size="11" font-style="italic">Flowchart — Mekanisme Timer (timer.php)</text>
+          <!-- START -->
+          <rect x="210" y="20" width="200" height="34" rx="17" fill="#8b1a1a"/>
+          <text x="310" y="42" text-anchor="middle" fill="white" font-weight="bold" font-size="13">Peserta klik "Mulai Ujian"</text>
+          <!-- arrow -->
+          <line x1="310" y1="54" x2="310" y2="74" stroke="#8b1a1a" stroke-width="2" marker-end="url(#fc2ah)"/>
+          <!-- P1: PHP ambil waktu -->
+          <rect x="56" y="76" width="508" height="44" rx="5" fill="#fff4f4" stroke="#8b1a1a" stroke-width="1.5"/>
+          <text x="310" y="95" text-anchor="middle" fill="#5c1010" font-weight="600" font-size="13">PHP: Ambil waktu ujian dari database</text>
+          <text x="310" y="112" text-anchor="middle" fill="#5c1010" font-size="11">Hitung keterlambatan masuk → sisa_waktu = (waktu×60) - detik_berlalu</text>
+          <!-- arrow -->
+          <line x1="310" y1="120" x2="310" y2="140" stroke="#8b1a1a" stroke-width="2" marker-end="url(#fc2ah)"/>
+          <!-- P2: JS countdown -->
+          <rect x="70" y="142" width="480" height="42" rx="5" fill="#fff4f4" stroke="#8b1a1a" stroke-width="1.5"/>
+          <text x="310" y="160" text-anchor="middle" fill="#5c1010" font-weight="600" font-size="13">JS: Inisialisasi countdown (var jam, menit, detik)</text>
+          <text x="310" y="177" text-anchor="middle" fill="#5c1010" font-size="11">Tampilkan "Sisa waktu X jam : Y menit : Z detik" di #timer</text>
+          <!-- arrow -->
+          <line x1="310" y1="184" x2="310" y2="210" stroke="#8b1a1a" stroke-width="2" marker-end="url(#fc2ah)"/>
+          <!-- P3: setTimeout loop -->
+          <rect x="70" y="212" width="480" height="40" rx="5" fill="#fff4f4" stroke="#8b1a1a" stroke-width="1.5"/>
+          <text x="310" y="230" text-anchor="middle" fill="#5c1010" font-weight="600" font-size="13">setTimeout(hitung, 1000) — update setiap 1 detik</text>
+          <text x="310" y="247" text-anchor="middle" fill="#5c1010" font-size="11">detik-- ; jika detik&lt;0: detik=59, menit-- ; jika menit&lt;0: jam--</text>
+          <!-- Side annotation: sisa < 10 mnt -->
+          <path d="M550,232 L570,232 L570,290 L552,290" fill="none" stroke="#d4a017" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#fc2ah)"/>
+          <!-- arrow down from P3 -->
+          <line x1="310" y1="252" x2="310" y2="278" stroke="#8b1a1a" stroke-width="2" marker-end="url(#fc2ah)"/>
+          <!-- D1: Waktu habis? -->
+          <polygon points="310,280 390,318 310,356 230,318" fill="#fffbeb" stroke="#d4a017" stroke-width="1.5"/>
+          <text x="310" y="312" text-anchor="middle" fill="#7a5000" font-weight="600" font-size="12">Waktu habis?</text>
+          <text x="310" y="328" text-anchor="middle" fill="#7a5000" font-size="12">(jam &lt; 0)</text>
+          <!-- Annotation note: sisa < 10 mnt -->
+          <rect x="554" y="272" width="58" height="44" rx="4" fill="#fffce6" stroke="#d4a017" stroke-width="1" stroke-dasharray="3,2"/>
+          <text x="583" y="289" text-anchor="middle" fill="#7a5000" font-size="9">Sisa &lt;10mnt:</text>
+          <text x="583" y="302" text-anchor="middle" fill="#7a5000" font-size="9">timer merah</text>
+          <!-- D1 Tidak: loop back left -->
+          <line x1="230" y1="318" x2="40" y2="318" stroke="#0066cc" stroke-width="2"/>
+          <line x1="40" y1="318" x2="40" y2="232" stroke="#0066cc" stroke-width="2"/>
+          <line x1="40" y1="232" x2="70" y2="232" stroke="#0066cc" stroke-width="2" marker-end="url(#fc2ahb)"/>
+          <text x="136" y="310" text-anchor="middle" fill="#0066cc" font-size="11" font-weight="bold">Tidak (loop)</text>
+          <!-- D1 Ya: down -->
+          <line x1="310" y1="356" x2="310" y2="378" stroke="#16a34a" stroke-width="2" marker-end="url(#fc2ahg)"/>
+          <text x="322" y="371" fill="#16a34a" font-size="11" font-weight="bold">Ya</text>
+          <!-- P4: alert -->
+          <rect x="70" y="380" width="480" height="40" rx="5" fill="#fff0f0" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="310" y="398" text-anchor="middle" fill="#991b1b" font-weight="600" font-size="13">alert("Waktu ujian telah selesai")</text>
+          <text x="310" y="414" text-anchor="middle" fill="#991b1b" font-size="11">Dipanggil oleh clearInterval(hitung) saat jam &lt; 0</text>
+          <!-- arrow -->
+          <line x1="310" y1="420" x2="310" y2="440" stroke="#8b1a1a" stroke-width="2" marker-end="url(#fc2ah)"/>
+          <!-- P5: redirect -->
+          <rect x="70" y="442" width="480" height="40" rx="5" fill="#fff4f4" stroke="#8b1a1a" stroke-width="1.5"/>
+          <text x="310" y="460" text-anchor="middle" fill="#5c1010" font-weight="600" font-size="13">window.location.href = "simpan-hasil.php?id=..."</text>
+          <text x="310" y="477" text-anchor="middle" fill="#5c1010" font-size="11">Nilai MCQ dihitung otomatis + disimpan ke tabel nilai &amp; riwayat</text>
+          <!-- arrow -->
+          <line x1="310" y1="482" x2="310" y2="500" stroke="#8b1a1a" stroke-width="2" marker-end="url(#fc2ah)"/>
+          <!-- END -->
+          <rect x="195" y="502" width="230" height="22" rx="11" fill="#8b1a1a"/>
+          <text x="310" y="518" text-anchor="middle" fill="white" font-weight="bold" font-size="12">SELESAI — Nilai Tersimpan</text>
+        </svg>
+        </div>
+        <ul class="sl">
+          <li><span class="sk">File Timer</span><span class="sv"><code>pages/siswa/ujian/timer.php</code> — countdown JavaScript dengan sinkronisasi ke server</span></li>
+          <li><span class="sk">Sumber Waktu</span><span class="sv">Kolom <code>ujian.waktu</code> dalam menit; sesi dimulai saat peserta klik "Mulai"</span></li>
+          <li><span class="sk">Submit Otomatis</span><span class="sv">Saat timer = 0, ujian otomatis disubmit; nilai MCQ langsung dihitung</span></li>
+          <li><span class="sk">Notifikasi (perlu ditambah)</span><span class="sv">Peringatan visual saat sisa 10 menit (warna kuning) dan 5 menit (warna merah)</span></li>
+        </ul>
+
+        <h3>5.4 Penilaian MCQ — Sudah Otomatis</h3>
+        <p>Penilaian berjalan di <code>simpan-hasil.php</code>: nilai dihitung berdasarkan persentase jawaban benar (<code>is_correct = 1</code> di tabel <code>jawaban</code>), disimpan ke tabel <code>nilai</code>. Jika nilai &ge; <code>nilai_kelulusan</code>, peserta dinyatakan lulus.</p>
+        <div style="overflow-x:auto;margin:14px 0">
+        <svg viewBox="0 0 650 570" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:650px;display:block;font-family:Calibri,'Segoe UI',Arial,sans-serif">
+          <defs>
+            <marker id="fc3ah" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,9 3.5,0 7" fill="#8b1a1a"/></marker>
+            <marker id="fc3ahg" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,9 3.5,0 7" fill="#16a34a"/></marker>
+            <marker id="fc3ahr" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,9 3.5,0 7" fill="#dc2626"/></marker>
+          </defs>
+          <rect width="650" height="570" fill="#fafafa" rx="8" stroke="#e5e7eb" stroke-width="1"/>
+          <text x="325" y="13" text-anchor="middle" fill="#9ca3af" font-size="11" font-style="italic">Flowchart — Kalkulasi Nilai MCQ (simpan-hasil.php)</text>
+          <!-- START -->
+          <rect x="200" y="20" width="250" height="34" rx="17" fill="#8b1a1a"/>
+          <text x="325" y="42" text-anchor="middle" fill="white" font-weight="bold" font-size="13">simpan-hasil.php dipanggil</text>
+          <line x1="325" y1="54" x2="325" y2="74" stroke="#8b1a1a" stroke-width="2" marker-end="url(#fc3ah)"/>
+          <!-- P1: COUNT soal -->
+          <rect x="82" y="76" width="486" height="40" rx="5" fill="#fff4f4" stroke="#8b1a1a" stroke-width="1.5"/>
+          <text x="325" y="94" text-anchor="middle" fill="#5c1010" font-weight="600" font-size="13">COUNT soal dalam ujian</text>
+          <text x="325" y="109" text-anchor="middle" fill="#5c1010" font-size="11">SELECT COUNT(*) FROM soal WHERE id_ujian='$id_ujian' → $jumlah_soal</text>
+          <line x1="325" y1="116" x2="325" y2="136" stroke="#8b1a1a" stroke-width="2" marker-end="url(#fc3ah)"/>
+          <!-- P2: COUNT benar -->
+          <rect x="82" y="138" width="486" height="40" rx="5" fill="#fff4f4" stroke="#8b1a1a" stroke-width="1.5"/>
+          <text x="325" y="156" text-anchor="middle" fill="#5c1010" font-weight="600" font-size="13">COUNT jawaban benar</text>
+          <text x="325" y="171" text-anchor="middle" fill="#5c1010" font-size="11">JOIN hasil + jawaban WHERE hasil.id_jawaban = jawaban.id_jawaban AND jawaban.kunci=1 → $jumlah_benar</text>
+          <line x1="325" y1="178" x2="325" y2="198" stroke="#8b1a1a" stroke-width="2" marker-end="url(#fc3ah)"/>
+          <!-- P3: Formula GOLD -->
+          <rect x="82" y="200" width="486" height="40" rx="5" fill="#fffbe6" stroke="#d4a017" stroke-width="2"/>
+          <text x="325" y="218" text-anchor="middle" fill="#7a5000" font-weight="700" font-size="14">$nilai = ($jumlah_benar / $jumlah_soal) × 100</text>
+          <text x="325" y="233" text-anchor="middle" fill="#7a5000" font-size="11">Contoh: 8 benar dari 10 soal → (8/10)×100 = 80</text>
+          <line x1="325" y1="240" x2="325" y2="260" stroke="#8b1a1a" stroke-width="2" marker-end="url(#fc3ah)"/>
+          <!-- P4: UPDATE nilai -->
+          <rect x="82" y="262" width="486" height="40" rx="5" fill="#fff4f4" stroke="#8b1a1a" stroke-width="1.5"/>
+          <text x="325" y="280" text-anchor="middle" fill="#5c1010" font-weight="600" font-size="13">UPDATE tabel nilai</text>
+          <text x="325" y="295" text-anchor="middle" fill="#5c1010" font-size="11">UPDATE nilai SET nilai='$nilai' WHERE id_ujian='$id_ujian' AND id_siswa='$id_siswa'</text>
+          <line x1="325" y1="302" x2="325" y2="322" stroke="#8b1a1a" stroke-width="2" marker-end="url(#fc3ah)"/>
+          <!-- P5: INSERT riwayat -->
+          <rect x="82" y="324" width="486" height="40" rx="5" fill="#fff4f4" stroke="#8b1a1a" stroke-width="1.5"/>
+          <text x="325" y="342" text-anchor="middle" fill="#5c1010" font-weight="600" font-size="13">INSERT tabel riwayat</text>
+          <text x="325" y="357" text-anchor="middle" fill="#5c1010" font-size="11">INSERT INTO riwayat (id_ujian, id_siswa, tanggal) → cegah ujian ulang</text>
+          <line x1="325" y1="364" x2="325" y2="390" stroke="#8b1a1a" stroke-width="2" marker-end="url(#fc3ah)"/>
+          <!-- D1: Lulus? -->
+          <polygon points="325,392 416,432 325,472 234,432" fill="#fffbeb" stroke="#d4a017" stroke-width="1.5"/>
+          <text x="325" y="426" text-anchor="middle" fill="#7a5000" font-weight="600" font-size="12">nilai ≥</text>
+          <text x="325" y="442" text-anchor="middle" fill="#7a5000" font-size="12">nilai_kelulusan?</text>
+          <!-- Ya → right: LULUS -->
+          <line x1="416" y1="432" x2="432" y2="432" stroke="#16a34a" stroke-width="2" marker-end="url(#fc3ahg)"/>
+          <text x="424" y="424" fill="#16a34a" font-size="10" font-weight="bold">Ya</text>
+          <rect x="434" y="410" width="142" height="44" rx="22" fill="#f0fff4" stroke="#16a34a" stroke-width="2"/>
+          <text x="505" y="429" text-anchor="middle" fill="#14532d" font-weight="700" font-size="13">✓ LULUS</text>
+          <text x="505" y="445" text-anchor="middle" fill="#14532d" font-size="11">status tampil hijau</text>
+          <!-- Tidak → left: TDK LULUS -->
+          <line x1="234" y1="432" x2="220" y2="432" stroke="#dc2626" stroke-width="2" marker-end="url(#fc3ahr)"/>
+          <text x="228" y="424" fill="#dc2626" font-size="10" font-weight="bold">Tidak</text>
+          <rect x="74" y="410" width="144" height="44" rx="22" fill="#fff0f0" stroke="#dc2626" stroke-width="2"/>
+          <text x="146" y="429" text-anchor="middle" fill="#991b1b" font-weight="700" font-size="13">✗ TIDAK LULUS</text>
+          <text x="146" y="445" text-anchor="middle" fill="#991b1b" font-size="11">status tampil merah</text>
+          <!-- Merge: both → END -->
+          <line x1="505" y1="454" x2="505" y2="508" stroke="#16a34a" stroke-width="1.5"/>
+          <line x1="146" y1="454" x2="146" y2="508" stroke="#dc2626" stroke-width="1.5"/>
+          <line x1="146" y1="508" x2="505" y2="508" stroke="#8b1a1a" stroke-width="1.5"/>
+          <line x1="325" y1="508" x2="325" y2="528" stroke="#8b1a1a" stroke-width="2" marker-end="url(#fc3ah)"/>
+          <!-- END -->
+          <rect x="185" y="530" width="280" height="30" rx="15" fill="#8b1a1a"/>
+          <text x="325" y="550" text-anchor="middle" fill="white" font-weight="bold" font-size="13">Tampilkan Hasil ke Peserta</text>
+        </svg>
+        </div>
+
+        <h3>5.5 Penilaian Essay — Gap Kritis</h3>
+        <div class="ib wn"><strong>Gap Saat Ini:</strong> Ujian essay (<code>tipe_soal = 2</code>) menyimpan nilai awal <code>0</code>. Tidak ada antarmuka untuk operator input nilai essay. Fitur penilaian essay manual harus dibangun segera sebelum ujian essay berikutnya.</div>
+        <p>Yang perlu dibangun:</p>
+        <ul>
+          <li>Halaman admin: daftar peserta essay dengan status "Belum Dinilai / Sudah Dinilai"</li>
+          <li>Tampilkan jawaban essay yang sudah ditulis peserta di tabel <code>hasil.essay</code></li>
+          <li>Form input nilai (0–100) per peserta per soal essay</li>
+          <li>Update otomatis tabel <code>nilai</code> setelah operator simpan</li>
+        </ul>
+
+        <h3>5.6 Fitur Anti-Kecurangan yang Disarankan</h3>
+        <p>Menjaga integritas ujian adalah tanggung jawab sistem. Fitur-fitur berikut dapat diimplementasikan seluruhnya di sisi JavaScript frontend tanpa perubahan besar pada logika backend — cukup ditambahkan ke file <code>ambil-soal.php</code>.</p>
+        <div class="tw"><table><thead><tr><th>Mekanisme</th><th>Implementasi JavaScript</th><th>Dampak</th></tr></thead>
+        <tbody>
+          <tr><td>Fullscreen Enforcement</td><td>Fullscreen API; event listener saat keluar fullscreen</td><td>Peringatan muncul; log dikirim ke admin</td></tr>
+          <tr><td>Deteksi Pindah Tab</td><td><code>document.addEventListener('visibilitychange',…)</code></td><td>Dicatat di tabel <code>cheat_log</code> baru</td></tr>
+          <tr><td>Blokir Klik Kanan</td><td><code>addEventListener('contextmenu', e => e.preventDefault())</code></td><td>Menu kanan tidak muncul di area soal</td></tr>
+          <tr><td>Blokir Copy-Paste</td><td>Event listener <code>copy</code> dan <code>cut</code> diblokir</td><td>Konten soal tidak dapat dicopy</td></tr>
+          <tr><td>Satu Sesi per Peserta</td><td>Validasi di <code>siswa_ujian_aktif.php</code> (sudah ada dasar)</td><td>Login device lain saat ujian aktif ditolak</td></tr>
+        </tbody></table></div>
+
+        <h3>5.7 Modul Manajemen Soal (Question Bank)</h3>
+        <p>Modul ini berfungsi sebagai repositori sentral soal-soal kompetensi kataloger dengan tingkat keamanan tinggi dan kemampuan pengelolaan dinamis:</p>
+        <div class="cg">
+          <div class="card"><div class="ci">🗂️</div><div class="ct">Kategorisasi Dinamis</div><div class="cd">Soal dikelompokkan berdasarkan bidang teknis katalogisasi dan tingkat kesulitan; mendukung lampiran gambar untuk detail spesifikasi materiil pertahanan</div></div>
+          <div class="card"><div class="ci">🔀</div><div class="ct">Pengacakan Algoritmik</div><div class="cd">Setiap peserta mendapat urutan soal berbeda secara otomatis (shuffling algorithm) — meminimalkan potensi kecurangan antar-peserta dalam ruang ujian yang sama</div></div>
+          <div class="card"><div class="ci">📋</div><div class="ct">Audit Trail Soal</div><div class="cd">Setiap perubahan bank soal (tambah, revisi, hapus) dicatat dalam log sistem dengan timestamp dan identitas admin yang melakukan modifikasi</div></div>
+        </div>
+        <div style="overflow-x:auto;margin:14px 0">
+        <svg viewBox="0 0 640 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:640px;display:block;font-family:Calibri,'Segoe UI',Arial,sans-serif">
+          <defs><marker id="fc16ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#1A2B4A"/></marker></defs>
+          <rect width="640" height="100" fill="#f8fafc" rx="8" stroke="#e2e8f0" stroke-width="1"/>
+          <text x="320" y="13" text-anchor="middle" fill="#94a3b8" font-size="10" font-style="italic">Alur Pengelolaan Bank Soal — Input hingga Tampil ke Peserta</text>
+          <rect x="10" y="24" width="96" height="40" rx="4" fill="#1A2B4A"/><text x="58" y="41" text-anchor="middle" fill="white" font-size="9.5" font-weight="bold">Penyusun</text><text x="58" y="54" text-anchor="middle" fill="#94a3c8" font-size="8.5">Input soal + gambar</text>
+          <line x1="106" y1="44" x2="120" y2="44" stroke="#1A2B4A" stroke-width="1.5" marker-end="url(#fc16ah)"/>
+          <rect x="122" y="24" width="96" height="40" rx="4" fill="#1A2B4A"/><text x="170" y="41" text-anchor="middle" fill="white" font-size="9.5" font-weight="bold">Validator</text><text x="170" y="54" text-anchor="middle" fill="#94a3c8" font-size="8.5">Review &amp; approve</text>
+          <line x1="218" y1="44" x2="232" y2="44" stroke="#1A2B4A" stroke-width="1.5" marker-end="url(#fc16ah)"/>
+          <rect x="234" y="24" width="96" height="40" rx="4" fill="#BF9B2F"/><text x="282" y="41" text-anchor="middle" fill="#1A2B4A" font-size="9.5" font-weight="bold">Bank Soal</text><text x="282" y="54" text-anchor="middle" fill="#4A3800" font-size="8.5">DB terenkripsi</text>
+          <line x1="330" y1="44" x2="344" y2="44" stroke="#1A2B4A" stroke-width="1.5" marker-end="url(#fc16ah)"/>
+          <rect x="346" y="24" width="96" height="40" rx="4" fill="#3D6096"/><text x="394" y="41" text-anchor="middle" fill="white" font-size="9.5" font-weight="bold">Shuffle Engine</text><text x="394" y="54" text-anchor="middle" fill="#CBD5E1" font-size="8.5">Acak per peserta</text>
+          <line x1="442" y1="44" x2="456" y2="44" stroke="#1A2B4A" stroke-width="1.5" marker-end="url(#fc16ah)"/>
+          <rect x="458" y="24" width="96" height="40" rx="4" fill="#16a34a"/><text x="506" y="41" text-anchor="middle" fill="white" font-size="9.5" font-weight="bold">Peserta</text><text x="506" y="54" text-anchor="middle" fill="#dcfce7" font-size="8.5">Tampil di ujian</text>
+          <line x1="554" y1="44" x2="568" y2="44" stroke="#1A2B4A" stroke-width="1.5" marker-end="url(#fc16ah)"/>
+          <rect x="570" y="24" width="60" height="40" rx="4" fill="#1A2B4A"/><text x="600" y="41" text-anchor="middle" fill="#BF9B2F" font-size="9" font-weight="bold">Audit</text><text x="600" y="54" text-anchor="middle" fill="#94a3c8" font-size="8.5">Log tercatat</text>
+        </svg></div>
+
+        <h3>5.8 Modul Ujian Real-Time</h3>
+        <p>Modul ini adalah jantung dari pengalaman pengguna selama ujian berlangsung. Keandalan real-time dijamin melalui sinkronisasi sesi antara perangkat peserta dan server pusat:</p>
+        <ul class="sl">
+          <li><span class="sk">Sinkronisasi Sesi</span><span class="sv">Polling interval pendek ke server memastikan data ujian (waktu, jawaban, status) tetap sinkron — mencegah perbedaan state antara client dan server</span></li>
+          <li><span class="sk">Auto-Save Interaktif</span><span class="sv">Jawaban disimpan secara asynchronous setiap kali peserta memilih opsi — data tidak hilang meskipun koneksi internet terganggu sementara</span></li>
+          <li><span class="sk">Anti-Idle Monitor</span><span class="sv">Sistem memantau aktivitas browser; jika tab tidak aktif atau ada indikasi ketidakhadiran mencurigakan, notifikasi peringatan dikirim ke admin</span></li>
+          <li><span class="sk">Peringatan Dini Timer</span><span class="sv">Saat waktu tersisa ≤5 menit: warna timer berubah merah intens + animasi pulsasi untuk meningkatkan fokus dan kewaspadaan peserta</span></li>
+          <li><span class="sk">Auto-Resume</span><span class="sv">Jika terjadi crash atau reload tidak sengaja, sistem memulihkan posisi soal terakhir dan jawaban tersimpan secara otomatis saat koneksi kembali stabil</span></li>
+        </ul>
+
+        <h3>5.9 Modul Penilaian Otomatis (Grading Engine)</h3>
+        <p>Modul ini menjamin objektivitas mutlak dalam penilaian hasil ujian kompetensi kataloger:</p>
+        <div style="overflow-x:auto;margin:14px 0">
+        <svg viewBox="0 0 640 116" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:640px;display:block;font-family:Calibri,'Segoe UI',Arial,sans-serif">
+          <defs><marker id="fc17ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#1A2B4A"/></marker></defs>
+          <rect width="640" height="116" fill="#f8fafc" rx="8" stroke="#e2e8f0" stroke-width="1"/>
+          <text x="320" y="13" text-anchor="middle" fill="#94a3b8" font-size="10" font-style="italic">Alur Penilaian Otomatis — Submit hingga Laporan</text>
+          <rect x="10" y="24" width="105" height="44" rx="4" fill="#8b1a1a"/><text x="62" y="42" text-anchor="middle" fill="white" font-size="9.5" font-weight="bold">Peserta Submit</text><text x="62" y="56" text-anchor="middle" fill="#fca5a5" font-size="8.5">atau waktu habis</text>
+          <line x1="115" y1="46" x2="130" y2="46" stroke="#1A2B4A" stroke-width="1.5" marker-end="url(#fc17ah)"/>
+          <rect x="132" y="24" width="105" height="44" rx="4" fill="#1A2B4A"/><text x="184" y="42" text-anchor="middle" fill="white" font-size="9.5" font-weight="bold">Validasi Token</text><text x="184" y="56" text-anchor="middle" fill="#94a3c8" font-size="8.5">Sesi masih aktif?</text>
+          <line x1="237" y1="46" x2="252" y2="46" stroke="#1A2B4A" stroke-width="1.5" marker-end="url(#fc17ah)"/>
+          <rect x="254" y="24" width="105" height="44" rx="4" fill="#BF9B2F"/><text x="306" y="42" text-anchor="middle" fill="#1A2B4A" font-size="9.5" font-weight="bold">Kalkulasi Skor</text><text x="306" y="56" text-anchor="middle" fill="#4A3800" font-size="8.5">Server-side scoring</text>
+          <line x1="359" y1="46" x2="374" y2="46" stroke="#1A2B4A" stroke-width="1.5" marker-end="url(#fc17ah)"/>
+          <rect x="376" y="24" width="105" height="44" rx="4" fill="#1A2B4A"/><text x="428" y="42" text-anchor="middle" fill="white" font-size="9.5" font-weight="bold">Simpan Nilai</text><text x="428" y="56" text-anchor="middle" fill="#94a3c8" font-size="8.5">DB + riwayat</text>
+          <line x1="481" y1="46" x2="496" y2="46" stroke="#1A2B4A" stroke-width="1.5" marker-end="url(#fc17ah)"/>
+          <rect x="498" y="24" width="134" height="44" rx="4" fill="#16a34a"/><text x="565" y="42" text-anchor="middle" fill="white" font-size="9.5" font-weight="bold">Output: Nilai + PDF</text><text x="565" y="56" text-anchor="middle" fill="#dcfce7" font-size="8.5">Langsung tersedia admin</text>
+          <text x="306" y="86" text-anchor="middle" fill="#8b1a1a" font-size="8.5">⚠ Kalkulasi di server — tidak bisa dimanipulasi client</text>
+          <text x="306" y="98" text-anchor="middle" fill="#555" font-size="8.5">Mendukung bobot nilai berbeda per soal sesuai tingkat kesulitan</text>
+        </svg></div>
+        <div class="tw"><table><thead><tr><th>Fitur Grading</th><th>Mekanisme</th><th>Keunggulan</th></tr></thead>
+        <tbody>
+          <tr><td>Pemrosesan Instan</td><td>Kalkulasi dipicu saat submit atau timeout</td><td>Hasil tersedia detik yang sama — tanpa antrian manual</td></tr>
+          <tr><td>Bobot Soal Berbeda</td><td>Tabel bobot per soal di database</td><td>Soal sulit bernilai lebih — mencerminkan kompetensi nyata</td></tr>
+          <tr><td>Server-Side Scoring</td><td>PHP kalkulasi di backend, bukan JS client</td><td>Tidak bisa dimanipulasi via browser developer tools</td></tr>
+          <tr><td>Integrasi Administrasi</td><td>Nilai langsung masuk tabel <code>nilai</code> dan <code>riwayat</code></td><td>Admin langsung cetak laporan PDF tanpa entri ulang</td></tr>
+          <tr><td>Validasi Token Sesi</td><td>Token unik per sesi diverifikasi sebelum scoring</td><td>Memastikan hanya sesi aktif yang dapat diproses</td></tr>
+        </tbody></table></div>
+
+        <h3>5.10 Keamanan Integritas Modul</h3>
+        <div class="ib cr"><strong>Prinsip Keamanan Inti:</strong> Setiap jawaban yang dikirim peserta disertai token unik yang memvalidasi sesi masih aktif dan sah. Jika token tidak valid (sesi expired, manipulasi), server menolak submission dan mencatat insiden ke audit log.</div>
+        <div class="ib ok" style="margin-top:8px"><strong>Prosedur Auto-Resume:</strong> Jika terjadi crash pada modul real-time, sistem memulihkan posisi soal terakhir dan seluruh jawaban tersimpan secara otomatis saat koneksi kembali — peserta tidak kehilangan progres pengerjaan.</div>
+
+        <h3>5.11 Kesimpulan Modul Inti</h3>
+        <div class="ib gold"><strong>Pernyataan Implementasi:</strong> Modul-modul inti ini dirancang untuk menciptakan lingkungan ujian yang <strong>setara, transparan, dan efisien</strong>. Dengan mengintegrasikan sistem penilaian otomatis dan mekanisme keamanan berlapis, PUSKOD BALOGHAN KEMHAN dapat memastikan kompetensi setiap kataloger diukur dengan standar seragam, objektif, dan dapat dipertanggungjawabkan di hadapan instansi pertahanan negara.</div>
+      </div>
+    </section>
+</main></div>
+</body></html>

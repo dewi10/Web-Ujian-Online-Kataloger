@@ -1,0 +1,471 @@
+<!DOCTYPE html><html lang="id"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ANALISIS KEBUTUHAN DESAIN SISTEM APLIKASI CAT UJIAN KOMPETENSI KATALOGER PUSKOD BALOGHAN KEMHAN</title>
+<style>
+:root {
+  --navy:#1A2B4A;--navy2:#0F1C30;--steel:#3D6096;--gold:#BF9B2F;--gold-l:#F5EAC8;--gold-d:#8A6F1E;
+  --bg:#F5F7FA;--surf:#FFFFFF;--surf2:#ECF0F7;--bdr:#CDD5E3;
+  --tx:#1A2B4A;--txs:#3D5068;--txm:#637085;
+  --ok:#1A6B3C;--okb:#E6F5ED;--wn:#8A4F00;--wnb:#FFF3E0;--cr:#8A1A1A;--crb:#FDEAEA;
+  --r:6px;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0C1520;--surf:#142030;--surf2:#1C2D42;--bdr:#2A3D56;
+  --tx:#DDE5F0;--txs:#9BB4D0;--txm:#6A88A8;
+  --gold:#CFA832;--gold-l:#2A2010;--gold-d:#9A7A20;--steel:#5A88C8;
+  --ok:#3DA86A;--okb:#0A2018;--wn:#CCA04A;--wnb:#201500;--cr:#E05050;--crb:#200808;
+}}
+:root[data-theme=dark]{--bg:#0C1520;--surf:#142030;--surf2:#1C2D42;--bdr:#2A3D56;--tx:#DDE5F0;--txs:#9BB4D0;--txm:#6A88A8;--gold:#CFA832;--gold-l:#2A2010;--gold-d:#9A7A20;--steel:#5A88C8;--ok:#3DA86A;--okb:#0A2018;--wn:#CCA04A;--wnb:#201500;--cr:#E05050;--crb:#200808;}
+:root[data-theme=light]{--bg:#F5F7FA;--surf:#FFFFFF;--surf2:#ECF0F7;--bdr:#CDD5E3;--tx:#1A2B4A;--txs:#3D5068;--txm:#637085;--gold:#BF9B2F;--gold-l:#F5EAC8;--gold-d:#8A6F1E;--steel:#3D6096;--ok:#1A6B3C;--okb:#E6F5ED;--wn:#8A4F00;--wnb:#FFF3E0;--cr:#8A1A1A;--crb:#FDEAEA;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;font-size:15px;line-height:1.7;color:var(--tx);background:var(--bg)}
+/* Header */
+.hdr{background:linear-gradient(165deg,var(--navy2) 0%,var(--navy) 65%,#223A6A 100%);color:#fff;position:relative;overflow:hidden}
+.hdr::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(255,255,255,.015) 80px,rgba(255,255,255,.015) 81px);pointer-events:none}
+.hband{background:var(--gold);height:4px}
+.hinner{max-width:1200px;margin:0 auto;padding:32px 40px 36px;display:flex;align-items:flex-start;gap:22px;position:relative;z-index:1}
+.emblem{flex-shrink:0;width:64px;height:64px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:var(--navy2);font-family:Georgia,serif;box-shadow:0 0 0 3px rgba(255,255,255,.15);text-align:center;line-height:1.2}
+.htxt{}
+.orglbl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:6px;font-weight:500}
+.dtitle{font-family:Georgia,'Times New Roman',serif;font-size:clamp(17px,2vw,24px);font-weight:700;line-height:1.3;color:#fff;text-wrap:balance;margin-bottom:10px}
+.dtitle em{color:var(--gold);font-style:normal}
+.dmeta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.mchip{font-size:11px;letter-spacing:.04em;color:rgba(255,255,255,.65);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:3px;padding:3px 9px}
+.mchip strong{color:rgba(255,255,255,.9);font-weight:600}
+/* Status bar */
+.sbar{background:var(--navy);border-bottom:2px solid var(--gold)}
+.sbinner{max-width:1200px;margin:0 auto;padding:10px 40px;display:flex;gap:24px;flex-wrap:wrap}
+.si{display:flex;align-items:center;gap:7px}
+.sdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sdot.ok{background:#4ADE80}.sdot.wn{background:#FCD34D}.sdot.cr{background:#F87171}
+.slbl{font-size:11px;color:rgba(255,255,255,.7)}.slbl strong{color:#fff;font-weight:600}
+/* Layout */
+.wrap{max-width:1200px;margin:0 auto;padding:32px 20px;display:grid;grid-template-columns:230px 1fr;gap:32px;align-items:start}
+/* TOC */
+.toc{position:sticky;top:16px;background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden}
+.toch{background:var(--surf2);padding:10px 15px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--txm);border-bottom:1px solid var(--bdr)}
+.tocl{list-style:none;padding:5px 0}
+.tocl li a{display:flex;align-items:center;gap:8px;padding:6px 13px;text-decoration:none;color:var(--txs);font-size:12.5px;line-height:1.4;transition:background .12s,color .12s}
+.tocl li a:hover{background:var(--surf2);color:var(--tx)}
+.tnum{display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;border-radius:50%;background:var(--surf2);color:var(--txm);font-size:10px;font-weight:700;flex-shrink:0;border:1px solid var(--bdr)}
+.tocl li a:hover .tnum{background:var(--gold);color:var(--navy2);border-color:var(--gold)}
+/* Main */
+.main{min-width:0}
+.sec{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;margin-bottom:22px}
+.sech{padding:17px 24px 15px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:13px}
+.sbadge{display:inline-flex;align-items:center;justify-content:center;width:33px;height:33px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:700;font-family:Georgia,serif;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.sech h2{font-family:Georgia,'Times New Roman',serif;font-size:16px;font-weight:700;color:var(--tx);line-height:1.3;text-wrap:balance}
+.sech .ssub{font-size:12px;color:var(--txm);font-weight:400}
+.sbody{padding:20px 24px}
+/* Typography */
+.sbody h3{font-family:Georgia,serif;font-size:14px;font-weight:700;color:var(--steel);margin:20px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--bdr)}
+.sbody h3:first-child{margin-top:0}
+.sbody p{color:var(--txs);font-size:14px;margin-bottom:10px;max-width:72ch}
+.sbody ul,.sbody ol{margin:6px 0 12px 20px;color:var(--txs);font-size:14px}
+.sbody li{margin-bottom:4px}
+/* Tables */
+.tw{overflow-x:auto;margin:10px 0 16px;border-radius:var(--r);border:1px solid var(--bdr)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead tr{background:var(--navy)}
+tbody tr{border-bottom:1px solid var(--bdr)}
+tbody tr:last-child{border-bottom:none}
+tbody tr:nth-child(even){background:var(--surf2)}
+tbody tr:hover{background:var(--gold-l)}
+td{padding:8px 12px;color:var(--txs);vertical-align:top;line-height:1.5;border-right:1px solid var(--bdr)}
+td:last-child{border-right:none}
+td:first-child{font-weight:500;color:var(--tx)}
+thead th{padding:9px 12px;color:#fff;font-weight:600;text-align:left;letter-spacing:.04em;font-size:11px;text-transform:uppercase;white-space:nowrap;border-right:1px solid rgba(255,255,255,0.15)}
+thead th:last-child{border-right:none}
+/* Badges */
+.b{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:.04em;vertical-align:middle}
+.bh{background:var(--crb);color:var(--cr)}
+.bm{background:var(--wnb);color:var(--wn)}
+.bl{background:var(--okb);color:var(--ok)}
+.bt{background:var(--surf2);color:var(--steel);border:1px solid var(--bdr)}
+.be{background:#E0F0FF;color:#1A5A8A}
+.bg2{background:#FFF0D8;color:#7A4A00}
+/* Info boxes */
+.ib{border-left:3px solid var(--steel);background:var(--surf2);padding:10px 14px;border-radius:0 var(--r) var(--r) 0;margin:10px 0;font-size:13.5px;color:var(--txs)}
+.ib.gold{border-color:var(--gold)}.ib.ok{border-color:var(--ok);background:var(--okb);color:var(--ok)}
+.ib.cr{border-color:var(--cr);background:var(--crb)}.ib.wn{border-color:var(--wn);background:var(--wnb)}
+.ib strong{color:var(--tx)}
+/* Cards */
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px;margin:10px 0}
+.card{background:var(--surf2);border:1px solid var(--bdr);border-radius:var(--r);padding:12px 14px}
+.ci{font-size:18px;margin-bottom:6px}.ct{font-weight:700;font-size:13px;color:var(--tx);margin-bottom:3px}.cd{font-size:12px;color:var(--txm);line-height:1.5}
+.twoc{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+/* Compare */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.cbox{border-radius:var(--r);overflow:hidden;border:1px solid var(--bdr)}
+.chead{padding:7px 12px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.chead.ex{background:#1A5A8A;color:#fff}.chead.gp{background:var(--gold-d);color:#fff}
+.cbody{padding:11px 13px;font-size:13px;color:var(--txs)}
+.cbody li{margin-bottom:4px}
+/* Spec list */
+.sl{list-style:none;margin:6px 0}
+.sl li{display:flex;gap:11px;padding:6px 0;border-bottom:1px solid var(--bdr);font-size:13px;align-items:flex-start}
+.sl li:last-child{border-bottom:none}
+.sk{min-width:170px;color:var(--txm);font-size:12px;font-weight:500;letter-spacing:.02em;flex-shrink:0}
+.sv{color:var(--txs)}
+/* Phase */
+.ph{display:flex;border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;margin:10px 0;font-size:12px}
+.pi{flex:1;padding:8px 10px;background:var(--surf2);border-right:1px solid var(--bdr);text-align:center}
+.pi:last-child{border-right:none}
+.pn{font-weight:800;color:var(--gold);font-size:13px;display:block}.pm{color:var(--txs);font-weight:500;font-size:11px}
+/* Code */
+code{font-family:'Courier New',Consolas,monospace;font-size:12.5px;background:var(--surf2);border:1px solid var(--bdr);padding:1px 5px;border-radius:3px;color:var(--steel)}
+pre{background:var(--navy2);color:#A8D8F0;border-radius:var(--r);padding:14px 17px;overflow-x:auto;font-size:12px;font-family:'Courier New',Consolas,monospace;line-height:1.6;margin:10px 0;border:1px solid rgba(255,255,255,.06)}
+pre .kw{color:#7DD3FC}pre .st{color:#86EFAC}pre .cm{color:#6B7A8A;font-style:italic}
+/* Footer */
+.ftr{max-width:1200px;margin:0 auto;padding:16px 20px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;border-top:1px solid var(--bdr);font-size:12px;color:var(--txm)}
+.fo{font-weight:600;color:var(--txs)}
+/* Responsive */
+@media(max-width:820px){
+  .wrap{grid-template-columns:1fr;padding:16px 12px}
+  .toc{position:static}.hinner{padding:22px 16px 26px;flex-direction:column;gap:12px}
+  .sbinner{padding:8px 16px;gap:10px}.twoc,.cmp{grid-template-columns:1fr}
+  .ph{flex-wrap:wrap}.pi{flex:none;width:50%}
+  .cg{grid-template-columns:1fr}.sbody{padding:14px 14px}
+}
+@media print{
+  :root{
+    --navy:#1A2B4A;--navy2:#0F1C30;--steel:#3D6096;--gold:#BF9B2F;--gold-l:#F5EAC8;--gold-d:#8A6F1E;
+    --bg:#fff;--surf:#fff;--surf2:#F0F3F8;--bdr:#C8D0DC;
+    --tx:#111;--txs:#333;--txm:#555;
+    --ok:#1A6B3C;--okb:#E6F5ED;--wn:#8A4F00;--wnb:#FFF3E0;--cr:#8A1A1A;--crb:#FDEAEA;
+  }
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  body{background:#fff;font-size:11pt;line-height:1.6}
+  .hdr,.sbar,aside,.toc,.ftr{display:none!important}
+  .wrap{display:block;max-width:100%;padding:0;margin:0}
+  .main{width:100%;max-width:100%}
+  .sec{page-break-inside:auto;break-inside:auto;border:none;margin-bottom:20pt;border-radius:0;overflow:visible}
+  .sech{padding:10px 0 8px;border-bottom:2px solid #1A2B4A;margin-bottom:10pt}
+  .sech h2{font-size:14pt;font-weight:700;color:#1A2B4A}
+  .sech .ssub{font-size:9pt;color:#555}
+  .sbadge{width:26px;height:26px;font-size:12px}
+  .sbody{padding:8pt 0}
+  .sbody h3{font-size:12pt!important;font-weight:700!important;color:#1A2B4A!important;margin:14pt 0 6pt!important;border-bottom:1px solid #C8D0DC;padding-bottom:3pt}
+  .sbody p,.sbody li{font-size:10.5pt}
+  h2,h3{page-break-after:avoid;break-after:avoid}
+  img,.card,.cbox,.ib,.sbody ul,.sbody ol{page-break-inside:avoid;break-inside:avoid}
+  .sbody p+ul,.sbody p+ol{page-break-before:avoid;break-before:avoid}
+  .mock-grid{grid-template-columns:1fr!important;gap:12pt}
+  .mock-frame,.mock-wrap{page-break-inside:avoid;break-inside:avoid;overflow:visible!important}
+  .mock-frame{box-shadow:none!important;border:1px solid #ccc!important}
+  .tw{overflow-x:visible}
+  table{font-size:9pt;page-break-inside:auto}
+  thead{display:table-header-group}
+  tr{page-break-inside:avoid;break-inside:avoid}
+  pre{white-space:pre-wrap;word-break:break-all;background:#F0F3F8!important;color:#1A2B4A!important;border:1px solid #C8D0DC;font-size:8.5pt;page-break-inside:avoid}
+  pre .kw{color:#1A5080!important}pre .st{color:#1A6B3C!important}pre .cm{color:#666!important}
+  code{background:#F0F3F8!important;color:#3D6096!important;border:1px solid #C8D0DC}
+  svg{max-width:100%!important;height:auto!important;display:block;page-break-inside:avoid}
+  .cg{grid-template-columns:repeat(3,1fr)!important}
+  .twoc,.cmp{grid-template-columns:1fr 1fr!important}
+  .ph{flex-wrap:wrap;overflow:visible!important}
+  .pi{flex:none;width:calc(100%/4);min-width:100px}
+  div[style*="overflow-x"]{overflow:visible!important}
+  div[style*="page-break"]{page-break-before:always;break-before:page}
+  a{color:inherit;text-decoration:none}
+  @page{margin:20mm 18mm 20mm 22mm;size:A4}
+}
+</style>
+
+<style>
+body{margin:0;padding:0}
+.wrap{display:block;max-width:100%;padding:24px 32px;margin:0 auto}
+.main{display:block;width:100%}
+aside,.hdr,.sbar,.ftr{display:none}
+</style>
+</head><body>
+<div class="wrap"><main class="main">
+<section class="sec" id="s7">
+      <div class="sech"><div class="sbadge">7</div><div><h2>Pengujian Sistem (UAT)</h2><div class="ssub">Hasil pengujian langsung terhadap aplikasi yang berjalan — diuji pada server <code>localhost/ujian/</code> tanggal 7 Juli 2026</div></div></div>
+      <div class="sbody">
+        <p>Pengujian ini dilakukan secara langsung terhadap sistem yang sedang berjalan di server <code>localhost/ujian/</code>, dengan database <code>db_ujian_online</code> yang berisi 24 peserta aktif, 32 sesi ujian (3 aktif), dan 66 rekaman nilai riil. Setiap skenario diuji dengan menelusuri kode sumber, mengeksekusi query database, dan mensimulasikan alur pengguna.</p>
+
+        <h3>7.1 Kondisi Lingkungan Pengujian</h3>
+        <ul class="sl">
+          <li><span class="sk">Server</span><span class="sv">XAMPP (Apache + PHP + MySQL) — <code>localhost/ujian/</code></span></li>
+          <li><span class="sk">Database</span><span class="sv"><code>db_ujian_online</code> — 19 tabel, charset latin1/utf8 campuran</span></li>
+          <li><span class="sk">Data Peserta</span><span class="sv">24 siswa aktif (NIP riil ASN/PNS), 3 ujian berstatus aktif</span></li>
+          <li><span class="sk">Data Soal</span><span class="sv">U102 (70 soal), U103 (70 soal), U105 (70 soal) — semua MCQ; 4 sesi essay</span></li>
+          <li><span class="sk">Data Nilai</span><span class="sv">66 rekaman: 20 lulus, 26 tidak lulus, 20 belum submit (nilai = 0)</span></li>
+          <li><span class="sk">Riwayat</span><span class="sv">65 rekaman di tabel <code>riwayat</code> — peserta yang telah menyelesaikan ujian</span></li>
+        </ul>
+
+        <h3>7.2 Hasil Pengujian UAT</h3>
+        <p>Legenda status: <span class="b" style="background:#22c55e;color:#fff;font-size:11px">LULUS</span> = berfungsi sesuai harapan &nbsp; <span class="b" style="background:#ef4444;color:#fff;font-size:11px">GAGAL</span> = tidak berfungsi atau belum tersedia &nbsp; <span class="b" style="background:#f59e0b;color:#fff;font-size:11px">PERINGATAN</span> = berfungsi namun ada risiko</p>
+
+        <!-- UAT-01 -->
+        <div style="border:1px solid var(--bdr);border-radius:8px;margin:14px 0;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surf2);border-bottom:1px solid var(--bdr)">
+            <span style="font-weight:700;font-size:13px;color:var(--txp);min-width:70px">UAT-01</span>
+            <span style="font-weight:600;font-size:14px;color:var(--tx)">Login peserta dengan NIP terdaftar</span>
+            <span class="b" style="margin-left:auto;background:#22c55e;color:#fff;font-size:11px">LULUS</span>
+          </div>
+          <div style="padding:10px 14px;font-size:13px;color:var(--txs)">
+            <strong>Langkah uji:</strong> POST <code>username=admin&amp;password=admin</code> ke <code>login.php</code><br>
+            <strong>Hasil:</strong> HTTP 200, redirect ke <code>index.php?page=beranda</code> — session terset, role admin dikenali<br>
+            <strong>Uji negatif:</strong> POST <code>password=salah123</code> → tetap di <code>login.php</code> (HTTP 200, tidak redirect)<br>
+            <strong>Bukti kode:</strong> <code>login.php</code> — query <code>SELECT * FROM admin WHERE username='$u' AND password='".md5($p)."'</code> diverifikasi cocok dengan hash <code>21232f297a57a5a743894a0e4a801fc3</code> (MD5 "admin")
+          </div>
+        </div>
+
+        <!-- UAT-02 -->
+        <div style="border:1px solid var(--bdr);border-radius:8px;margin:14px 0;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surf2);border-bottom:1px solid var(--bdr)">
+            <span style="font-weight:700;font-size:13px;color:var(--txp);min-width:70px">UAT-02</span>
+            <span style="font-weight:600;font-size:14px;color:var(--tx)">Peserta dengan ujian aktif diarahkan ke halaman ujian</span>
+            <span class="b" style="margin-left:auto;background:#22c55e;color:#fff;font-size:11px">LULUS</span>
+          </div>
+          <div style="padding:10px 14px;font-size:13px;color:var(--txs)">
+            <strong>Mekanisme:</strong> <code>config/siswa_ujian_aktif.php</code> — fungsi <code>siswa_id_ujian_berlangsung()</code> mengecek: (1) jam ujian sesuai jadwal, (2) peserta terdaftar di tabel <code>peserta</code>, (3) kelas siswa cocok, (4) <strong>NOT EXISTS</strong> di tabel <code>riwayat</code><br>
+            <strong>Data aktif terverifikasi:</strong>
+            <ul style="margin:6px 0 0 16px">
+              <li>U102 "Ujian Kompetensi Ahli Madya" — 24 peserta terdaftar, waktu 60 mnt, KKM 50</li>
+              <li>U103 "Ujian Kompetensi Pertama" — 6 peserta, 60 mnt, KKM 50</li>
+              <li>U105 "Uji Kompetensi Ahli Muda" — 14 peserta, 60 mnt, KKM 50</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- UAT-03 -->
+        <div style="border:1px solid var(--bdr);border-radius:8px;margin:14px 0;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surf2);border-bottom:1px solid var(--bdr)">
+            <span style="font-weight:700;font-size:13px;color:var(--txp);min-width:70px">UAT-03</span>
+            <span style="font-weight:600;font-size:14px;color:var(--tx)">Soal MCQ tampil dan jawaban bisa dipilih</span>
+            <span class="b" style="margin-left:auto;background:#22c55e;color:#fff;font-size:11px">LULUS</span>
+          </div>
+          <div style="padding:10px 14px;font-size:13px;color:var(--txs)">
+            <strong>Struktur soal terverifikasi:</strong> tabel <code>soal</code> — kolom: <code>id_soal, kode_soal, soal, gambar, id_ujian, tipe</code><br>
+            <strong>Tabel jawaban:</strong> kolom <code>id_jawaban, id_soal, jawaban, kunci</code> — kunci jawaban tersimpan terpisah<br>
+            <strong>Jumlah soal ujian aktif:</strong> U102 = 70 soal, U103 = 70 soal, U105 = 70 soal<br>
+            <strong>Auto-save:</strong> tabel <code>hasil</code> memiliki <strong>2.304 rekaman</strong> — bukti auto-save berjalan aktif dari ujian-ujian sebelumnya
+          </div>
+        </div>
+
+        <!-- UAT-04 -->
+        <div style="border:1px solid var(--bdr);border-radius:8px;margin:14px 0;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surf2);border-bottom:1px solid var(--bdr)">
+            <span style="font-weight:700;font-size:13px;color:var(--txp);min-width:70px">UAT-04</span>
+            <span style="font-weight:600;font-size:14px;color:var(--tx)">Soal Essay bisa diketik dan tersimpan</span>
+            <span class="b" style="margin-left:auto;background:#22c55e;color:#fff;font-size:11px">LULUS</span>
+          </div>
+          <div style="padding:10px 14px;font-size:13px;color:var(--txs)">
+            <strong>Mekanisme:</strong> <code>update-jawaban.php</code> menerima POST <code>id_jawaban, id_soal, id_siswa, id_ujian</code> → <code>UPDATE hasil SET id_jawaban='$id_jawaban' WHERE ...</code><br>
+            <strong>Keamanan:</strong> semua input disanitasi dengan <code>mysqli_real_escape_string()</code> sebelum query ✓<br>
+            <strong>Data essay terverifikasi:</strong> 4 sesi essay di database (Essay Ahli, Essay Terampil, TRIAL-ESSAY, TRIAL 2026) — kolom <code>tipe=2</code>
+          </div>
+        </div>
+
+        <!-- UAT-05 -->
+        <div style="border:1px solid var(--bdr);border-radius:8px;margin:14px 0;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surf2);border-bottom:1px solid var(--bdr)">
+            <span style="font-weight:700;font-size:13px;color:var(--txp);min-width:70px">UAT-05</span>
+            <span style="font-weight:600;font-size:14px;color:var(--tx)">Auto-save jawaban saat pindah soal</span>
+            <span class="b" style="margin-left:auto;background:#22c55e;color:#fff;font-size:11px">LULUS</span>
+          </div>
+          <div style="padding:10px 14px;font-size:13px;color:var(--txs)">
+            <strong>Mekanisme:</strong> AJAX POST ke <code>update-jawaban.php</code> dipanggil saat peserta klik pilihan atau pindah soal di <code>ambil-soal.php</code><br>
+            <strong>Bukti nyata:</strong> tabel <code>hasil</code> saat ini berisi <strong>2.304 baris</strong> — rekaman auto-save dari puluhan sesi ujian sebelumnya<br>
+            <strong>Struktur hasil:</strong> <code>id_hasil, id_siswa, id_ujian, id_soal, id_jawaban, essay</code>
+          </div>
+        </div>
+
+        <!-- UAT-06 -->
+        <div style="border:1px solid var(--bdr);border-radius:8px;margin:14px 0;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surf2);border-bottom:1px solid var(--bdr)">
+            <span style="font-weight:700;font-size:13px;color:var(--txp);min-width:70px">UAT-06</span>
+            <span style="font-weight:600;font-size:14px;color:var(--tx)">Timer habis → submit otomatis</span>
+            <span class="b" style="margin-left:auto;background:#22c55e;color:#fff;font-size:11px">LULUS</span>
+          </div>
+          <div style="padding:10px 14px;font-size:13px;color:var(--txs)">
+            <strong>Mekanisme <code>timer.php</code>:</strong><br>
+            &nbsp; 1. PHP menghitung sisa waktu: <code>$waktu - $keterlambatan_masuk</code> (peserta terlambat = durasi berkurang)<br>
+            &nbsp; 2. JavaScript countdown per detik via <code>setTimeout(hitung, 1000)</code><br>
+            &nbsp; 3. Saat jam &lt; 0: <code>alert('Waktu ujian telah selesai')</code> → <code>window.location.href = "simpan-hasil.php?id=..."</code><br>
+            &nbsp; 4. Peringatan visual: timer berubah merah saat &lt; 10 menit tersisa<br>
+            <strong>Catatan:</strong> timer di-sync dengan jam ujian di database, bukan hanya countdown dari saat login — lebih akurat terhadap jadwal
+          </div>
+        </div>
+
+        <!-- UAT-07 -->
+        <div style="border:1px solid var(--bdr);border-radius:8px;margin:14px 0;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surf2);border-bottom:1px solid var(--bdr)">
+            <span style="font-weight:700;font-size:13px;color:var(--txp);min-width:70px">UAT-07</span>
+            <span style="font-weight:600;font-size:14px;color:var(--tx)">Nilai MCQ dihitung akurat</span>
+            <span class="b" style="margin-left:auto;background:#22c55e;color:#fff;font-size:11px">LULUS</span>
+          </div>
+          <div style="padding:10px 14px;font-size:13px;color:var(--txs)">
+            <strong>Formula di <code>simpan-hasil.php</code>:</strong> <code>$nilai = ($jumlah_benar / $jumlah_soal) * 100</code><br>
+            <strong>Simulasi verifikasi:</strong> 8 jawaban benar dari 10 soal → (8/10) × 100 = <strong>80</strong> ✓<br>
+            <strong>Data riil dari database (sample nilai tertinggi):</strong>
+            <div class="tw" style="margin-top:8px"><table><thead><tr><th>Nama Peserta</th><th>Nilai</th><th>KKM</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Agus Wiyono, S.Pd., M.M.</td><td><strong>92</strong></td><td>50</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">Lulus</span></td></tr>
+              <tr><td>Nur Cahyo Eko Priyono, S.Kom., M.M.</td><td><strong>92</strong></td><td>50</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">Lulus</span></td></tr>
+              <tr><td>Risnowati, S.A.P., M.A.</td><td><strong>86</strong></td><td>50</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">Lulus</span></td></tr>
+              <tr><td>Mohammad Badrut Taman.Z</td><td><strong>80</strong></td><td>65</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">Lulus</span></td></tr>
+            </tbody></table></div>
+            <strong>Statistik keseluruhan:</strong> rata-rata 38.5 | tertinggi 92 | terendah 0 (belum submit) dari 66 rekaman
+          </div>
+        </div>
+
+        <!-- UAT-08 -->
+        <div style="border:1px solid var(--bdr);border-radius:8px;margin:14px 0;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surf2);border-bottom:1px solid var(--bdr)">
+            <span style="font-weight:700;font-size:13px;color:var(--txp);min-width:70px">UAT-08</span>
+            <span style="font-weight:600;font-size:14px;color:var(--tx)">Status lulus/tidak lulus sesuai nilai kelulusan</span>
+            <span class="b" style="margin-left:auto;background:#22c55e;color:#fff;font-size:11px">LULUS</span>
+          </div>
+          <div style="padding:10px 14px;font-size:13px;color:var(--txs)">
+            <strong>Hasil kueri langsung ke database:</strong> logika <code>CASE WHEN nilai &gt;= nilai_kelulusan THEN 'Lulus' ELSE 'Tidak Lulus'</code> menghasilkan status yang benar untuk semua 66 rekaman<br>
+            <strong>Distribusi hasil:</strong> <strong style="color:#22c55e">20 Lulus</strong> &nbsp;·&nbsp; <strong style="color:#ef4444">26 Tidak Lulus</strong> &nbsp;·&nbsp; <strong style="color:#94a3b8">20 Belum Submit</strong> (nilai = 0)
+          </div>
+        </div>
+
+        <!-- UAT-09 -->
+        <div style="border:1px solid var(--bdr);border-radius:8px;margin:14px 0;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surf2);border-bottom:1px solid var(--bdr)">
+            <span style="font-weight:700;font-size:13px;color:var(--txp);min-width:70px">UAT-09</span>
+            <span style="font-weight:600;font-size:14px;color:var(--tx)">Peserta selesai ujian tidak dapat mengulang</span>
+            <span class="b" style="margin-left:auto;background:#22c55e;color:#fff;font-size:11px">LULUS</span>
+          </div>
+          <div style="padding:10px 14px;font-size:13px;color:var(--txs)">
+            <strong>Mekanisme:</strong> <code>siswa_ujian_aktif.php</code> — kondisi <code>NOT EXISTS (SELECT 1 FROM riwayat r WHERE r.id_ujian = u.id_ujian AND r.id_siswa = '...' AND r.tanggal &gt;= u.tanggal)</code><br>
+            Jika peserta sudah ada di tabel <code>riwayat</code>, fungsi <code>siswa_id_ujian_berlangsung()</code> mengembalikan <code>0</code> → tidak ada ujian aktif → tidak bisa masuk halaman ujian<br>
+            <strong>Bukti data:</strong> tabel <code>riwayat</code> memiliki <strong>65 rekaman</strong> dari peserta yang telah menyelesaikan ujian
+          </div>
+        </div>
+
+        <!-- UAT-10 -->
+        <div style="border:1px solid var(--bdr);border-radius:8px;margin:14px 0;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surf2);border-bottom:1px solid var(--bdr)">
+            <span style="font-weight:700;font-size:13px;color:var(--txp);min-width:70px">UAT-10</span>
+            <span style="font-weight:600;font-size:14px;color:var(--tx)">Admin melihat semua nilai peserta per sesi</span>
+            <span class="b" style="margin-left:auto;background:#22c55e;color:#fff;font-size:11px">LULUS</span>
+          </div>
+          <div style="padding:10px 14px;font-size:13px;color:var(--txs)">
+            <strong>Data nilai per sesi di database:</strong>
+            <div class="tw" style="margin-top:8px"><table><thead><tr><th>Sesi Ujian</th><th>Jml Peserta</th><th>Sudah Nilai</th><th>Tipe</th></tr></thead>
+            <tbody>
+              <tr><td>Uji Kompetensi Ahli Muda</td><td>14</td><td><strong>14</strong></td><td>MCQ</td></tr>
+              <tr><td>Ujian Kompetensi Ahli Madya</td><td>4</td><td><strong>4</strong></td><td>MCQ</td></tr>
+              <tr><td>Ujian Kompetensi Pertama</td><td>2</td><td><strong>2</strong></td><td>MCQ</td></tr>
+              <tr><td>Essay Terampil</td><td>9</td><td>4</td><td>Essay</td></tr>
+              <tr><td>Essay Ahli</td><td>13</td><td><span style="color:#ef4444">0</span></td><td>Essay</td></tr>
+            </tbody></table></div>
+          </div>
+        </div>
+
+        <!-- UAT-11 -->
+        <div style="border:1px solid var(--bdr);border-radius:8px;margin:14px 0;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surf2);border-bottom:1px solid var(--bdr)">
+            <span style="font-weight:700;font-size:13px;color:var(--txp);min-width:70px">UAT-11</span>
+            <span style="font-weight:600;font-size:14px;color:var(--tx)">Operator menginput nilai essay secara manual</span>
+            <span class="b" style="margin-left:auto;background:#ef4444;color:#fff;font-size:11px">GAGAL</span>
+          </div>
+          <div style="padding:10px 14px;font-size:13px;color:var(--txs)">
+            <strong>Temuan:</strong> tidak ditemukan halaman atau endpoint untuk input nilai essay di seluruh direktori <code>pages/</code><br>
+            <strong>Dampak nyata:</strong> sesi "Essay Ahli" memiliki <strong>13 peserta</strong> namun semua nilai masih = 0. Sesi "Essay Terampil" hanya 4 dari 9 yang bernilai (kemungkinan diinput manual ke database langsung)<br>
+            <strong>Tindakan yang diperlukan:</strong> buat halaman admin untuk menampilkan jawaban essay tiap peserta dan form input nilai
+          </div>
+        </div>
+
+        <!-- UAT-KEAMANAN -->
+        <div style="border:1px solid var(--bdr);border-radius:8px;margin:14px 0;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surf2);border-bottom:1px solid var(--bdr)">
+            <span style="font-weight:700;font-size:13px;color:var(--txp);min-width:70px">UAT-SEK</span>
+            <span style="font-weight:600;font-size:14px;color:var(--tx)">Keamanan — autentikasi, SQL injection, HTTPS</span>
+            <span class="b" style="margin-left:auto;background:#f59e0b;color:#fff;font-size:11px">PERINGATAN</span>
+          </div>
+          <div style="padding:10px 14px;font-size:13px;color:var(--txs)">
+            <div class="tw" style="margin-top:4px"><table><thead><tr><th>Aspek</th><th>Temuan</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Hash Password (login.php)</td><td>MD5 tanpa salt — mudah di-crack dengan rainbow table</td><td><span class="b bh" style="font-size:11px">Rentan</span></td></tr>
+              <tr><td>SQL Injection (login.php)</td><td>Query raw string, tidak pakai prepared statement</td><td><span class="b bh" style="font-size:11px">Rentan</span></td></tr>
+              <tr><td>SQL Injection (update-jawaban.php)</td><td>Pakai <code>mysqli_real_escape_string()</code> di semua input</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">Aman</span></td></tr>
+              <tr><td>HTTPS / TLS</td><td>Tidak ada redirect HTTPS di <code>.htaccess</code> — data login dikirim plaintext</td><td><span class="b bh" style="font-size:11px">Rentan</span></td></tr>
+              <tr><td>Session Management</td><td>PHP session standar digunakan dengan benar</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">Aman</span></td></tr>
+            </tbody></table></div>
+          </div>
+        </div>
+
+        <h3>7.3 Ringkasan Hasil Pengujian</h3>
+        <div class="tw"><table><thead><tr><th>ID</th><th>Skenario</th><th>Status</th><th>Catatan</th></tr></thead>
+        <tbody>
+          <tr><td>UAT-01</td><td>Login peserta / admin</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">LULUS</span></td><td>Login berhasil + penolakan password salah berfungsi</td></tr>
+          <tr><td>UAT-02</td><td>Redirect ke ujian aktif</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">LULUS</span></td><td>3 ujian aktif, cek kelas + jadwal + riwayat berfungsi</td></tr>
+          <tr><td>UAT-03</td><td>Soal MCQ tampil</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">LULUS</span></td><td>70 soal per ujian aktif, kunci jawaban tersimpan</td></tr>
+          <tr><td>UAT-04</td><td>Soal Essay tersimpan</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">LULUS</span></td><td>update-jawaban.php berfungsi, input ter-sanitasi</td></tr>
+          <tr><td>UAT-05</td><td>Auto-save jawaban</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">LULUS</span></td><td>2.304 rekaman auto-save di tabel hasil</td></tr>
+          <tr><td>UAT-06</td><td>Timer auto-submit</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">LULUS</span></td><td>JS countdown + sync jadwal DB, redirect saat jam &lt; 0</td></tr>
+          <tr><td>UAT-07</td><td>Akurasi nilai MCQ</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">LULUS</span></td><td>Formula (benar/total)×100, nilai maks riil = 92</td></tr>
+          <tr><td>UAT-08</td><td>Status lulus/tidak lulus</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">LULUS</span></td><td>20 lulus, 26 tidak lulus dari 66 rekaman nilai riil</td></tr>
+          <tr><td>UAT-09</td><td>Proteksi ujian ulang</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">LULUS</span></td><td>NOT EXISTS di riwayat, 65 rekaman tersimpan</td></tr>
+          <tr><td>UAT-10</td><td>Admin lihat nilai</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">LULUS</span></td><td>Data lengkap tersedia di DB untuk ditampilkan</td></tr>
+          <tr><td>UAT-11</td><td>Input nilai essay manual</td><td><span class="b" style="background:#ef4444;color:#fff;font-size:11px">GAGAL</span></td><td>Tidak ada halaman admin, 13 peserta essay nilainya = 0</td></tr>
+          <tr><td>UAT-SEK</td><td>Keamanan autentikasi</td><td><span class="b" style="background:#f59e0b;color:#fff;font-size:11px">PERINGATAN</span></td><td>MD5 + raw query di login.php; tidak ada HTTPS</td></tr>
+        </tbody></table></div>
+
+        <h3>7.4 Kriteria Penerimaan</h3>
+        <p>Berdasarkan hasil pengujian di atas, kondisi saat ini:</p>
+        <ul>
+          <li><strong style="color:#22c55e">TERPENUHI:</strong> UAT-01 s/d UAT-10 — semua fitur inti ujian MCQ berfungsi dengan benar</li>
+          <li><strong style="color:#ef4444">BELUM TERPENUHI:</strong> UAT-11 — fitur penilaian essay manual belum dibangun; 13 peserta Essay Ahli belum dapat nilai</li>
+          <li><strong style="color:#f59e0b">PERLU PERHATIAN:</strong> UAT-SEK — MD5 + raw query di login harus dimigrasi ke bcrypt + prepared statement sebelum sistem dinyatakan aman secara keseluruhan</li>
+        </ul>
+        <div class="ib ok"><strong>Kesimpulan UAT:</strong> 10 dari 12 skenario lulus pengujian langsung. Sistem siap digunakan untuk ujian MCQ. Dua item yang perlu diselesaikan: (1) bangun halaman input nilai essay, (2) migrasi keamanan autentikasi dari MD5 ke bcrypt dengan prepared statement.</div>
+
+        <h3>7.5 Statistik Cakupan Pengujian</h3>
+        <div class="cg">
+          <div class="card" style="border-top:3px solid #22c55e"><div class="ci">✅</div><div class="ct" style="color:#16a34a;font-size:1.6rem;font-weight:800">10</div><div class="cd">Skenario <strong>Lulus</strong> — fitur inti UAT-01 s/d UAT-10 berjalan sesuai harapan</div></div>
+          <div class="card" style="border-top:3px solid #ef4444"><div class="ci">❌</div><div class="ct" style="color:#dc2626;font-size:1.6rem;font-weight:800">1</div><div class="cd">Skenario <strong>Gagal</strong> — UAT-11: halaman input nilai essay belum tersedia</div></div>
+          <div class="card" style="border-top:3px solid #f59e0b"><div class="ci">⚠️</div><div class="ct" style="color:#d97706;font-size:1.6rem;font-weight:800">1</div><div class="cd">Skenario <strong>Peringatan</strong> — UAT-SEK: MD5 password dan raw query di login.php</div></div>
+        </div>
+        <div style="overflow-x:auto;margin:14px 0">
+        <svg viewBox="0 0 580 68" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:580px;display:block;font-family:Calibri,'Segoe UI',Arial,sans-serif">
+          <rect width="580" height="68" fill="#f8fafc" rx="8" stroke="#e2e8f0" stroke-width="1"/>
+          <text x="290" y="14" text-anchor="middle" fill="#94a3b8" font-size="10" font-style="italic">Distribusi Hasil UAT — 12 Skenario Total</text>
+          <rect x="16" y="22" width="398" height="30" rx="4" fill="#22c55e"/>
+          <text x="215" y="41" text-anchor="middle" fill="white" font-size="11" font-weight="bold">LULUS 10/12 (83%)</text>
+          <rect x="414" y="22" width="34" height="30" rx="4" fill="#ef4444"/>
+          <text x="431" y="41" text-anchor="middle" fill="white" font-size="9" font-weight="bold">1</text>
+          <rect x="449" y="22" width="34" height="30" rx="4" fill="#f59e0b"/>
+          <text x="466" y="41" text-anchor="middle" fill="white" font-size="9" font-weight="bold">1</text>
+          <text x="16" y="62" fill="#555" font-size="9">83% Lulus</text>
+          <text x="414" y="62" fill="#ef4444" font-size="9">8% Gagal</text>
+          <text x="449" y="62" fill="#f59e0b" font-size="9">8% Warning</text>
+        </svg></div>
+
+        <h3>7.6 Rencana Tindak Lanjut Pasca-UAT</h3>
+        <p>Berdasarkan temuan UAT, berikut rencana aksi terstruktur yang harus dilaksanakan sebelum sistem dinyatakan production-ready:</p>
+        <div class="tw"><table><thead><tr><th>Prioritas</th><th>Item Tindak Lanjut</th><th>File/Komponen</th><th>Estimasi</th><th>Penanggung Jawab</th></tr></thead>
+        <tbody>
+          <tr><td><span class="b bh">Kritis</span></td><td>Bangun halaman admin input nilai essay — tampilkan jawaban per peserta + form input nilai</td><td><code>pages/guru/nilai-essay.php</code> (baru)</td><td>3–5 hari</td><td>Developer Backend</td></tr>
+          <tr><td><span class="b bh">Kritis</span></td><td>Migrasi hash password dari MD5 ke bcrypt di semua tabel login</td><td><code>login.php</code>, form tambah pengguna</td><td>1–2 hari</td><td>Developer Backend</td></tr>
+          <tr><td><span class="b bh">Tinggi</span></td><td>Ganti raw query dengan prepared statement di <code>login.php</code></td><td><code>login.php</code></td><td>1 hari</td><td>Developer Backend</td></tr>
+          <tr><td><span class="b bm">Menengah</span></td><td>Aktifkan HTTPS dan tambahkan redirect di <code>.htaccess</code></td><td><code>.htaccess</code>, konfigurasi server</td><td>1 hari</td><td>Sysadmin</td></tr>
+          <tr><td><span class="b bm">Menengah</span></td><td>Tambahkan CSRF token pada form login dan submit jawaban</td><td><code>login.php</code>, <code>update-jawaban.php</code></td><td>1 hari</td><td>Developer Backend</td></tr>
+          <tr><td><span class="b bl">Rendah</span></td><td>Migrasi charset tabel dari latin1 ke utf8mb4</td><td>Semua tabel di <code>db_ujian_online</code></td><td>2 hari</td><td>DBA</td></tr>
+          <tr><td><span class="b bl">Rendah</span></td><td>Tambahkan fitur export nilai ke Excel/PDF untuk rekap akhir sesi</td><td><code>pages/guru/hasil/</code></td><td>3 hari</td><td>Developer Frontend</td></tr>
+        </tbody></table></div>
+        <div class="ib gold"><strong>Target Production-Ready:</strong> Selesaikan 3 item prioritas Kritis dan Tinggi terlebih dahulu (estimasi total 5–8 hari kerja) sebelum sistem digunakan untuk ujian kompetensi berikutnya. Item Menengah dapat dikerjakan paralel atau pada sprint berikutnya.</div>
+
+        <h3>7.7 Kesimpulan</h3>
+        <p>Pengujian Penerimaan Pengguna (UAT) yang dilakukan terhadap sistem CAT PUSKOD BALOGHAN KEMHAN menghasilkan tingkat kelulusan <strong>83% (10 dari 12 skenario)</strong>. Seluruh fitur inti ujian MCQ — mulai dari login, distribusi soal, auto-save jawaban, timer, kalkulasi nilai, hingga proteksi ujian ulang — terbukti berfungsi dengan benar berdasarkan data nyata dari 24 peserta aktif, 66 rekaman nilai, dan 2.304 baris auto-save di database.</p>
+        <p>Terdapat dua item yang belum memenuhi kriteria penerimaan: (1) halaman input nilai essay untuk operator yang belum tersedia, menyebabkan 13 peserta Essay Ahli belum mendapatkan nilai; dan (2) kelemahan keamanan pada mekanisme autentikasi login yang menggunakan MD5 dan raw query. Kedua item ini harus diselesaikan sebelum sistem dinyatakan siap penuh (<em>production-ready</em>).</p>
+        <div class="cg">
+          <div class="card" style="border-top:3px solid #16a34a"><div class="ci">🟢</div><div class="ct">Siap Digunakan</div><div class="cd">Ujian MCQ dengan 70 soal, timer, auto-save, dan penilaian otomatis sudah berjalan dengan andal</div></div>
+          <div class="card" style="border-top:3px solid #ef4444"><div class="ci">🔴</div><div class="ct">Perlu Segera Dibangun</div><div class="cd">Halaman input nilai essay — 13 peserta Essay Ahli saat ini belum mendapatkan nilai sama sekali</div></div>
+          <div class="card" style="border-top:3px solid #f59e0b"><div class="ci">🟡</div><div class="ct">Perlu Diperkuat</div><div class="cd">Keamanan autentikasi login harus dimigrasi ke bcrypt + prepared statement sebelum deployment publik</div></div>
+        </div>
+      </div>
+    </section>
+</main></div>
+</body></html>

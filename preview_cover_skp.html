@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contoh Cover SKP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .cover-page {
+            background: white;
+            padding: 40px;
+            min-height: 800px;
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .text-center {
+            text-align: center;
+        }
+        .mb-4 {
+            margin-bottom: 2rem;
+        }
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+        .mb-5 {
+            margin-bottom: 3rem;
+        }
+        .my-5 {
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+        }
+        .py-4 {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+        .mt-5 {
+            margin-top: 3rem;
+        }
+        .pt-5 {
+            padding-top: 3rem;
+        }
+        .font-weight-bold {
+            font-weight: bold;
+        }
+        h2 {
+            font-size: 24px;
+            margin: 0 0 2rem 0;
+        }
+        h3 {
+            font-size: 20px;
+            margin: 0 0 1rem 0;
+        }
+        table {
+            margin: 0 auto;
+        }
+        td {
+            padding: 8px;
+            font-size: 14px;
+        }
+        .no-print {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        @media print {
+            .no-print {
+                display: none;
+            }
+            body {
+                background: white;
+                padding: 0;
+            }
+            .cover-page {
+                box-shadow: none;
+                border: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="no-print">
+        <h1 style="text-align: center;">Preview Cover SKP</h1>
+        <p style="text-align: center;">Ini adalah contoh tampilan cover SKP yang dapat dicetak</p>
+        <div style="text-align: center;">
+            <button class="btn btn-success" onclick="window.print()">🖨️ Cetak Cover</button>
+        </div>
+    </div>
+
+    <div class="cover-page">
+        <div class="text-center">
+            <!-- Logo Garuda -->
+            <div class="mb-4">
+                <img src="img/garuda.svg" alt="Garuda Pancasila" style="width: 120px; height: auto;" onerror="this.src='img/logo-kemhan.png'">
+            </div>
+            
+            <!-- Title -->
+            <h2 class="font-weight-bold mb-4">PENILAIAN KINERJA</h2>
+            <h3 class="font-weight-bold mb-2">PEGAWAI APARATUR SIPIL NEGARA</h3>
+            <p class="mb-5" style="font-size: 14px; text-decoration: underline;">SESUAI PERMENPAN RB 06 TAHUN 2022</p>
+            
+            <!-- Periode -->
+            <div class="my-5 py-4">
+                <p class="font-weight-bold mb-2" style="font-size: 16px;">JANGKA WAKTU PENILAIAN</p>
+                <p class="font-weight-bold" style="font-size: 16px;">02 JUNI S.D 31 DESEMBER 2025</p>
+            </div>
+            
+            <!-- Data Pegawai -->
+            <div class="mt-5 pt-5">
+                <table style="text-align: left; font-size: 14px;">
+                    <tr>
+                        <td style="width: 150px; font-weight: 600;">NAMA</td>
+                        <td style="width: 20px;">:</td>
+                        <td>I Gusti Ayu Nyoman Setiawati, S.T, M.T</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;">NIP</td>
+                        <td>:</td>
+                        <td>197001151998032003</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;">PANGKAT /GOL</td>
+                        <td>:</td>
+                        <td>Pembina Utama Muda IV/c</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;">JABATAN</td>
+                        <td>:</td>
+                        <td>Katologer Ahli Madya</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;">UNIT KERJA</td>
+                        <td>:</td>
+                        <td>Balogbah Kemhan</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <!-- Footer -->
+            <div class="mt-5 pt-5">
+                <h3 class="font-weight-bold mt-5" style="font-size: 18px;">KEMENTERIAN PERTAHANAN RI</h3>
+                <p class="font-weight-bold" style="font-size: 16px;">TAHUN 2025</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="no-print" style="margin-top: 20px; padding: 20px; background: #fff; border: 1px solid #ddd; max-width: 800px; margin: 20px auto;">
+        <h3>Informasi</h3>
+        <ul>
+            <li>Cover ini dapat dicetak dengan klik tombol "Cetak Cover" atau tekan Ctrl+P</li>
+            <li>Data pada cover dapat disesuaikan melalui menu SKP > Tab COVER</li>
+            <li>Setiap user dapat menyimpan data cover mereka sendiri</li>
+            <li>File ini hanya untuk preview, gunakan sistem untuk edit dan simpan data</li>
+        </ul>
+    </div>
+</body>
+</html>

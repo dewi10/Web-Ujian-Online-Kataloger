@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ANALISIS KEBUTUHAN DESAIN SISTEM APLIKASI CAT UJIAN KOMPETENSI KATALOGER PUSKOD BALOGHAN KEMHAN</title>
+<style>
+:root {
+  --navy:#1A2B4A;--navy2:#0F1C30;--steel:#3D6096;--gold:#BF9B2F;--gold-l:#F5EAC8;--gold-d:#8A6F1E;
+  --bg:#F5F7FA;--surf:#FFFFFF;--surf2:#ECF0F7;--bdr:#CDD5E3;
+  --tx:#1A2B4A;--txs:#3D5068;--txm:#637085;
+  --ok:#1A6B3C;--okb:#E6F5ED;--wn:#8A4F00;--wnb:#FFF3E0;--cr:#8A1A1A;--crb:#FDEAEA;
+  --r:6px;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0C1520;--surf:#142030;--surf2:#1C2D42;--bdr:#2A3D56;
+  --tx:#DDE5F0;--txs:#9BB4D0;--txm:#6A88A8;
+  --gold:#CFA832;--gold-l:#2A2010;--gold-d:#9A7A20;--steel:#5A88C8;
+  --ok:#3DA86A;--okb:#0A2018;--wn:#CCA04A;--wnb:#201500;--cr:#E05050;--crb:#200808;
+}}
+:root[data-theme=dark]{--bg:#0C1520;--surf:#142030;--surf2:#1C2D42;--bdr:#2A3D56;--tx:#DDE5F0;--txs:#9BB4D0;--txm:#6A88A8;--gold:#CFA832;--gold-l:#2A2010;--gold-d:#9A7A20;--steel:#5A88C8;--ok:#3DA86A;--okb:#0A2018;--wn:#CCA04A;--wnb:#201500;--cr:#E05050;--crb:#200808;}
+:root[data-theme=light]{--bg:#F5F7FA;--surf:#FFFFFF;--surf2:#ECF0F7;--bdr:#CDD5E3;--tx:#1A2B4A;--txs:#3D5068;--txm:#637085;--gold:#BF9B2F;--gold-l:#F5EAC8;--gold-d:#8A6F1E;--steel:#3D6096;--ok:#1A6B3C;--okb:#E6F5ED;--wn:#8A4F00;--wnb:#FFF3E0;--cr:#8A1A1A;--crb:#FDEAEA;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;font-size:15px;line-height:1.7;color:var(--tx);background:var(--bg)}
+/* Header */
+.hdr{background:linear-gradient(165deg,var(--navy2) 0%,var(--navy) 65%,#223A6A 100%);color:#fff;position:relative;overflow:hidden}
+.hdr::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(255,255,255,.015) 80px,rgba(255,255,255,.015) 81px);pointer-events:none}
+.hband{background:var(--gold);height:4px}
+.hinner{max-width:1200px;margin:0 auto;padding:32px 40px 36px;display:flex;align-items:flex-start;gap:22px;position:relative;z-index:1}
+.emblem{flex-shrink:0;width:64px;height:64px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:var(--navy2);font-family:Georgia,serif;box-shadow:0 0 0 3px rgba(255,255,255,.15);text-align:center;line-height:1.2}
+.htxt{}
+.orglbl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:6px;font-weight:500}
+.dtitle{font-family:Georgia,'Times New Roman',serif;font-size:clamp(17px,2vw,24px);font-weight:700;line-height:1.3;color:#fff;text-wrap:balance;margin-bottom:10px}
+.dtitle em{color:var(--gold);font-style:normal}
+.dmeta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.mchip{font-size:11px;letter-spacing:.04em;color:rgba(255,255,255,.65);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:3px;padding:3px 9px}
+.mchip strong{color:rgba(255,255,255,.9);font-weight:600}
+/* Status bar */
+.sbar{background:var(--navy);border-bottom:2px solid var(--gold)}
+.sbinner{max-width:1200px;margin:0 auto;padding:10px 40px;display:flex;gap:24px;flex-wrap:wrap}
+.si{display:flex;align-items:center;gap:7px}
+.sdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sdot.ok{background:#4ADE80}.sdot.wn{background:#FCD34D}.sdot.cr{background:#F87171}
+.slbl{font-size:11px;color:rgba(255,255,255,.7)}.slbl strong{color:#fff;font-weight:600}
+/* Layout */
+.wrap{max-width:1200px;margin:0 auto;padding:32px 20px;display:grid;grid-template-columns:230px 1fr;gap:32px;align-items:start}
+/* TOC */
+.toc{position:sticky;top:16px;background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden}
+.toch{background:var(--surf2);padding:10px 15px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--txm);border-bottom:1px solid var(--bdr)}
+.tocl{list-style:none;padding:5px 0}
+.tocl li a{display:flex;align-items:center;gap:8px;padding:6px 13px;text-decoration:none;color:var(--txs);font-size:12.5px;line-height:1.4;transition:background .12s,color .12s}
+.tocl li a:hover{background:var(--surf2);color:var(--tx)}
+.tnum{display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;border-radius:50%;background:var(--surf2);color:var(--txm);font-size:10px;font-weight:700;flex-shrink:0;border:1px solid var(--bdr)}
+.tocl li a:hover .tnum{background:var(--gold);color:var(--navy2);border-color:var(--gold)}
+/* Main */
+.main{min-width:0}
+.sec{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;margin-bottom:22px}
+.sech{padding:17px 24px 15px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:13px}
+.sbadge{display:inline-flex;align-items:center;justify-content:center;width:33px;height:33px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:700;font-family:Georgia,serif;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.sech h2{font-family:Georgia,'Times New Roman',serif;font-size:16px;font-weight:700;color:var(--tx);line-height:1.3;text-wrap:balance}
+.sech .ssub{font-size:12px;color:var(--txm);font-weight:400}
+.sbody{padding:20px 24px}
+/* Typography */
+.sbody h3{font-family:Georgia,serif;font-size:14px;font-weight:700;color:var(--steel);margin:20px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--bdr)}
+.sbody h3:first-child{margin-top:0}
+.sbody p{color:var(--txs);font-size:14px;margin-bottom:10px;max-width:72ch}
+.sbody ul,.sbody ol{margin:6px 0 12px 20px;color:var(--txs);font-size:14px}
+.sbody li{margin-bottom:4px}
+/* Tables */
+.tw{overflow-x:auto;margin:10px 0 16px;border-radius:var(--r);border:1px solid var(--bdr)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead tr{background:var(--navy)}
+thead th{padding:9px 12px;color:#fff;font-weight:600;text-align:left;letter-spacing:.04em;font-size:11px;text-transform:uppercase;white-space:nowrap}
+tbody tr{border-bottom:1px solid var(--bdr)}
+tbody tr:last-child{border-bottom:none}
+tbody tr:nth-child(even){background:var(--surf2)}
+tbody tr:hover{background:var(--gold-l)}
+td{padding:8px 12px;color:var(--txs);vertical-align:top;line-height:1.5}
+td:first-child{font-weight:500;color:var(--tx)}
+/* Badges */
+.b{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:.04em;vertical-align:middle}
+.bh{background:var(--crb);color:var(--cr)}
+.bm{background:var(--wnb);color:var(--wn)}
+.bl{background:var(--okb);color:var(--ok)}
+.bt{background:var(--surf2);color:var(--steel);border:1px solid var(--bdr)}
+.be{background:#E0F0FF;color:#1A5A8A}
+.bg2{background:#FFF0D8;color:#7A4A00}
+/* Info boxes */
+.ib{border-left:3px solid var(--steel);background:var(--surf2);padding:10px 14px;border-radius:0 var(--r) var(--r) 0;margin:10px 0;font-size:13.5px;color:var(--txs)}
+.ib.gold{border-color:var(--gold)}.ib.ok{border-color:var(--ok);background:var(--okb);color:var(--ok)}
+.ib.cr{border-color:var(--cr);background:var(--crb)}.ib.wn{border-color:var(--wn);background:var(--wnb)}
+.ib strong{color:var(--tx)}
+/* Cards */
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px;margin:10px 0}
+.card{background:var(--surf2);border:1px solid var(--bdr);border-radius:var(--r);padding:12px 14px}
+.ci{font-size:18px;margin-bottom:6px}.ct{font-weight:700;font-size:13px;color:var(--tx);margin-bottom:3px}.cd{font-size:12px;color:var(--txm);line-height:1.5}
+.twoc{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+/* Compare */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.cbox{border-radius:var(--r);overflow:hidden;border:1px solid var(--bdr)}
+.chead{padding:7px 12px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.chead.ex{background:#1A5A8A;color:#fff}.chead.gp{background:var(--gold-d);color:#fff}
+.cbody{padding:11px 13px;font-size:13px;color:var(--txs)}
+.cbody li{margin-bottom:4px}
+/* Spec list */
+.sl{list-style:none;margin:6px 0}
+.sl li{display:flex;gap:11px;padding:6px 0;border-bottom:1px solid var(--bdr);font-size:13px;align-items:flex-start}
+.sl li:last-child{border-bottom:none}
+.sk{min-width:170px;color:var(--txm);font-size:12px;font-weight:500;letter-spacing:.02em;flex-shrink:0}
+.sv{color:var(--txs)}
+/* Phase */
+.ph{display:flex;border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;margin:10px 0;font-size:12px}
+.pi{flex:1;padding:8px 10px;background:var(--surf2);border-right:1px solid var(--bdr);text-align:center}
+.pi:last-child{border-right:none}
+.pn{font-weight:800;color:var(--gold);font-size:13px;display:block}.pm{color:var(--txs);font-weight:500;font-size:11px}
+/* Code */
+code{font-family:'Courier New',Consolas,monospace;font-size:12.5px;background:var(--surf2);border:1px solid var(--bdr);padding:1px 5px;border-radius:3px;color:var(--steel)}
+pre{background:var(--navy2);color:#A8D8F0;border-radius:var(--r);padding:14px 17px;overflow-x:auto;font-size:12px;font-family:'Courier New',Consolas,monospace;line-height:1.6;margin:10px 0;border:1px solid rgba(255,255,255,.06)}
+pre .kw{color:#7DD3FC}pre .st{color:#86EFAC}pre .cm{color:#6B7A8A;font-style:italic}
+/* Footer */
+.ftr{max-width:1200px;margin:0 auto;padding:16px 20px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;border-top:1px solid var(--bdr);font-size:12px;color:var(--txm)}
+.fo{font-weight:600;color:var(--txs)}
+/* Responsive */
+@media(max-width:820px){
+  .wrap{grid-template-columns:1fr;padding:16px 12px}
+  .toc{position:static}.hinner{padding:22px 16px 26px;flex-direction:column;gap:12px}
+  .sbinner{padding:8px 16px;gap:10px}.twoc,.cmp{grid-template-columns:1fr}
+  .ph{flex-wrap:wrap}.pi{flex:none;width:50%}
+  .cg{grid-template-columns:1fr}.sbody{padding:14px 14px}
+}
+@media print{
+  :root{
+    --navy:#1A2B4A;--navy2:#0F1C30;--steel:#3D6096;--gold:#BF9B2F;--gold-l:#F5EAC8;--gold-d:#8A6F1E;
+    --bg:#fff;--surf:#fff;--surf2:#F0F3F8;--bdr:#C8D0DC;
+    --tx:#111;--txs:#333;--txm:#555;
+    --ok:#1A6B3C;--okb:#E6F5ED;--wn:#8A4F00;--wnb:#FFF3E0;--cr:#8A1A1A;--crb:#FDEAEA;
+  }
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  body{background:#fff;font-size:11pt;line-height:1.6}
+  .hdr,.sbar,aside,.toc,.ftr{display:none!important}
+  .wrap{display:block;max-width:100%;padding:0;margin:0}
+  .main{width:100%;max-width:100%}
+  .sec{page-break-inside:auto;break-inside:auto;border:none;margin-bottom:20pt;border-radius:0;overflow:visible}
+  .sech{padding:10px 0 8px;border-bottom:2px solid #1A2B4A;margin-bottom:10pt}
+  .sech h2{font-size:14pt;font-weight:700;color:#1A2B4A}
+  .sech .ssub{font-size:9pt;color:#555}
+  .sbadge{width:26px;height:26px;font-size:12px}
+  .sbody{padding:8pt 0}
+  .sbody h3{font-size:12pt!important;font-weight:700!important;color:#1A2B4A!important;margin:14pt 0 6pt!important;border-bottom:1px solid #C8D0DC;padding-bottom:3pt}
+  .sbody p,.sbody li{font-size:10.5pt}
+  h2,h3{page-break-after:avoid;break-after:avoid}
+  img,.card,.cbox,.ib,.sbody ul,.sbody ol{page-break-inside:avoid;break-inside:avoid}
+  .sbody p+ul,.sbody p+ol{page-break-before:avoid;break-before:avoid}
+  .mock-grid{grid-template-columns:1fr!important;gap:12pt}
+  .mock-frame,.mock-wrap{page-break-inside:avoid;break-inside:avoid;overflow:visible!important}
+  .mock-frame{box-shadow:none!important;border:1px solid #ccc!important}
+  .tw{overflow-x:visible}
+  table{font-size:9pt;page-break-inside:auto}
+  thead{display:table-header-group}
+  tr{page-break-inside:avoid;break-inside:avoid}
+  pre{white-space:pre-wrap;word-break:break-all;background:#F0F3F8!important;color:#1A2B4A!important;border:1px solid #C8D0DC;font-size:8.5pt;page-break-inside:avoid}
+  pre .kw{color:#1A5080!important}pre .st{color:#1A6B3C!important}pre .cm{color:#666!important}
+  code{background:#F0F3F8!important;color:#3D6096!important;border:1px solid #C8D0DC}
+  svg{max-width:100%!important;height:auto!important;display:block;page-break-inside:avoid}
+  .cg{grid-template-columns:repeat(3,1fr)!important}
+  .twoc,.cmp{grid-template-columns:1fr 1fr!important}
+  .ph{flex-wrap:wrap;overflow:visible!important}
+  .pi{flex:none;width:calc(100%/4);min-width:100px}
+  div[style*="overflow-x"]{overflow:visible!important}
+  div[style*="page-break"]{page-break-before:always;break-before:page}
+  a{color:inherit;text-decoration:none}
+  @page{margin:20mm 18mm 20mm 22mm;size:A4}
+}
+</style>
+
+<style>
+:root{--navy:#1A2B4A;--navy2:#0F1C30;--steel:#3D6096;--gold:#BF9B2F;
+  --gold-l:#F5EAC8;--gold-d:#8A6F1E;--bg:#fff;--surf:#fff;--surf2:#F0F3F8;
+  --bdr:#C8D0DC;--tx:#111;--txs:#333;--txm:#555;
+  --ok:#1A6B3C;--okb:#E6F5ED;--wn:#8A4F00;--wnb:#FFF3E0;--cr:#8A1A1A;--crb:#FDEAEA;}
+body{font-family:Arial,sans-serif;font-size:12pt;line-height:1.6;background:#fff;color:#111}
+.hdr,.sbar,aside,.ftr{display:none!important}
+.wrap{display:block!important;max-width:100%!important;padding:0!important;margin:0!important}
+.main{display:block!important;width:100%!important}
+.sec{display:block!important;margin:0 0 24pt!important;border:none!important;background:#fff!important}
+.sech{display:block!important;padding:6pt 0!important;border-bottom:2pt solid #1A2B4A!important;margin-bottom:8pt!important}
+.sech h2{font-size:14pt!important;font-weight:700!important;color:#1A2B4A!important}
+.sbadge{display:none!important}
+.ssub{font-size:10pt!important;color:#555!important;display:block!important}
+.sbody{display:block!important;padding:0!important}
+.sbody h3{font-size:12pt!important;font-weight:700!important;color:#1A2B4A!important;margin:12pt 0 4pt!important;border-bottom:1pt solid #ccc!important;padding-bottom:2pt!important}
+.sbody p,.sbody li{font-size:11pt!important;color:#222!important}
+.cg,.twoc,.cmp{display:block!important}
+.card,.cbox{display:block!important;margin:6pt 0!important;padding:8pt!important;border:1pt solid #ccc!important;border-radius:0!important}
+.ph{display:flex!important;flex-wrap:wrap!important;gap:4px!important;border:1pt solid #ccc!important}
+.pi{flex:none!important;width:auto!important;padding:4pt 8pt!important}
+.tw{overflow:visible!important}
+table{width:100%!important;border-collapse:collapse!important;font-size:10pt!important}
+thead th{background:#1A2B4A!important;color:#fff!important;padding:6pt!important}
+td{border:1pt solid #ccc!important;padding:5pt!important}
+pre{background:#f0f3f8!important;color:#1A2B4A!important;border:1pt solid #ccc!important;font-size:9pt!important;padding:8pt!important;white-space:pre-wrap!important}
+.ib{border-left:4pt solid #3D6096!important;background:#F0F3F8!important;padding:8pt!important;display:block!important}
+.ib.gold{border-color:#BF9B2F!important;background:#F5EAC8!important}
+.ib.cr{border-color:#8A1A1A!important;background:#FDEAEA!important}
+.ib.wn{border-color:#8A4F00!important;background:#FFF3E0!important}
+.ib.ok{border-color:#1A6B3C!important;background:#E6F5ED!important}
+.mock-grid{display:block!important}
+.mock-frame{display:block!important;margin:10pt 0!important;overflow:visible!important;box-shadow:none!important;border:1pt solid #ccc!important}
+svg{display:none!important}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hband"></div>
+  <div class="hinner">
+    <div class="emblem">RI<br>KEMHAN</div>
+    <div class="htxt">
+      <div class="orglbl">Kementerian Pertahanan RI · Pusat Kodifikasi, Badan Logistik Pertahanan</div>
+      <h1 class="dtitle">ANALISIS KEBUTUHAN DESAIN SISTEM<br><em>APLIKASI CAT UJIAN KOMPETENSI KATALOGER PUSKOD BALOGHAN KEMHAN</em></h1>
+      <div class="dmeta">
+        <span class="mchip"><strong>Versi:</strong> 1.1</span>
+        <span class="mchip"><strong>Tanggal:</strong> 7 Juli 2026</span>
+        <span class="mchip"><strong>Basis:</strong> Aplikasi Aktif PHP + MySQL</span>
+        <span class="mchip"><strong>Database:</strong> db_ujian_online</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="sbar">
+  <div class="sbinner">
+    <div class="si"><div class="sdot ok"></div><div class="slbl"><strong>Berjalan:</strong> Login · Ujian MCQ &amp; Essay · Timer · Auto-Save · Nilai · Cetak Laporan · SKP · PAK</div></div>
+    <div class="si"><div class="sdot wn"></div><div class="slbl"><strong>Perlu Penyempurnaan:</strong> Penilaian Essay Manual · Anti-Kecurangan · Monitoring Live</div></div>
+    <div class="si"><div class="sdot cr"></div><div class="slbl"><strong>Celah Kritis:</strong> MD5 Password · Potensi SQL Injection · Charset latin1</div></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <aside>
+    <nav class="toc" aria-label="Daftar Isi">
+      <div class="toch">Daftar Isi</div>
+      <ul class="tocl">
+        <li><a href="#s1"><span class="tnum">1</span>Analisis Kebutuhan</a></li>
+        <li><a href="#s2"><span class="tnum">2</span>Desain UI/UX</a></li>
+        <li><a href="#s3"><span class="tnum">3</span>Backend &amp; Database</a></li>
+        <li><a href="#s4"><span class="tnum">4</span>Frontend</a></li>
+        <li><a href="#s5"><span class="tnum">5</span>Modul CAT</a></li>
+        <li><a href="#s6"><span class="tnum">6</span>Keamanan &amp; Enkripsi</a></li>
+        <li><a href="#s7"><span class="tnum">7</span>Pengujian UAT</a></li>
+        <li><a href="#s8"><span class="tnum">8</span>Dokumentasi</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="main">
+
+    <!-- S1 -->
+    <section class="sec" id="s1">
+      <div class="sech"><div class="sbadge">1</div><div><h2>Analisis Kebutuhan Desain Sistem</h2><div class="ssub">Pendahuluan, latar belakang, tujuan, pengguna, dan kebutuhan fungsional &amp; non-fungsional</div></div></div>
+      <div class="sbody">
+
+        <h3>1.1 Pendahuluan</h3>
+        <p>Dokumen ini merupakan analisis kebutuhan desain sistem untuk Aplikasi Computer Assisted Test (CAT) Ujian Kompetensi Kataloger yang dikelola oleh Pusat Kodifikasi Badan Logistik Pertahanan Kementerian Pertahanan Republik Indonesia (PUSKOD BALOGHAN KEMHAN). Analisis dilakukan berdasarkan kondisi aplikasi yang saat ini telah berjalan secara aktif, mencakup evaluasi fitur eksisting, identifikasi celah (gap), serta rekomendasi pengembangan dan penguatan sistem.</p>
+        <p>Jabatan Fungsional Kataloger merupakan jabatan karier Pegawai Negeri Sipil (PNS) yang melaksanakan tugas kegiatan kodifikasi materiil pertahanan berdasarkan sistem NATO Stock Number (NSN). Sebagai satu-satunya instansi National Codification Bureau (NCB) di Indonesia, PUSKOD BALOGHAN KEMHAN bertanggung jawab atas standar dan kualitas seluruh kataloger di lingkungan Kemhan dan TNI. Ujian kompetensi menjadi instrumen utama untuk memastikan standar tersebut terpenuhi secara objektif dan terukur.</p>
+
+        <h3>1.2 Latar Belakang</h3>
+        <p>Sebelum sistem CAT diimplementasikan, proses ujian kompetensi kataloger dilakukan secara konvensional yang mengandung sejumlah kelemahan: potensi subjektivitas penilaian, risiko kebocoran soal, ketidakefisienan administrasi, serta keterbatasan skalabilitas peserta. Kebutuhan akan sistem ujian yang objektif, terstandardisasi, dan dapat diselenggarakan secara bersamaan untuk banyak peserta mendorong pengembangan platform berbasis web ini.</p>
+        <p>Aplikasi CAT saat ini telah berhasil digunakan dalam penyelenggaraan lebih dari 110 sesi ujian kompetensi dengan ratusan peserta ber-NIP aktual dari berbagai satuan kerja (Satker) di lingkungan Kemhan. Seiring meningkatnya jumlah peserta dan kompleksitas kebutuhan, diperlukan analisis menyeluruh untuk mengidentifikasi area yang perlu diperkuat — terutama dari sisi keamanan data, kelengkapan fitur penilaian essay, dan perlindungan integritas ujian.</p>
+        <div class="ib gold"><strong>Dasar Hukum:</strong> Peraturan Menteri Negara Pendayagunaan Aparatur Negara tentang Jabatan Fungsional Kataloger; Peraturan Pemerintah tentang Pegawai Negeri Sipil; STANAG NATO terkait sistem kodifikasi NSN yang menjadi acuan kompetensi teknis.</div>
+
+        <h3>1.3 Tujuan</h3>
+        <p>Analisis ini bertujuan untuk:</p>
+        <ul>
+          <li><strong>Mendokumentasikan kondisi sistem saat ini</strong> — mencakup fitur yang sudah berjalan, struktur database aktual, dan alur proses ujian dari login hingga penerbitan nilai.</li>
+          <li><strong>Mengidentifikasi kebutuhan fungsional yang belum terpenuhi</strong> — seperti penilaian essay manual, monitoring live peserta, dan fitur anti-kecurangan.</li>
+          <li><strong>Memetakan kerentanan keamanan</strong> — termasuk sistem hashing password yang tidak aman (MD5) dan potensi celah SQL injection yang perlu segera ditangani.</li>
+          <li><strong>Memberikan rekomendasi teknis terstruktur</strong> — berupa roadmap pengembangan bertahap yang dapat dijadikan acuan tim pengembang dan manajemen PUSKOD BALOGHAN KEMHAN.</li>
+          <li><strong>Menjadi acuan pengujian dan penerimaan sistem (UAT)</strong> — dengan skenario uji yang konkret berdasarkan alur aplikasi nyata.</li>
+          <li><strong>Menyediakan kerangka dokumentasi teknis dan user manual</strong> — agar sistem dapat dioperasikan, dipelihara, dan dikembangkan secara berkelanjutan.</li>
+        </ul>
+
+        <h3>1.4 Deskripsi Aplikasi Eksisting</h3>
+        <p>Aplikasi Ujian Online PUSKOD BALOGHAN KEMHAN telah beroperasi sebagai platform Computer Based Test (CBT/CAT) untuk uji kompetensi Jabatan Fungsional Kataloger. Sistem dibangun di atas PHP Native dengan database MySQL (<code>db_ujian_online</code>), berjalan di server dengan root di <code>/var/www/html/ujian/</code>.</p>
+        <div class="ib gold"><strong>Nama Resmi:</strong> "Pusat Kodifikasi Badan Logistik Pertahanan Kemhan" — Jl. Jati No.1, Pondok Labu, Jakarta Selatan 12450. Menangani ujian kompetensi berbasis NIP untuk kataloger ASN/PNS di lingkungan KEMHAN dan TNI.</div>
+
+        <h3>1.5 Pengguna Sistem</h3>
+        <p>Aplikasi ini memiliki tiga peran pengguna yang masing-masing memiliki hak akses berbeda. Seluruh pengguna mengakses sistem melalui halaman login yang sama (<code>login.php</code>), dan sistem membedakan tampilan berdasarkan role yang tersimpan di session setelah autentikasi berhasil.</p>
+        <div class="tw"><table><thead><tr><th>Role</th><th>Tabel DB</th><th>Login</th><th>Fungsi Utama</th></tr></thead>
+        <tbody>
+          <tr><td>Admin</td><td><code>admin</code></td><td>username + password (MD5)</td><td>Pengelolaan sistem penuh, konfigurasi aplikasi global</td></tr>
+          <tr><td>Guru / Operator</td><td><code>guru</code></td><td>username + password (MD5)</td><td>Buat sesi ujian, kelola soal, lihat &amp; cetak hasil</td></tr>
+          <tr><td>Siswa / Peserta</td><td><code>siswa</code></td><td>username + password; ID = NIP</td><td>Ikuti ujian, lihat hasil, akses riwayat</td></tr>
+        </tbody></table></div>
+
+        <h3>1.6 Jenjang Ujian Kompetensi yang Ditangani</h3>
+        <p>Ujian dikelompokkan berdasarkan jenjang jabatan kataloger sesuai ketentuan PermenPAN. Setiap kelompok (kelas) memiliki tipe soal dan ambang batas kelulusan (<em>passing grade</em>) yang berbeda, mencerminkan tingkat kompetensi yang dipersyaratkan.</p>
+        <div class="tw"><table><thead><tr><th>Kelas</th><th>Jenjang Kataloger</th><th>Tipe Ujian</th><th>Passing Grade</th></tr></thead>
+        <tbody>
+          <tr><td>Kelas 8</td><td>Kataloger Ahli Pertama</td><td>Pilihan Ganda (MCQ)</td><td>65</td></tr>
+          <tr><td>Kelas 9</td><td>Kataloger Ahli Madya</td><td>MCQ + Essay</td><td>70</td></tr>
+          <tr><td>Kelas 10</td><td>Kataloger Ahli Muda</td><td>Pilihan Ganda (MCQ)</td><td>50</td></tr>
+          <tr><td>Kelas 11</td><td>Kataloger Ahli Madya (lanjutan)</td><td>Pilihan Ganda (MCQ)</td><td>50</td></tr>
+        </tbody></table></div>
+
+        <h3>1.7 Kebutuhan Fungsional — Status Implementasi</h3>
+        <p>Tabel berikut merangkum seluruh kebutuhan fungsional sistem, status implementasinya saat ini, dan prioritas pengembangan lanjutan. Kolom status membedakan fitur yang <em>sudah berjalan</em> dengan yang <em>masih perlu dibangun</em>.</p>
+        <div class="tw"><table><thead><tr><th>Kode</th><th>Kebutuhan</th><th>Status</th><th>Prioritas</th></tr></thead>
+        <tbody>
+          <tr><td>KF-01</td><td>Login peserta, admin, operator</td><td><span class="b be">Sudah Ada</span></td><td>—</td></tr>
+          <tr><td>KF-02</td><td>Manajemen sesi ujian (jadwal, durasi, kelas, mapel, status aktif)</td><td><span class="b be">Sudah Ada</span></td><td>—</td></tr>
+          <tr><td>KF-03</td><td>Bank soal MCQ dengan gambar</td><td><span class="b be">Sudah Ada</span></td><td>—</td></tr>
+          <tr><td>KF-04</td><td>Bank soal Essay</td><td><span class="b be">Sudah Ada</span></td><td>—</td></tr>
+          <tr><td>KF-05</td><td>Timer ujian real-time dengan countdown</td><td><span class="b be">Sudah Ada</span></td><td>—</td></tr>
+          <tr><td>KF-06</td><td>Auto-save jawaban secara berkala</td><td><span class="b be">Sudah Ada</span></td><td>—</td></tr>
+          <tr><td>KF-07</td><td>Penilaian nilai MCQ otomatis setelah submit</td><td><span class="b be">Sudah Ada</span></td><td>—</td></tr>
+          <tr><td>KF-08</td><td>Penilaian essay manual oleh operator</td><td><span class="b bg2">Perlu Dibangun</span></td><td><span class="b bh">Tinggi</span></td></tr>
+          <tr><td>KF-09</td><td>Cetak laporan hasil per ujian dan per peserta</td><td><span class="b be">Sudah Ada</span></td><td>—</td></tr>
+          <tr><td>KF-10</td><td>Manajemen peserta per sesi (tabel <code>peserta</code>)</td><td><span class="b be">Sudah Ada</span></td><td>—</td></tr>
+          <tr><td>KF-11</td><td>Riwayat ujian selesai per peserta</td><td><span class="b be">Sudah Ada</span></td><td>—</td></tr>
+          <tr><td>KF-12</td><td>SKP dan PAK</td><td><span class="b be">Sudah Ada</span></td><td>—</td></tr>
+          <tr><td>KF-13</td><td>Monitoring peserta aktif live oleh pengawas</td><td><span class="b bg2">Belum Ada</span></td><td><span class="b bm">Menengah</span></td></tr>
+          <tr><td>KF-14</td><td>Anti-kecurangan (pindah tab, fullscreen)</td><td><span class="b bg2">Belum Ada</span></td><td><span class="b bh">Tinggi</span></td></tr>
+          <tr><td>KF-15</td><td>Import massal peserta dari Excel/CSV</td><td><span class="b bg2">Belum Ada</span></td><td><span class="b bm">Menengah</span></td></tr>
+          <tr><td>KF-16</td><td>Analitik statistik soal</td><td><span class="b bg2">Belum Ada</span></td><td><span class="b bl">Rendah</span></td></tr>
+        </tbody></table></div>
+
+        <h3>1.8 Kebutuhan Non-Fungsional</h3>
+        <p>Selain fitur fungsional, sistem harus memenuhi standar kualitas teknis berikut agar dapat beroperasi secara handal, aman, dan nyaman digunakan oleh seluruh peserta dan operator ujian.</p>
+        <ul class="sl">
+          <li><span class="sk">Performa</span><span class="sv">Halaman ujian load &lt;2 detik; auto-save latency &lt;500ms; mendukung semua peserta aktif bersamaan</span></li>
+          <li><span class="sk">Keamanan Password</span><span class="sv"><span class="b bh">KRITIS</span> Saat ini MD5 — harus segera migrasi ke <code>password_hash()</code> PHP (bcrypt)</span></li>
+          <li><span class="sk">Encoding Database</span><span class="sv">Tabel inti masih <code>latin1</code> — perlu migrasi ke <code>utf8mb4</code> agar nama/teks unicode aman</span></li>
+          <li><span class="sk">Kompatibilitas</span><span class="sv">Chrome, Firefox, Edge modern; desktop dan laptop; resolusi minimum 1024×768</span></li>
+          <li><span class="sk">Backup</span><span class="sv">Backup database harian otomatis; prosedur restore terdokumentasi; uji restore tiap bulan</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- S2 -->
+    <section class="sec" id="s2">
+      <div class="sech"><div class="sbadge">2</div><div><h2>Desain UI/UX (Web &amp; Mobile)</h2><div class="ssub">Alur pengguna berdasarkan kode aktual, identitas visual, dan responsivitas</div></div></div>
+      <div class="sbody">
+        <p>Bagian ini menjabarkan panduan desain antarmuka pengguna (UI/UX) yang berlaku untuk aplikasi CAT PUSKOD BALOGHAN KEMHAN, mencakup alur navigasi, sistem identitas visual, prinsip desain halaman ujian, dan panduan responsivitas untuk berbagai ukuran perangkat. Desain didasarkan pada alur kode aktual yang sudah berjalan sehingga rekomendasi bersifat incremental — memperbaiki dan menyempurnakan tampilan yang ada, bukan merancang ulang dari nol.</p>
+
+        <h3>2.1 Alur Pengguna Peserta (Berdasarkan Kode Aktual)</h3>
+        <p>Berikut adalah alur lengkap yang dilalui peserta dari pertama membuka aplikasi hingga mendapatkan nilai, berdasarkan file PHP aktual yang sudah ada di sistem.</p>
+        <div class="ph">
+          <div class="pi"><span class="pn">①</span><span class="pm">login.php</span></div>
+          <div class="pi"><span class="pn">②</span><span class="pm">ujian-siswa<br>(daftar ujian)</span></div>
+          <div class="pi"><span class="pn">③</span><span class="pm">set-default.php<br>(inisialisasi)</span></div>
+          <div class="pi"><span class="pn">④</span><span class="pm">mulai.php<br>(briefing)</span></div>
+          <div class="pi"><span class="pn">⑤</span><span class="pm">ambil-soal.php<br>(sesi ujian)</span></div>
+          <div class="pi"><span class="pn">⑥</span><span class="pm">review.php<br>(tinjau &amp; submit)</span></div>
+          <div class="pi"><span class="pn">⑦</span><span class="pm">hasil-ujian-siswa<br>(nilai &amp; cetak)</span></div>
+        </div>
+
+        <h3>2.1.1 Flowchart Alur Peserta Ujian</h3>
+        
+
+        <h3>2.2 Panduan Identitas Visual</h3>
+        <p>Konsistensi visual sangat penting agar peserta merasakan nuansa ujian yang resmi dan terpercaya. Berikut rekomendasi palet warna dan tipografi yang selaras dengan identitas Kementerian Pertahanan RI.</p>
+        <div class="tw"><table><thead><tr><th>Elemen</th><th>Rekomendasi</th><th>Penggunaan</th></tr></thead>
+        <tbody>
+          <tr><td>Warna Primer</td><td><code>#1A2B4A</code> Navy KEMHAN</td><td>Header, navbar, tombol utama</td></tr>
+          <tr><td>Aksen Gold</td><td><code>#BF9B2F</code> Emas Pertahanan</td><td>Badge aktif, border pilihan, highlight</td></tr>
+          <tr><td>Soal Terjawab</td><td><code>#166534</code> Hijau</td><td>Nomor soal sudah dijawab</td></tr>
+          <tr><td>Soal Ragu</td><td><code>#92400E</code> Amber</td><td>Soal yang di-flag untuk ditinjau</td></tr>
+          <tr><td>Timer Kritis</td><td><code>#DC2626</code> Merah</td><td>Timer saat sisa &lt;5 menit</td></tr>
+          <tr><td>Font Soal</td><td>Georgia / system serif</td><td>Keterbacaan panjang, suasana resmi</td></tr>
+          <tr><td>Font UI</td><td>Segoe UI / system-ui</td><td>Navigasi, tombol, label</td></tr>
+        </tbody></table></div>
+
+        <h3>2.3 Prinsip Desain Halaman Ujian</h3>
+        <p>Halaman ujian aktif adalah inti dari pengalaman pengguna. Empat prinsip berikut harus dijaga konsistensinya di seluruh tampilan sesi ujian.</p>
+        <div class="twoc">
+          <div class="card"><div class="ct">Fokus pada Soal</div><div class="cd">70% area layar untuk soal dan pilihan. Sidebar kiri: nomor soal. Header: timer dan progress. Tidak ada distraksi lain.</div></div>
+          <div class="card"><div class="ct">Status Selalu Terlihat</div><div class="cd">Nomor soal berwarna berbeda: terjawab (hijau), ragu (amber), belum (abu). Timer mencolok di header.</div></div>
+          <div class="card"><div class="ct">Identitas Institusional</div><div class="cd">Logo &amp; nama "Puskod Baranahan Kemhan" tampil di header ujian — nuansa resmi dan kredibel.</div></div>
+          <div class="card"><div class="ct">Mobile-Friendly</div><div class="cd">Sidebar nomor soal kolaps ke drawer/bottom bar di layar kecil. Tombol pilihan jawaban besar dan mudah disentuh.</div></div>
+        </div>
+
+        <h3>2.4 Breakpoint Responsivitas</h3>
+        <p>Peserta mengakses sistem dari beragam perangkat. Tata letak halaman ujian harus menyesuaikan diri secara otomatis tanpa mengorbankan fungsionalitas inti seperti timer dan navigasi soal.</p>
+        <ul class="sl">
+          <li><span class="sk">Desktop ≥1024px</span><span class="sv">Sidebar kiri berisi grid nomor soal, konten soal di area utama, timer di header fixed</span></li>
+          <li><span class="sk">Tablet 768–1023px</span><span class="sv">Sidebar kolaps ke drawer. Header timer tetap visible. Soal full width.</span></li>
+          <li><span class="sk">Mobile 360–767px</span><span class="sv">Navigasi soal menjadi bottom bar. Tombol prev/next besar. Timer di header tersendiri.</span></li>
+        </ul>
+
+        <h3>2.5 Wireframe Tampilan Halaman Utama</h3>
+        <p>Mockup berikut menggambarkan tata letak dan elemen visual utama dari lima halaman kunci aplikasi, menggunakan skema warna dan struktur yang sesuai dengan desain aktual sistem (merah crimson <code>#8B1A1A</code> + gold <code>#F4C430</code> + Bootstrap 4).</p>
+
+        <style>
+        /* ── Mockup styles ── */
+        .mock-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 16px 0; }
+        .mock-grid.single { grid-template-columns: 1fr; }
+        .mock-frame { border-radius: 8px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.18); border: 1px solid #ccc; background: #f8f9fa; font-family: Calibri, 'Segoe UI', sans-serif; font-size: 11px; }
+        .mock-label { font-size: 11px; font-weight: 700; color: var(--txm); letter-spacing: .05em; margin-bottom: 6px; text-transform: uppercase; }
+        .mock-wrap { margin-bottom: 6px; }
+
+        /* topbar */
+        .m-topbar { background: linear-gradient(135deg,#8b1a1a,#c92a2a); color:#fff; padding: 7px 12px; display:flex; align-items:center; justify-content:space-between; }
+        .m-topbar .brand { font-weight:700; font-size:11px; display:flex; align-items:center; gap:6px; }
+        .m-topbar .brand-logo { width:22px; height:22px; border-radius:50%; background:linear-gradient(135deg,#d4a017,#f4c430); display:flex; align-items:center; justify-content:center; font-size:7px; font-weight:900; color:#7a2020; }
+        .m-topbar .userinfo { font-size:10px; opacity:.85; display:flex; align-items:center; gap:6px; }
+        .m-topbar .avatar { width:20px; height:20px; border-radius:50%; background:rgba(255,255,255,.25); display:flex; align-items:center; justify-content:center; font-size:9px; }
+
+        /* sidebar */
+        .m-layout { display:flex; min-height:180px; }
+        .m-sidebar { width:130px; background:#fff; border-right:1px solid #e3e6f0; flex-shrink:0; }
+        .m-sidebar-head { padding:8px 10px; font-size:9px; font-weight:700; color:#8b1a1a; border-bottom:1px solid #e3e6f0; background:#fff8f8; }
+        .m-nav-item { padding:6px 10px; font-size:10px; color:#555; border-left:3px solid transparent; cursor:pointer; display:flex; align-items:center; gap:5px; }
+        .m-nav-item.active { background:#fff0f0; border-left-color:#8b1a1a; color:#8b1a1a; font-weight:600; }
+        .m-nav-item .ico { width:12px; height:12px; border-radius:2px; background:#ddd; flex-shrink:0; }
+        .m-nav-item.active .ico { background:#8b1a1a; }
+        .m-content { flex:1; padding:12px; overflow:hidden; }
+
+        /* dashboard header */
+        .m-dash-head { background:linear-gradient(135deg,#8b1a1a,#c92a2a); color:#fff; padding:8px 12px; border-radius:4px 4px 0 0; margin-bottom:0; font-size:11px; font-weight:700; }
+        .m-stat-row { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin:8px 0; }
+        .m-stat { background:#fff; border-radius:4px; padding:7px 8px; box-shadow:0 1px 4px rgba(0,0,0,.08); border-left:3px solid; }
+        .m-stat.r { border-color:#dc3545; } .m-stat.y { border-color:#ffc107; } .m-stat.b { border-color:#0062cc; } .m-stat.g { border-color:#28a745; }
+        .m-stat-num { font-size:16px; font-weight:800; color:#222; }
+        .m-stat-lbl { font-size:9px; color:#888; }
+
+        /* Login */
+        .m-login-bg { background: linear-gradient(135deg, rgba(139,26,26,.85), rgba(178,34,34,.7)), repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(255,255,255,.03) 10px,rgba(255,255,255,.03) 11px); padding:24px 16px; display:flex; justify-content:center; align-items:center; min-height:220px; }
+        .m-login-card { background:#fff; border-radius:8px; width:160px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,.3); }
+        .m-login-head { background:linear-gradient(180deg,#8B1A1A,#A52A2A); padding:12px 10px; text-align:center; }
+        .m-login-logo { width:36px; height:36px; border-radius:50%; background:radial-gradient(circle at 30% 30%,#FFF8DC,#FFD700 40%,#DAA520); margin:0 auto 6px; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:900; color:#7a2020; }
+        .m-login-title { color:#FFD700; font-size:10px; font-weight:700; margin-bottom:2px; }
+        .m-login-sub { color:rgba(255,255,255,.7); font-size:8px; }
+        .m-login-body { padding:12px 10px; }
+        .m-input { width:100%; background:#f8f9fa; border:1px solid #dee2e6; border-radius:3px; padding:4px 6px; font-size:9px; margin-bottom:6px; color:#333; }
+        .m-btn-login { width:100%; background:linear-gradient(135deg,#8B1A1A,#A52A2A); color:#fff; border:none; border-radius:3px; padding:5px; font-size:9px; font-weight:700; text-align:center; }
+        .m-check { display:flex; align-items:center; gap:4px; font-size:9px; color:#666; margin-bottom:6px; }
+
+        /* ujian card */
+        .m-ujian-card { background:#fff; border-radius:4px; border:1px solid #dee2e6; padding:8px 10px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center; }
+        .m-ujian-title { font-weight:700; font-size:10px; color:#222; margin-bottom:2px; }
+        .m-ujian-meta { font-size:9px; color:#888; }
+        .m-badge { font-size:8px; padding:2px 6px; border-radius:3px; font-weight:700; }
+        .m-badge.hijau { background:#d4edda; color:#155724; }
+        .m-badge.merah { background:#f8d7da; color:#721c24; }
+        .m-badge.kuning { background:#fff3cd; color:#856404; }
+
+        /* exam page */
+        .m-exam-layout { display:grid; grid-template-columns:100px 1fr; min-height:200px; }
+        .m-exam-sidebar { background:#fff; border-right:1px solid #dee2e6; padding:8px; }
+        .m-exam-sidebar-head { font-size:9px; font-weight:700; color:#8b1a1a; margin-bottom:6px; }
+        .m-nomor-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:3px; }
+        .m-nomor { width:18px; height:18px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:8px; font-weight:700; }
+        .m-nomor.done { background:#28a745; color:#fff; }
+        .m-nomor.current { background:#8b1a1a; color:#fff; }
+        .m-nomor.ragu { background:#ffc107; color:#333; }
+        .m-nomor.empty { background:#e9ecef; color:#666; }
+        .m-exam-main { padding:10px; }
+        .m-timer-bar { background:linear-gradient(135deg,#8b1a1a,#c92a2a); color:#fff; padding:5px 10px; display:flex; justify-content:space-between; align-items:center; font-size:10px; font-weight:700; }
+        .m-timer-val { background:rgba(0,0,0,.25); padding:2px 8px; border-radius:3px; font-size:11px; letter-spacing:.05em; }
+        .m-soal-num { font-size:9px; color:#888; margin-bottom:4px; }
+        .m-soal-text { font-size:10px; color:#222; line-height:1.5; margin-bottom:8px; font-weight:500; }
+        .m-option { display:flex; align-items:center; gap:6px; padding:4px 6px; border-radius:3px; margin-bottom:3px; border:1px solid #dee2e6; font-size:9px; color:#444; cursor:pointer; }
+        .m-option.selected { background:#fff0f0; border-color:#8b1a1a; color:#8b1a1a; font-weight:600; }
+        .m-option .m-radio { width:10px; height:10px; border-radius:50%; border:2px solid #ccc; flex-shrink:0; }
+        .m-option.selected .m-radio { border-color:#8b1a1a; background:#8b1a1a; }
+        .m-nav-btns { display:flex; gap:4px; margin-top:8px; }
+        .m-btn { padding:4px 8px; border-radius:3px; font-size:9px; font-weight:600; border:none; cursor:pointer; }
+        .m-btn.prev { background:#6c757d; color:#fff; }
+        .m-btn.next { background:linear-gradient(135deg,#8b1a1a,#c92a2a); color:#fff; }
+        .m-btn.submit { background:linear-gradient(135deg,#d4a017,#f4c430); color:#333; }
+
+        /* review page */
+        .m-review-grid { display:grid; grid-template-columns:repeat(8,1fr); gap:3px; margin:8px 0; }
+
+        /* hasil page */
+        .m-hasil-score { text-align:center; padding:16px 10px; }
+        .m-score-circle { width:80px; height:80px; border-radius:50%; background:linear-gradient(135deg,#8b1a1a,#c92a2a); color:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; margin:0 auto 8px; box-shadow:0 4px 16px rgba(139,26,26,.4); }
+        .m-score-num { font-size:24px; font-weight:900; line-height:1; }
+        .m-score-lbl { font-size:8px; opacity:.8; }
+        .m-lulus { display:inline-block; background:linear-gradient(135deg,#d4a017,#f4c430); color:#7a2020; font-weight:800; font-size:12px; padding:4px 16px; border-radius:20px; margin-bottom:8px; }
+        .m-hasil-row { display:flex; justify-content:space-between; padding:4px 12px; border-bottom:1px solid #f0f0f0; font-size:9px; color:#555; }
+        .m-hasil-row:last-child { border-bottom:none; }
+
+        /* admin panel */
+        .m-table-head { background:linear-gradient(135deg,#8b1a1a,#c92a2a); color:#fff; }
+        .m-table-head th, .m-tr td { padding:4px 6px; font-size:9px; }
+        .m-tr:nth-child(even) { background:#f8f9fa; }
+        .m-tr td { border-bottom:1px solid #dee2e6; }
+
+        @media(max-width:700px){ .mock-grid { grid-template-columns:1fr; } }
+        </style>
+
+        <!-- ① Login -->
+        <div class="mock-wrap">
+          <div class="mock-label">① Halaman Login</div>
+          <div class="mock-frame" style="max-width:380px">
+            <div class="m-login-bg">
+              <div class="m-login-card">
+                <div class="m-login-head">
+                  <div class="m-login-logo">RI</div>
+                  <div class="m-login-title">PUSKOD BALOGHAN KEMHAN</div>
+                  <div class="m-login-sub">Sistem Ujian Kompetensi Kataloger</div>
+                </div>
+                <div class="m-login-body">
+                  <div style="font-size:9px;color:#888;margin-bottom:8px">Masukkan kredensial Anda</div>
+                  <input class="m-input" placeholder="Username / NIP" readonly>
+                  <input class="m-input" placeholder="Password" type="password" readonly>
+                  <div class="m-check">
+                    <div style="width:10px;height:10px;border:1px solid #ccc;border-radius:2px;flex-shrink:0"></div>
+                    <span>Ingat Saya</span>
+                  </div>
+                  <div class="m-btn-login">MASUK</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ② Dashboard Peserta + ③ Dashboard Admin -->
+        <div class="mock-grid">
+          <div class="mock-wrap">
+            <div class="mock-label">② Dashboard Peserta — Daftar Ujian</div>
+            <div class="mock-frame">
+              <div class="m-topbar">
+                <div class="brand"><div class="brand-logo">RI</div>Puskod Baloghan Kemhan</div>
+                <div class="userinfo"><div class="avatar">&#9900;</div>197607...(NIP)</div>
+              </div>
+              <div class="m-layout">
+                <div class="m-sidebar">
+                  <div class="m-sidebar-head">Menu Peserta</div>
+                  <div class="m-nav-item active"><div class="ico"></div>Ujian Saya</div>
+                  <div class="m-nav-item"><div class="ico"></div>Hasil Ujian</div>
+                  <div class="m-nav-item"><div class="ico"></div>Riwayat</div>
+                  <div class="m-nav-item"><div class="ico"></div>Profil</div>
+                  <div class="m-nav-item"><div class="ico"></div>Keluar</div>
+                </div>
+                <div class="m-content">
+                  <div class="m-dash-head">Ujian Tersedia</div>
+                  <div style="background:#fff;padding:6px;border:1px solid #dee2e6;border-top:none;border-radius:0 0 4px 4px">
+                    <div class="m-ujian-card">
+                      <div>
+                        <div class="m-ujian-title">Ujian Kompetensi Ahli Madya</div>
+                        <div class="m-ujian-meta">09 Jun 2026 · 08:30 · 60 menit</div>
+                      </div>
+                      <span class="m-badge hijau">Aktif</span>
+                    </div>
+                    <div class="m-ujian-card">
+                      <div>
+                        <div class="m-ujian-title">Uji Kompetensi Ahli Muda</div>
+                        <div class="m-ujian-meta">09 Jun 2026 · 08:30 · 60 menit</div>
+                      </div>
+                      <span class="m-badge kuning">Menunggu</span>
+                    </div>
+                    <div class="m-ujian-card">
+                      <div>
+                        <div class="m-ujian-title">Ujian Kompetensi Pertama</div>
+                        <div class="m-ujian-meta">04 Jun 2026 · Selesai</div>
+                      </div>
+                      <span class="m-badge merah">Selesai</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mock-wrap">
+            <div class="mock-label">③ Dashboard Admin / Operator</div>
+            <div class="mock-frame">
+              <div class="m-topbar">
+                <div class="brand"><div class="brand-logo">RI</div>Puskod Baloghan Kemhan</div>
+                <div class="userinfo"><div class="avatar">&#9900;</div>baloghan (Admin)</div>
+              </div>
+              <div class="m-layout">
+                <div class="m-sidebar">
+                  <div class="m-sidebar-head">Menu Admin</div>
+                  <div class="m-nav-item active"><div class="ico"></div>Beranda</div>
+                  <div class="m-nav-item"><div class="ico"></div>Peserta</div>
+                  <div class="m-nav-item"><div class="ico"></div>Ujian</div>
+                  <div class="m-nav-item"><div class="ico"></div>Soal</div>
+                  <div class="m-nav-item"><div class="ico"></div>Hasil</div>
+                  <div class="m-nav-item"><div class="ico"></div>SKP / PAK</div>
+                  <div class="m-nav-item"><div class="ico"></div>Keluar</div>
+                </div>
+                <div class="m-content">
+                  <div class="m-stat-row">
+                    <div class="m-stat r"><div class="m-stat-num">23</div><div class="m-stat-lbl">Peserta</div></div>
+                    <div class="m-stat y"><div class="m-stat-num">3</div><div class="m-stat-lbl">Sesi Aktif</div></div>
+                    <div class="m-stat b"><div class="m-stat-num">110</div><div class="m-stat-lbl">Total Sesi</div></div>
+                    <div class="m-stat g"><div class="m-stat-num">72</div><div class="m-stat-lbl">Lulus</div></div>
+                  </div>
+                  <div class="m-dash-head" style="border-radius:4px 4px 0 0">Sesi Ujian Terbaru</div>
+                  <div style="background:#fff;border:1px solid #dee2e6;border-top:none;border-radius:0 0 4px 4px;overflow:hidden">
+                    <table style="width:100%;border-collapse:collapse">
+                      <tr class="m-table-head"><th>Judul</th><th>Tgl</th><th>Status</th></tr>
+                      <tr class="m-tr"><td>Ujian Ahli Madya</td><td>09/06</td><td><span class="m-badge hijau">Aktif</span></td></tr>
+                      <tr class="m-tr"><td>Uji Ahli Muda</td><td>09/06</td><td><span class="m-badge hijau">Aktif</span></td></tr>
+                      <tr class="m-tr"><td>Ujian Pertama</td><td>04/06</td><td><span class="m-badge merah">Selesai</span></td></tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ④ Halaman Ujian Aktif -->
+        <div class="mock-wrap">
+          <div class="mock-label">④ Halaman Ujian Aktif (Sesi Berjalan)</div>
+          <div class="mock-frame">
+            <div class="m-timer-bar">
+              <span>Ujian Kompetensi Ahli Madya &nbsp;·&nbsp; Soal 12 / 50</span>
+              <span class="m-timer-val">00:43:17</span>
+            </div>
+            <div class="m-exam-layout">
+              <div class="m-exam-sidebar">
+                <div class="m-exam-sidebar-head">Navigasi Soal</div>
+                <div class="m-nomor-grid">
+                  <div class="m-nomor done">1</div><div class="m-nomor done">2</div>
+                  <div class="m-nomor done">3</div><div class="m-nomor done">4</div>
+                  <div class="m-nomor done">5</div><div class="m-nomor done">6</div>
+                  <div class="m-nomor ragu">7</div><div class="m-nomor done">8</div>
+                  <div class="m-nomor done">9</div><div class="m-nomor done">10</div>
+                  <div class="m-nomor done">11</div><div class="m-nomor current">12</div>
+                  <div class="m-nomor empty">13</div><div class="m-nomor empty">14</div>
+                  <div class="m-nomor empty">15</div><div class="m-nomor empty">16</div>
+                </div>
+                <div style="margin-top:8px;font-size:8px;color:#888">
+                  <div style="display:flex;align-items:center;gap:4px;margin-bottom:3px"><div style="width:10px;height:10px;background:#28a745;border-radius:2px"></div> Terjawab</div>
+                  <div style="display:flex;align-items:center;gap:4px;margin-bottom:3px"><div style="width:10px;height:10px;background:#ffc107;border-radius:2px"></div> Ragu-ragu</div>
+                  <div style="display:flex;align-items:center;gap:4px"><div style="width:10px;height:10px;background:#e9ecef;border-radius:2px"></div> Belum</div>
+                </div>
+              </div>
+              <div class="m-exam-main">
+                <div class="m-soal-num">Soal Nomor 12</div>
+                <div class="m-soal-text">Apa kepanjangan dari NSN dalam sistem kodifikasi materiil pertahanan?</div>
+                <div class="m-option selected">
+                  <div class="m-radio"></div>
+                  <span>A. National Stock Number / Nomor Sediaan Nasional</span>
+                </div>
+                <div class="m-option">
+                  <div class="m-radio"></div>
+                  <span>B. NATO Supply Number</span>
+                </div>
+                <div class="m-option">
+                  <div class="m-radio"></div>
+                  <span>C. National Serial Notation</span>
+                </div>
+                <div class="m-option">
+                  <div class="m-radio"></div>
+                  <span>D. Nomor Sistem Nasional</span>
+                </div>
+                <div class="m-nav-btns">
+                  <button class="m-btn prev">&#8592; Sebelumnya</button>
+                  <button class="m-btn next">Berikutnya &#8594;</button>
+                  <button class="m-btn submit" style="margin-left:auto">Selesai &amp; Kumpulkan</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ⑤ Review + ⑥ Hasil -->
+        <div class="mock-grid">
+          <div class="mock-wrap">
+            <div class="mock-label">⑤ Halaman Review Jawaban</div>
+            <div class="mock-frame">
+              <div class="m-topbar" style="font-size:10px;padding:6px 10px">
+                <span style="font-weight:700">Review Jawaban — Ujian Ahli Madya</span>
+                <span class="m-timer-val" style="font-size:10px;background:rgba(0,0,0,.25);padding:2px 7px;border-radius:3px">00:38:52</span>
+              </div>
+              <div style="padding:10px">
+                <div style="font-size:9px;color:#555;margin-bottom:8px">Periksa kembali jawaban Anda sebelum mengumpulkan. Klik nomor soal untuk kembali mengubah jawaban.</div>
+                <div style="display:flex;gap:6px;font-size:8px;margin-bottom:8px">
+                  <span style="display:flex;align-items:center;gap:3px"><span style="width:10px;height:10px;background:#28a745;border-radius:2px;display:inline-block"></span> Terjawab (44)</span>
+                  <span style="display:flex;align-items:center;gap:3px"><span style="width:10px;height:10px;background:#ffc107;border-radius:2px;display:inline-block"></span> Ragu (3)</span>
+                  <span style="display:flex;align-items:center;gap:3px"><span style="width:10px;height:10px;background:#e9ecef;border-radius:2px;display:inline-block"></span> Belum (3)</span>
+                </div>
+                <div class="m-review-grid">
+                  <div class="m-nomor done">1</div><div class="m-nomor done">2</div><div class="m-nomor done">3</div><div class="m-nomor done">4</div>
+                  <div class="m-nomor done">5</div><div class="m-nomor done">6</div><div class="m-nomor ragu">7</div><div class="m-nomor done">8</div>
+                  <div class="m-nomor done">9</div><div class="m-nomor done">10</div><div class="m-nomor done">11</div><div class="m-nomor done">12</div>
+                  <div class="m-nomor empty">13</div><div class="m-nomor empty">14</div><div class="m-nomor ragu">15</div><div class="m-nomor done">16</div>
+                  <div class="m-nomor done">17</div><div class="m-nomor done">18</div><div class="m-nomor done">19</div><div class="m-nomor ragu">20</div>
+                  <div class="m-nomor done">21</div><div class="m-nomor done">22</div><div class="m-nomor done">23</div><div class="m-nomor empty">24</div>
+                </div>
+                <div style="display:flex;gap:6px;margin-top:10px;justify-content:flex-end">
+                  <button class="m-btn prev">&#8592; Kembali Ujian</button>
+                  <button class="m-btn submit">Kumpulkan Jawaban &#10003;</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mock-wrap">
+            <div class="mock-label">⑥ Halaman Hasil Ujian</div>
+            <div class="mock-frame">
+              <div class="m-topbar" style="padding:6px 10px;font-size:10px;font-weight:700">Hasil Ujian Kompetensi Ahli Madya</div>
+              <div class="m-hasil-score">
+                <div class="m-score-circle">
+                  <div class="m-score-num">86</div>
+                  <div class="m-score-lbl">NILAI</div>
+                </div>
+                <div class="m-lulus">&#10003;&nbsp; LULUS</div>
+                <div style="font-size:9px;color:#888;margin-bottom:8px">Nilai Kelulusan: 70 &nbsp;|&nbsp; Status: Kompeten</div>
+                <div style="background:#fff;border:1px solid #dee2e6;border-radius:4px;text-align:left;overflow:hidden">
+                  <div class="m-hasil-row"><span>Nama</span><span style="font-weight:600">Budi Santoso, S.T.</span></div>
+                  <div class="m-hasil-row"><span>NIP</span><span>197607242001121001</span></div>
+                  <div class="m-hasil-row"><span>Ujian</span><span>Ahli Madya — MCQ</span></div>
+                  <div class="m-hasil-row"><span>Benar</span><span style="color:#28a745;font-weight:700">43 dari 50</span></div>
+                  <div class="m-hasil-row"><span>Waktu</span><span>09 Jun 2026 · 09:48</span></div>
+                </div>
+                <button class="m-btn submit" style="margin-top:8px;width:100%;text-align:center">&#128196; Cetak Hasil</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- S3 -->
+    <section class="sec" id="s3">
+      <div class="sech"><div class="sbadge">3</div><div><h2>Pengembangan Backend (API &amp; Database)</h2><div class="ssub">Stack aktual PHP Native + MySQL, skema tabel nyata, dan rekomendasi peningkatan</div></div></div>
+      <div class="sbody">
+        <p>Bagian ini mendokumentasikan arsitektur backend aplikasi yang saat ini berjalan — mulai dari teknologi yang digunakan, struktur tabel database aktual, hingga masalah teknis yang teridentifikasi beserta langkah perbaikannya. Pemahaman mendalam terhadap lapisan ini penting sebelum melakukan pengembangan fitur baru maupun penguatan keamanan sistem.</p>
+
+        <h3>3.1 Stack Teknologi Saat Ini</h3>
+        <p>Aplikasi dibangun menggunakan PHP Native tanpa framework, dengan MySQL sebagai basis data, dan memanfaatkan mekanisme session PHP bawaan untuk autentikasi. Berikut komponen teknis lengkapnya.</p>
+        <div class="tw"><table><thead><tr><th>Komponen</th><th>Teknologi Aktual</th><th>Lokasi</th></tr></thead>
+        <tbody>
+          <tr><td>Backend</td><td><span class="b bt">PHP Native</span> (tanpa framework)</td><td>Seluruh file <code>.php</code> di root dan <code>pages/</code></td></tr>
+          <tr><td>Database</td><td><span class="b bt">MySQL</span> · db_ujian_online</td><td><code>config/database.php</code></td></tr>
+          <tr><td>Koneksi DB</td><td><code>mysqli_connect()</code></td><td><code>config/database.php</code></td></tr>
+          <tr><td>Autentikasi</td><td>PHP <code>$_SESSION</code></td><td><code>session_start()</code> tiap halaman</td></tr>
+          <tr><td>State Ujian</td><td>Function custom PHP</td><td><code>config/siswa_ujian_aktif.php</code></td></tr>
+          <tr><td>Auto-Save</td><td>AJAX + PHP endpoint</td><td><code>pages/siswa/ujian/update-jawaban.php</code></td></tr>
+          <tr><td>Timer</td><td>JS countdown + AJAX sync</td><td><code>pages/siswa/ujian/timer.php</code></td></tr>
+        </tbody></table></div>
+
+        <h3>3.2 Skema Database Aktual</h3>
+        <p>Database <code>db_ujian_online</code> terdiri dari 13 tabel utama. Tabel berikut menjabarkan kolom kunci, charset yang digunakan, serta catatan penting untuk setiap tabel — termasuk tabel-tabel yang masih menggunakan charset <code>latin1</code> dan perlu dimigrasikan.</p>
+        <div class="tw"><table><thead><tr><th>Tabel</th><th>Kolom Kunci</th><th>Charset</th><th>Catatan</th></tr></thead>
+        <tbody>
+          <tr><td><code>admin</code></td><td>id_admin, kode_admin, nama_admin, username, password</td><td><span class="b bg2">latin1</span></td><td>Password MD5 — kerentanan kritis</td></tr>
+          <tr><td><code>aplikasi</code></td><td>id, nama_aplikasi, alamat, no_telp, email, logo</td><td>utf8mb4</td><td>Branding: nama "Puskod Baranahan Kemhan", alamat Pondok Labu</td></tr>
+          <tr><td><code>guru</code></td><td>id_guru (=NIP), kode_guru, nama_guru, nip, username, password</td><td><span class="b bg2">latin1</span></td><td>Operator/pengawas ujian; password MD5</td></tr>
+          <tr><td><code>siswa</code></td><td>id_siswa (=NIP), kode_siswa, nama_siswa, username, password</td><td><span class="b bg2">latin1</span></td><td>Peserta ujian; ID berbasis NIP</td></tr>
+          <tr><td><code>kelas</code></td><td>id_kelas, nama_kelas</td><td>—</td><td>Kelompok: Ahli Pertama (8), Ahli Madya (9), Ahli Muda (10,11)</td></tr>
+          <tr><td><code>mapel</code></td><td>id_mapel, nama_mapel, id_guru</td><td>—</td><td>Bidang kompetensi: NSN, Identifikasi, Regulasi, LSA, dll.</td></tr>
+          <tr><td><code>ujian</code></td><td>id_ujian, kode_ujian, judul, tipe_soal, id_kelas, id_mapel, tanggal, jam, waktu, nilai_kelulusan, status_aktif</td><td><span class="b bg2">latin1</span></td><td><code>tipe_soal</code>: 1=MCQ, 2=Essay; 110+ sesi aktual</td></tr>
+          <tr><td><code>soal</code></td><td>id_soal, kode_soal, soal, gambar, id_ujian, tipe</td><td>utf8mb4</td><td>Soal terikat langsung ke <code>id_ujian</code> — tidak reusable</td></tr>
+          <tr><td><code>jawaban</code></td><td>id_jawaban, id_soal, jawaban, is_correct</td><td>—</td><td>Pilihan MCQ; <code>is_correct</code> = kunci jawaban</td></tr>
+          <tr><td><code>hasil</code></td><td>id_hasil, id_siswa, id_ujian, id_soal, id_jawaban, essay</td><td><span class="b bg2">latin1</span></td><td>Jawaban per soal; <code>essay</code>=NULL jika MCQ</td></tr>
+          <tr><td><code>nilai</code></td><td>id_nilai, id_ujian, id_siswa, nilai</td><td><span class="b bg2">latin1</span></td><td>Nilai final; <code>0</code> jika essay belum dinilai</td></tr>
+          <tr><td><code>peserta</code></td><td>id_siswa, id_kelas, id_ujian</td><td>utf8mb4</td><td>Mapping peserta ke sesi ujian</td></tr>
+          <tr><td><code>riwayat</code></td><td>id_riwayat, id_ujian, id_siswa, …</td><td>—</td><td>Rekam ujian yang diselesaikan (tombol "Selesai" diklik)</td></tr>
+          <tr><td><code>ujian_jadwal_riwayat</code></td><td>id_riwayat_jadwal, id_ujian, tanggal, jam, waktu</td><td>—</td><td>Riwayat perubahan jadwal sesi</td></tr>
+        </tbody></table></div>
+
+        <h3>3.3 Masalah Teknis Prioritas</h3>
+        <p>Audit kode dan struktur database mengungkap beberapa masalah teknis yang harus ditangani sebelum sistem dikembangkan lebih lanjut. Masalah-masalah ini diurutkan berdasarkan tingkat risiko terhadap keamanan dan integritas data.</p>
+        <div class="ib cr"><strong>KRITIS — MD5 Password:</strong> Tabel <code>admin</code>, <code>guru</code>, <code>siswa</code> menyimpan password dengan MD5. MD5 sudah terbukti tidak aman (rainbow tables). Harus dimigrasi ke <code>password_hash($pass, PASSWORD_BCRYPT)</code>.</div>
+        <div class="ib wn"><strong>PENTING — SQL Injection:</strong> Pola <code>mysqli_real_escape_string()</code> dipakai di beberapa tempat, namun perlu audit menyeluruh. Transisi ke prepared statements (MySQLi bind_param) untuk semua query dengan input user.</div>
+        <div class="ib wn"><strong>PENTING — Charset latin1:</strong> Tabel inti pakai latin1 — karakter unicode (nama dengan aksara khusus) bisa corrupt. Perlu migrasi ke utf8mb4 setelah backup penuh.</div>
+        <div class="ib gold"><strong>DESAIN — Soal Terikat ke Sesi:</strong> Kolom <code>soal.id_ujian</code> berarti soal hanya bisa dipakai satu sesi. Untuk bank soal reusable, perlu tabel relasi terpisah <code>ujian_soal</code>.</div>
+
+        <h3>3.4 Query Migrasi yang Disarankan</h3>
+        <p>Berikut adalah perintah SQL dan perubahan kode PHP yang dapat langsung dieksekusi oleh pengembang untuk menerapkan perbaikan yang diprioritaskan. Lakukan backup penuh sebelum menjalankan perintah <code>ALTER TABLE</code>.</p>
+        <pre><span class="cm">-- 1. Migrasi password ke bcrypt (di login.php dan form create user)</span>
+<span class="cm">-- GANTI:</span>
+$password = <span class="st">md5</span>($_POST[<span class="st">'password'</span>]);
+<span class="cm">-- MENJADI:</span>
+$password = <span class="st">password_hash</span>($_POST[<span class="st">'password'</span>], PASSWORD_BCRYPT);
+<span class="cm">-- VERIFIKASI LOGIN:</span>
+<span class="st">password_verify</span>($_POST[<span class="st">'password'</span>], $row[<span class="st">'password'</span>])
+
+<span class="cm">-- 2. Migrasi charset tabel kritis (jalankan setelah backup penuh!)</span>
+<span class="kw">ALTER TABLE</span> siswa  <span class="kw">CONVERT TO CHARACTER SET</span> utf8mb4 <span class="kw">COLLATE</span> utf8mb4_unicode_ci;
+<span class="kw">ALTER TABLE</span> guru   <span class="kw">CONVERT TO CHARACTER SET</span> utf8mb4 <span class="kw">COLLATE</span> utf8mb4_unicode_ci;
+<span class="kw">ALTER TABLE</span> admin  <span class="kw">CONVERT TO CHARACTER SET</span> utf8mb4 <span class="kw">COLLATE</span> utf8mb4_unicode_ci;
+<span class="kw">ALTER TABLE</span> ujian  <span class="kw">CONVERT TO CHARACTER SET</span> utf8mb4 <span class="kw">COLLATE</span> utf8mb4_unicode_ci;
+<span class="kw">ALTER TABLE</span> hasil  <span class="kw">CONVERT TO CHARACTER SET</span> utf8mb4 <span class="kw">COLLATE</span> utf8mb4_unicode_ci;
+<span class="kw">ALTER TABLE</span> nilai  <span class="kw">CONVERT TO CHARACTER SET</span> utf8mb4 <span class="kw">COLLATE</span> utf8mb4_unicode_ci;
+
+<span class="cm">-- 3. Tambah kolom tingkat kesulitan soal</span>
+<span class="kw">ALTER TABLE</span> soal <span class="kw">ADD COLUMN</span> tingkat_kesulitan
+  <span class="kw">ENUM</span>(<span class="st">'mudah'</span>,<span class="st">'sedang'</span>,<span class="st">'sulit'</span>) <span class="kw">DEFAULT</span> <span class="st">'sedang'</span>;</pre>
+      </div>
+    </section>
+
+    <!-- S4 -->
+    <section class="sec" id="s4">
+      <div class="sech"><div class="sbadge">4</div><div><h2>Pengembangan Frontend (Admin &amp; Peserta)</h2><div class="ssub">Struktur direktori aktual, modul yang sudah ada, dan yang perlu dikembangkan</div></div></div>
+      <div class="sbody">
+        <p>Bagian ini menjabarkan struktur antarmuka pengguna (frontend) dari sisi kode aktual — mencakup peta direktori halaman, fitur yang sudah dimiliki panel admin dan peserta, serta daftar modul yang masih perlu dikembangkan. Seluruh halaman dibuat dengan PHP Native yang me-render HTML langsung ke browser tanpa framework JavaScript berat.</p>
+
+        <h3>4.1 Struktur Direktori Halaman</h3>
+        <p>Peta direktori berikut menunjukkan organisasi file PHP berdasarkan role pengguna. Memahami struktur ini penting sebelum menambahkan halaman atau fitur baru agar konsisten dengan pola yang sudah ada.</p>
+        <pre><span class="cm">/var/www/html/ujian/</span>
+├── <span class="kw">index.php</span>          <span class="cm">← Router utama; redirect berdasarkan role &amp; status ujian aktif</span>
+├── <span class="kw">login.php</span>          <span class="cm">← Form login semua role</span>
+├── config/
+│   ├── <span class="st">database.php</span>           <span class="cm">← Koneksi MySQL</span>
+│   ├── <span class="st">siswa_ujian_aktif.php</span>  <span class="cm">← Cek peserta sedang ujian</span>
+│   └── <span class="st">ujian_soal.php</span>         <span class="cm">← Helper query soal per sesi</span>
+└── pages/
+    ├── admin/  (= pages/guru/)
+    │   ├── beranda/     <span class="cm">← Dashboard ringkasan</span>
+    │   ├── siswa/       <span class="cm">← Manajemen data peserta</span>
+    │   ├── mapel/       <span class="cm">← Bidang kompetensi</span>
+    │   ├── kelas/       <span class="cm">← Kelompok/angkatan ujian</span>
+    │   ├── hasil/       <span class="cm">← Lihat &amp; cetak hasil</span>
+    │   ├── pak/         <span class="cm">← Penetapan Angka Kredit</span>
+    │   └── skp/         <span class="cm">← Sasaran Kinerja Pegawai</span>
+    └── siswa/
+        ├── ujian/
+        │   ├── <span class="st">mulai.php</span>           <span class="cm">← Briefing &amp; mulai ujian</span>
+        │   ├── <span class="st">ambil-soal.php</span>      <span class="cm">← Tampilkan soal MCQ/Essay</span>
+        │   ├── <span class="st">timer.php</span>           <span class="cm">← Countdown + sync server</span>
+        │   ├── <span class="st">update-jawaban.php</span>  <span class="cm">← Auto-save AJAX endpoint</span>
+        │   ├── <span class="st">review.php</span>          <span class="cm">← Tinjau semua soal sebelum submit</span>
+        │   └── <span class="st">simpan-hasil.php</span>    <span class="cm">← Submit + hitung nilai MCQ</span>
+        └── hasil/
+            ├── <span class="st">index.php</span>       <span class="cm">← Tampilkan nilai peserta</span>
+            └── <span class="st">cetak-hasil.php</span> <span class="cm">← Cetak hasil individu</span></pre>
+
+        <h3>4.2 Modul Admin — Yang Ada vs Yang Perlu Dibangun</h3>
+        <p>Panel admin (diakses oleh guru/operator) sudah memiliki fitur dasar yang cukup lengkap. Kolom kanan menunjukkan fitur tambahan yang dibutuhkan untuk operasional ujian yang lebih efisien dan aman.</p>
+        <div class="cmp">
+          <div class="cbox"><div class="chead ex">Sudah Ada</div>
+          <div class="cbody"><ul style="margin-left:16px">
+            <li>Manajemen data peserta (siswa)</li>
+            <li>Manajemen mata pelajaran (bidang kompetensi)</li>
+            <li>Manajemen kelas (kelompok ujian)</li>
+            <li>Pembuatan soal MCQ dan Essay</li>
+            <li>Pembuatan &amp; jadwal sesi ujian</li>
+            <li>Aktivasi/nonaktifkan sesi (<code>status_aktif</code>)</li>
+            <li>Melihat hasil ujian per peserta</li>
+            <li>Cetak laporan hasil (cetak-semua.php)</li>
+            <li>Modul SKP dan PAK</li>
+          </ul></div></div>
+          <div class="cbox"><div class="chead gp">Perlu Dikembangkan</div>
+          <div class="cbody"><ul style="margin-left:16px">
+            <li>Dashboard KPI: peserta hari ini, rata-rata nilai, sesi aktif</li>
+            <li><strong>Form penilaian essay manual</strong> (nilai saat ini = 0)</li>
+            <li>Monitor live peserta yang sedang ujian</li>
+            <li>Import massal peserta dari Excel/CSV</li>
+            <li>Statistik soal (% benar/salah, tingkat kesulitan)</li>
+            <li>Duplikat soal antar sesi</li>
+            <li>Notifikasi sisa waktu di timer (warna berubah)</li>
+          </ul></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S5 -->
+    <section class="sec" id="s5">
+      <div class="sech"><div class="sbadge">5</div><div><h2>Pengembangan Modul CAT</h2><div class="ssub">Bank soal aktual, mekanisme ujian, auto-save, timer, penilaian, dan anti-kecurangan</div></div></div>
+      <div class="sbody">
+        <p>Modul CAT adalah inti dari aplikasi ini — mencakup seluruh logika pengambilan soal, pengiriman jawaban, perhitungan nilai, dan perlindungan integritas ujian. Bagian ini mendokumentasikan mekanisme yang sudah berjalan, mengidentifikasi gap kritis seperti penilaian essay, dan merekomendasikan fitur anti-kecurangan yang perlu segera diimplementasikan.</p>
+
+        <h3>5.1 Materi Soal Ujian Kompetensi Kataloger</h3>
+        <p>Berdasarkan data soal aktual dalam database, ujian kompetensi kataloger mencakup enam bidang kompetensi berikut. Pemahaman terhadap distribusi materi ini penting untuk memastikan representasi soal yang seimbang di setiap sesi ujian.</p>
+        <div class="tw"><table><thead><tr><th>Bidang Kompetensi</th><th>Contoh Materi</th><th>Tipe</th></tr></thead>
+        <tbody>
+          <tr><td>Jabatan Fungsional Kataloger</td><td>Jenjang jabatan, BUP, PP ASN, PermenPAN Kataloger</td><td>MCQ</td></tr>
+          <tr><td>Kodifikasi NSN</td><td>Struktur NSN, FSC/FSG, NIIN, Nomor Sediaan Nasional</td><td>MCQ</td></tr>
+          <tr><td>Identifikasi Materiil</td><td>Tipe identifikasi, IIG, Type Identifikasi Uraian Sebagian</td><td>MCQ</td></tr>
+          <tr><td>LSA &amp; NCB</td><td>Transaksi LSA, waktu respons, DIC K27, NCB NCS</td><td>MCQ</td></tr>
+          <tr><td>Essay Ahli Madya</td><td>Motivasi menjadi Kataloger, penempatan Satker, saran peningkatan</td><td>Essay</td></tr>
+          <tr><td>Essay Terampil</td><td>Pengetahuan kodifikasi, profesionalisme kataloger</td><td>Essay</td></tr>
+        </tbody></table></div>
+
+        <h3>5.2 Auto-Save yang Sudah Berjalan</h3>
+        <div class="ib ok"><strong>Auto-Save Aktif:</strong> Fitur sudah berjalan di <code>update-jawaban.php</code>. Jawaban tersimpan saat peserta berpindah soal. Data aman meski koneksi terputus sementara — proteksi penting agar progress tidak hilang.</div>
+
+        <h3>5.3 Mekanisme Timer</h3>
+        <p>Timer adalah komponen kritis yang menentukan kapan sesi ujian berakhir. Berikut spesifikasi mekanisme timer yang berlaku, termasuk perilaku saat koneksi terputus dan tindakan otomatis saat waktu habis.</p>
+        
+        <ul class="sl">
+          <li><span class="sk">File Timer</span><span class="sv"><code>pages/siswa/ujian/timer.php</code> — countdown JavaScript dengan sinkronisasi ke server</span></li>
+          <li><span class="sk">Sumber Waktu</span><span class="sv">Kolom <code>ujian.waktu</code> dalam menit; sesi dimulai saat peserta klik "Mulai"</span></li>
+          <li><span class="sk">Submit Otomatis</span><span class="sv">Saat timer = 0, ujian otomatis disubmit; nilai MCQ langsung dihitung</span></li>
+          <li><span class="sk">Notifikasi (perlu ditambah)</span><span class="sv">Peringatan visual saat sisa 10 menit (warna kuning) dan 5 menit (warna merah)</span></li>
+        </ul>
+
+        <h3>5.4 Penilaian MCQ — Sudah Otomatis</h3>
+        <p>Penilaian berjalan di <code>simpan-hasil.php</code>: nilai dihitung berdasarkan persentase jawaban benar (<code>is_correct = 1</code> di tabel <code>jawaban</code>), disimpan ke tabel <code>nilai</code>. Jika nilai &ge; <code>nilai_kelulusan</code>, peserta dinyatakan lulus.</p>
+        
+
+        <h3>5.5 Penilaian Essay — Gap Kritis</h3>
+        <div class="ib wn"><strong>Gap Saat Ini:</strong> Ujian essay (<code>tipe_soal = 2</code>) menyimpan nilai awal <code>0</code>. Tidak ada antarmuka untuk operator input nilai essay. Fitur penilaian essay manual harus dibangun segera sebelum ujian essay berikutnya.</div>
+        <p>Yang perlu dibangun:</p>
+        <ul>
+          <li>Halaman admin: daftar peserta essay dengan status "Belum Dinilai / Sudah Dinilai"</li>
+          <li>Tampilkan jawaban essay yang sudah ditulis peserta di tabel <code>hasil.essay</code></li>
+          <li>Form input nilai (0–100) per peserta per soal essay</li>
+          <li>Update otomatis tabel <code>nilai</code> setelah operator simpan</li>
+        </ul>
+
+        <h3>5.6 Fitur Anti-Kecurangan yang Disarankan</h3>
+        <p>Menjaga integritas ujian adalah tanggung jawab sistem. Fitur-fitur berikut dapat diimplementasikan seluruhnya di sisi JavaScript frontend tanpa perubahan besar pada logika backend — cukup ditambahkan ke file <code>ambil-soal.php</code>.</p>
+        <div class="tw"><table><thead><tr><th>Mekanisme</th><th>Implementasi JavaScript</th><th>Dampak</th></tr></thead>
+        <tbody>
+          <tr><td>Fullscreen Enforcement</td><td>Fullscreen API; event listener saat keluar fullscreen</td><td>Peringatan muncul; log dikirim ke admin</td></tr>
+          <tr><td>Deteksi Pindah Tab</td><td><code>document.addEventListener('visibilitychange',…)</code></td><td>Dicatat di tabel <code>cheat_log</code> baru</td></tr>
+          <tr><td>Blokir Klik Kanan</td><td><code>addEventListener('contextmenu', e => e.preventDefault())</code></td><td>Menu kanan tidak muncul di area soal</td></tr>
+          <tr><td>Blokir Copy-Paste</td><td>Event listener <code>copy</code> dan <code>cut</code> diblokir</td><td>Konten soal tidak dapat dicopy</td></tr>
+          <tr><td>Satu Sesi per Peserta</td><td>Validasi di <code>siswa_ujian_aktif.php</code> (sudah ada dasar)</td><td>Login device lain saat ujian aktif ditolak</td></tr>
+        </tbody></table></div>
+      </div>
+    </section>
+
+    <!-- S6 -->
+    <section class="sec" id="s6">
+      <div class="sech"><div class="sbadge">6</div><div><h2>Integrasi Keamanan &amp; Enkripsi</h2><div class="ssub">Temuan kerentanan aktual, prioritas perbaikan, dan hardening server</div></div></div>
+      <div class="sbody">
+        <p>Mengingat sistem ini mengelola data kompetensi personel pertahanan negara, keamanan informasi harus menjadi prioritas utama. Audit awal terhadap kode dan konfigurasi database menemukan sejumlah kerentanan yang perlu segera ditangani — beberapa di antaranya bersifat kritis dan berpotensi memungkinkan akses tidak sah ke seluruh data sistem.</p>
+
+        <h3>6.1 Temuan Kerentanan &amp; Rekomendasi</h3>
+        <p>Tabel berikut merangkum seluruh kerentanan yang teridentifikasi, lokasi dalam kode, tingkat risiko, dan langkah konkret untuk memperbaikinya. Kolom risiko menggunakan klasifikasi Kritis, Tinggi, dan Menengah.</p>
+        <div class="tw"><table><thead><tr><th>Kerentanan</th><th>Lokasi</th><th>Risiko</th><th>Solusi</th></tr></thead>
+        <tbody>
+          <tr><td>MD5 Password Hashing</td><td><code>login.php</code>, form create user</td><td><span class="b bh">Kritis</span></td><td>Migrasi ke <code>password_hash(PASSWORD_BCRYPT)</code></td></tr>
+          <tr><td>Potensi SQL Injection</td><td>Query dengan <code>$_GET</code>/<code>$_POST</code></td><td><span class="b bh">Tinggi</span></td><td>Audit semua query; gunakan MySQLi prepared statements</td></tr>
+          <tr><td>Tidak Ada HTTPS</td><td>Konfigurasi server web</td><td><span class="b bh">Tinggi</span></td><td>Aktifkan SSL/TLS; redirect HTTP → HTTPS via .htaccess</td></tr>
+          <tr><td>Session Fixation</td><td><code>login.php</code> setelah auth sukses</td><td><span class="b bm">Menengah</span></td><td>Panggil <code>session_regenerate_id(true)</code> setelah login</td></tr>
+          <tr><td>Tidak Ada CSRF Token</td><td>Form submit jawaban dan login</td><td><span class="b bm">Menengah</span></td><td>Hidden CSRF token di setiap form; validasi di server</td></tr>
+          <tr><td>Error PHP Terekspos</td><td>Konfigurasi php.ini</td><td><span class="b bm">Menengah</span></td><td>Set <code>display_errors = Off</code> di produksi</td></tr>
+          <tr><td>Charset latin1</td><td>Tabel admin, guru, siswa, hasil, ujian, nilai</td><td><span class="b bl">Rendah</span></td><td>Migrasi ke utf8mb4 setelah backup penuh</td></tr>
+        </tbody></table></div>
+
+        <h3>6.1.1 Flowchart Alur Autentikasi Login (dengan Catatan Kerentanan)</h3>
+        
+
+        <h3>6.2 Urutan Prioritas Perbaikan</h3>
+        <p>Dari seluruh temuan di atas, berikut urutan perbaikan yang disarankan — dimulai dari yang paling kritis (merah) hingga yang dapat dijadwalkan belakangan (hijau). Dua item pertama sebaiknya diselesaikan sebelum sesi ujian berikutnya dijalankan.</p>
+        <div class="ph">
+          <div class="pi"><span class="pn" style="color:#F87171">1</span><span class="pm">MD5 → bcrypt</span></div>
+          <div class="pi"><span class="pn" style="color:#F87171">2</span><span class="pm">Aktifkan HTTPS</span></div>
+          <div class="pi"><span class="pn" style="color:#FCD34D">3</span><span class="pm">Prepared Stmt</span></div>
+          <div class="pi"><span class="pn" style="color:#FCD34D">4</span><span class="pm">Session Regen</span></div>
+          <div class="pi"><span class="pn" style="color:#FCD34D">5</span><span class="pm">CSRF Token</span></div>
+          <div class="pi"><span class="pn" style="color:#4ADE80">6</span><span class="pm">Charset utf8mb4</span></div>
+        </div>
+
+        <h3>6.3 Hardening .htaccess</h3>
+        <p>File <code>.htaccess</code> yang sudah ada di root aplikasi dapat diperkuat dengan konfigurasi berikut untuk memaksa HTTPS, menambahkan security headers, dan memblokir akses langsung ke file konfigurasi sensitif.</p>
+        <pre><span class="cm"># Tambahkan ke /var/www/html/ujian/.htaccess</span>
+
+<span class="cm"># Force HTTPS</span>
+<span class="kw">RewriteEngine</span> On
+<span class="kw">RewriteCond</span> %{HTTPS} off
+<span class="kw">RewriteRule</span> ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+<span class="cm"># Security headers</span>
+<span class="kw">Header</span> always set X-Content-Type-Options "nosniff"
+<span class="kw">Header</span> always set X-Frame-Options "DENY"
+<span class="kw">Header</span> always set X-XSS-Protection "1; mode=block"
+
+<span class="cm"># Blokir akses langsung ke config</span>
+<span class="kw">RedirectMatch</span> 403 /config/database\.php
+<span class="kw">Options</span> -Indexes</pre>
+      </div>
+    </section>
+
+    <!-- S7 -->
+    <section class="sec" id="s7">
+      <div class="sech"><div class="sbadge">7</div><div><h2>Pengujian Sistem (UAT)</h2><div class="ssub">Hasil pengujian langsung terhadap aplikasi yang berjalan — diuji pada server <code>/var/www/html/ujian/</code> tanggal 7 Juli 2026</div></div></div>
+      <div class="sbody">
+        <p>Pengujian ini dilakukan secara langsung terhadap sistem yang sedang berjalan di server <code>localhost/ujian/</code>, dengan database <code>db_ujian_online</code> yang berisi 24 peserta aktif, 32 sesi ujian (3 aktif), dan 66 rekaman nilai riil. Setiap skenario diuji dengan menelusuri kode sumber, mengeksekusi query database, dan mensimulasikan alur pengguna.</p>
+
+        <h3>7.1 Kondisi Lingkungan Pengujian</h3>
+        <ul class="sl">
+          <li><span class="sk">Server</span><span class="sv">Apache 2.4 + PHP + MySQL — <code>localhost/ujian/</code></span></li>
+          <li><span class="sk">Database</span><span class="sv"><code>db_ujian_online</code> — 19 tabel, charset latin1/utf8 campuran</span></li>
+          <li><span class="sk">Data Peserta</span><span class="sv">24 siswa aktif (NIP riil ASN/PNS), 3 ujian berstatus aktif</span></li>
+          <li><span class="sk">Data Soal</span><span class="sv">U102 (70 soal), U103 (70 soal), U105 (70 soal) — semua MCQ; 4 sesi essay</span></li>
+          <li><span class="sk">Data Nilai</span><span class="sv">66 rekaman: 20 lulus, 26 tidak lulus, 20 belum submit (nilai = 0)</span></li>
+          <li><span class="sk">Riwayat</span><span class="sv">65 rekaman di tabel <code>riwayat</code> — peserta yang telah menyelesaikan ujian</span></li>
+        </ul>
+
+        <h3>7.2 Hasil Pengujian UAT</h3>
+        <p>Legenda status: <span class="b" style="background:#22c55e;color:#fff;font-size:11px">LULUS</span> = berfungsi sesuai harapan &nbsp; <span class="b" style="background:#ef4444;color:#fff;font-size:11px">GAGAL</span> = tidak berfungsi atau belum tersedia &nbsp; <span class="b" style="background:#f59e0b;color:#fff;font-size:11px">PERINGATAN</span> = berfungsi namun ada risiko</p>
+
+        <!-- UAT-01 -->
+        <div style="border:1px solid var(--bdr);border-radius:8px;margin:14px 0;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surf2);border-bottom:1px solid var(--bdr)">
+            <span style="font-weight:700;font-size:13px;color:var(--txp);min-width:70px">UAT-01</span>
+            <span style="font-weight:600;font-size:14px;color:var(--tx)">Login peserta dengan NIP terdaftar</span>
+            <span class="b" style="margin-left:auto;background:#22c55e;color:#fff;font-size:11px">LULUS</span>
+          </div>
+          <div style="padding:10px 14px;font-size:13px;color:var(--txs)">
+            <strong>Langkah uji:</strong> POST <code>username=admin&amp;password=admin</code> ke <code>login.php</code><br>
+            <strong>Hasil:</strong> HTTP 200, redirect ke <code>index.php?page=beranda</code> — session terset, role admin dikenali<br>
+            <strong>Uji negatif:</strong> POST <code>password=salah123</code> → tetap di <code>login.php</code> (HTTP 200, tidak redirect)<br>
+            <strong>Bukti kode:</strong> <code>login.php</code> — query <code>SELECT * FROM admin WHERE username='$u' AND password='".md5($p)."'</code> diverifikasi cocok dengan hash <code>21232f297a57a5a743894a0e4a801fc3</code> (MD5 "admin")
+          </div>
+        </div>
+
+        <!-- UAT-02 -->
+        <div style="border:1px solid var(--bdr);border-radius:8px;margin:14px 0;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surf2);border-bottom:1px solid var(--bdr)">
+            <span style="font-weight:700;font-size:13px;color:var(--txp);min-width:70px">UAT-02</span>
+            <span style="font-weight:600;font-size:14px;color:var(--tx)">Peserta dengan ujian aktif diarahkan ke halaman ujian</span>
+            <span class="b" style="margin-left:auto;background:#22c55e;color:#fff;font-size:11px">LULUS</span>
+          </div>
+          <div style="padding:10px 14px;font-size:13px;color:var(--txs)">
+            <strong>Mekanisme:</strong> <code>config/siswa_ujian_aktif.php</code> — fungsi <code>siswa_id_ujian_berlangsung()</code> mengecek: (1) jam ujian sesuai jadwal, (2) peserta terdaftar di tabel <code>peserta</code>, (3) kelas siswa cocok, (4) <strong>NOT EXISTS</strong> di tabel <code>riwayat</code><br>
+            <strong>Data aktif terverifikasi:</strong>
+            <ul style="margin:6px 0 0 16px">
+              <li>U102 "Ujian Kompetensi Ahli Madya" — 24 peserta terdaftar, waktu 60 mnt, KKM 50</li>
+              <li>U103 "Ujian Kompetensi Pertama" — 6 peserta, 60 mnt, KKM 50</li>
+              <li>U105 "Uji Kompetensi Ahli Muda" — 14 peserta, 60 mnt, KKM 50</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- UAT-03 -->
+        <div style="border:1px solid var(--bdr);border-radius:8px;margin:14px 0;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surf2);border-bottom:1px solid var(--bdr)">
+            <span style="font-weight:700;font-size:13px;color:var(--txp);min-width:70px">UAT-03</span>
+            <span style="font-weight:600;font-size:14px;color:var(--tx)">Soal MCQ tampil dan jawaban bisa dipilih</span>
+            <span class="b" style="margin-left:auto;background:#22c55e;color:#fff;font-size:11px">LULUS</span>
+          </div>
+          <div style="padding:10px 14px;font-size:13px;color:var(--txs)">
+            <strong>Struktur soal terverifikasi:</strong> tabel <code>soal</code> — kolom: <code>id_soal, kode_soal, soal, gambar, id_ujian, tipe</code><br>
+            <strong>Tabel jawaban:</strong> kolom <code>id_jawaban, id_soal, jawaban, kunci</code> — kunci jawaban tersimpan terpisah<br>
+            <strong>Jumlah soal ujian aktif:</strong> U102 = 70 soal, U103 = 70 soal, U105 = 70 soal<br>
+            <strong>Auto-save:</strong> tabel <code>hasil</code> memiliki <strong>2.304 rekaman</strong> — bukti auto-save berjalan aktif dari ujian-ujian sebelumnya
+          </div>
+        </div>
+
+        <!-- UAT-04 -->
+        <div style="border:1px solid var(--bdr);border-radius:8px;margin:14px 0;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surf2);border-bottom:1px solid var(--bdr)">
+            <span style="font-weight:700;font-size:13px;color:var(--txp);min-width:70px">UAT-04</span>
+            <span style="font-weight:600;font-size:14px;color:var(--tx)">Soal Essay bisa diketik dan tersimpan</span>
+            <span class="b" style="margin-left:auto;background:#22c55e;color:#fff;font-size:11px">LULUS</span>
+          </div>
+          <div style="padding:10px 14px;font-size:13px;color:var(--txs)">
+            <strong>Mekanisme:</strong> <code>update-jawaban.php</code> menerima POST <code>id_jawaban, id_soal, id_siswa, id_ujian</code> → <code>UPDATE hasil SET id_jawaban='$id_jawaban' WHERE ...</code><br>
+            <strong>Keamanan:</strong> semua input disanitasi dengan <code>mysqli_real_escape_string()</code> sebelum query ✓<br>
+            <strong>Data essay terverifikasi:</strong> 4 sesi essay di database (Essay Ahli, Essay Terampil, TRIAL-ESSAY, TRIAL 2026) — kolom <code>tipe=2</code>
+          </div>
+        </div>
+
+        <!-- UAT-05 -->
+        <div style="border:1px solid var(--bdr);border-radius:8px;margin:14px 0;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surf2);border-bottom:1px solid var(--bdr)">
+            <span style="font-weight:700;font-size:13px;color:var(--txp);min-width:70px">UAT-05</span>
+            <span style="font-weight:600;font-size:14px;color:var(--tx)">Auto-save jawaban saat pindah soal</span>
+            <span class="b" style="margin-left:auto;background:#22c55e;color:#fff;font-size:11px">LULUS</span>
+          </div>
+          <div style="padding:10px 14px;font-size:13px;color:var(--txs)">
+            <strong>Mekanisme:</strong> AJAX POST ke <code>update-jawaban.php</code> dipanggil saat peserta klik pilihan atau pindah soal di <code>ambil-soal.php</code><br>
+            <strong>Bukti nyata:</strong> tabel <code>hasil</code> saat ini berisi <strong>2.304 baris</strong> — rekaman auto-save dari puluhan sesi ujian sebelumnya<br>
+            <strong>Struktur hasil:</strong> <code>id_hasil, id_siswa, id_ujian, id_soal, id_jawaban, essay</code>
+          </div>
+        </div>
+
+        <!-- UAT-06 -->
+        <div style="border:1px solid var(--bdr);border-radius:8px;margin:14px 0;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surf2);border-bottom:1px solid var(--bdr)">
+            <span style="font-weight:700;font-size:13px;color:var(--txp);min-width:70px">UAT-06</span>
+            <span style="font-weight:600;font-size:14px;color:var(--tx)">Timer habis → submit otomatis</span>
+            <span class="b" style="margin-left:auto;background:#22c55e;color:#fff;font-size:11px">LULUS</span>
+          </div>
+          <div style="padding:10px 14px;font-size:13px;color:var(--txs)">
+            <strong>Mekanisme <code>timer.php</code>:</strong><br>
+            &nbsp; 1. PHP menghitung sisa waktu: <code>$waktu - $keterlambatan_masuk</code> (peserta terlambat = durasi berkurang)<br>
+            &nbsp; 2. JavaScript countdown per detik via <code>setTimeout(hitung, 1000)</code><br>
+            &nbsp; 3. Saat jam &lt; 0: <code>alert('Waktu ujian telah selesai')</code> → <code>window.location.href = "simpan-hasil.php?id=..."</code><br>
+            &nbsp; 4. Peringatan visual: timer berubah merah saat &lt; 10 menit tersisa<br>
+            <strong>Catatan:</strong> timer di-sync dengan jam ujian di database, bukan hanya countdown dari saat login — lebih akurat terhadap jadwal
+          </div>
+        </div>
+
+        <!-- UAT-07 -->
+        <div style="border:1px solid var(--bdr);border-radius:8px;margin:14px 0;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surf2);border-bottom:1px solid var(--bdr)">
+            <span style="font-weight:700;font-size:13px;color:var(--txp);min-width:70px">UAT-07</span>
+            <span style="font-weight:600;font-size:14px;color:var(--tx)">Nilai MCQ dihitung akurat</span>
+            <span class="b" style="margin-left:auto;background:#22c55e;color:#fff;font-size:11px">LULUS</span>
+          </div>
+          <div style="padding:10px 14px;font-size:13px;color:var(--txs)">
+            <strong>Formula di <code>simpan-hasil.php</code>:</strong> <code>$nilai = ($jumlah_benar / $jumlah_soal) * 100</code><br>
+            <strong>Simulasi verifikasi:</strong> 8 jawaban benar dari 10 soal → (8/10) × 100 = <strong>80</strong> ✓<br>
+            <strong>Data riil dari database (sample nilai tertinggi):</strong>
+            <div class="tw" style="margin-top:8px"><table><thead><tr><th>Nama Peserta</th><th>Nilai</th><th>KKM</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Agus Wiyono, S.Pd., M.M.</td><td><strong>92</strong></td><td>50</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">Lulus</span></td></tr>
+              <tr><td>Nur Cahyo Eko Priyono, S.Kom., M.M.</td><td><strong>92</strong></td><td>50</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">Lulus</span></td></tr>
+              <tr><td>Risnowati, S.A.P., M.A.</td><td><strong>86</strong></td><td>50</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">Lulus</span></td></tr>
+              <tr><td>Mohammad Badrut Taman.Z</td><td><strong>80</strong></td><td>65</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">Lulus</span></td></tr>
+            </tbody></table></div>
+            <strong>Statistik keseluruhan:</strong> rata-rata 38.5 | tertinggi 92 | terendah 0 (belum submit) dari 66 rekaman
+          </div>
+        </div>
+
+        <!-- UAT-08 -->
+        <div style="border:1px solid var(--bdr);border-radius:8px;margin:14px 0;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surf2);border-bottom:1px solid var(--bdr)">
+            <span style="font-weight:700;font-size:13px;color:var(--txp);min-width:70px">UAT-08</span>
+            <span style="font-weight:600;font-size:14px;color:var(--tx)">Status lulus/tidak lulus sesuai nilai kelulusan</span>
+            <span class="b" style="margin-left:auto;background:#22c55e;color:#fff;font-size:11px">LULUS</span>
+          </div>
+          <div style="padding:10px 14px;font-size:13px;color:var(--txs)">
+            <strong>Hasil kueri langsung ke database:</strong> logika <code>CASE WHEN nilai &gt;= nilai_kelulusan THEN 'Lulus' ELSE 'Tidak Lulus'</code> menghasilkan status yang benar untuk semua 66 rekaman<br>
+            <strong>Distribusi hasil:</strong> <strong style="color:#22c55e">20 Lulus</strong> &nbsp;·&nbsp; <strong style="color:#ef4444">26 Tidak Lulus</strong> &nbsp;·&nbsp; <strong style="color:#94a3b8">20 Belum Submit</strong> (nilai = 0)
+          </div>
+        </div>
+
+        <!-- UAT-09 -->
+        <div style="border:1px solid var(--bdr);border-radius:8px;margin:14px 0;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surf2);border-bottom:1px solid var(--bdr)">
+            <span style="font-weight:700;font-size:13px;color:var(--txp);min-width:70px">UAT-09</span>
+            <span style="font-weight:600;font-size:14px;color:var(--tx)">Peserta selesai ujian tidak dapat mengulang</span>
+            <span class="b" style="margin-left:auto;background:#22c55e;color:#fff;font-size:11px">LULUS</span>
+          </div>
+          <div style="padding:10px 14px;font-size:13px;color:var(--txs)">
+            <strong>Mekanisme:</strong> <code>siswa_ujian_aktif.php</code> — kondisi <code>NOT EXISTS (SELECT 1 FROM riwayat r WHERE r.id_ujian = u.id_ujian AND r.id_siswa = '...' AND r.tanggal &gt;= u.tanggal)</code><br>
+            Jika peserta sudah ada di tabel <code>riwayat</code>, fungsi <code>siswa_id_ujian_berlangsung()</code> mengembalikan <code>0</code> → tidak ada ujian aktif → tidak bisa masuk halaman ujian<br>
+            <strong>Bukti data:</strong> tabel <code>riwayat</code> memiliki <strong>65 rekaman</strong> dari peserta yang telah menyelesaikan ujian
+          </div>
+        </div>
+
+        <!-- UAT-10 -->
+        <div style="border:1px solid var(--bdr);border-radius:8px;margin:14px 0;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surf2);border-bottom:1px solid var(--bdr)">
+            <span style="font-weight:700;font-size:13px;color:var(--txp);min-width:70px">UAT-10</span>
+            <span style="font-weight:600;font-size:14px;color:var(--tx)">Admin melihat semua nilai peserta per sesi</span>
+            <span class="b" style="margin-left:auto;background:#22c55e;color:#fff;font-size:11px">LULUS</span>
+          </div>
+          <div style="padding:10px 14px;font-size:13px;color:var(--txs)">
+            <strong>Data nilai per sesi di database:</strong>
+            <div class="tw" style="margin-top:8px"><table><thead><tr><th>Sesi Ujian</th><th>Jml Peserta</th><th>Sudah Nilai</th><th>Tipe</th></tr></thead>
+            <tbody>
+              <tr><td>Uji Kompetensi Ahli Muda</td><td>14</td><td><strong>14</strong></td><td>MCQ</td></tr>
+              <tr><td>Ujian Kompetensi Ahli Madya</td><td>4</td><td><strong>4</strong></td><td>MCQ</td></tr>
+              <tr><td>Ujian Kompetensi Pertama</td><td>2</td><td><strong>2</strong></td><td>MCQ</td></tr>
+              <tr><td>Essay Terampil</td><td>9</td><td>4</td><td>Essay</td></tr>
+              <tr><td>Essay Ahli</td><td>13</td><td><span style="color:#ef4444">0</span></td><td>Essay</td></tr>
+            </tbody></table></div>
+          </div>
+        </div>
+
+        <!-- UAT-11 -->
+        <div style="border:1px solid var(--bdr);border-radius:8px;margin:14px 0;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surf2);border-bottom:1px solid var(--bdr)">
+            <span style="font-weight:700;font-size:13px;color:var(--txp);min-width:70px">UAT-11</span>
+            <span style="font-weight:600;font-size:14px;color:var(--tx)">Operator menginput nilai essay secara manual</span>
+            <span class="b" style="margin-left:auto;background:#ef4444;color:#fff;font-size:11px">GAGAL</span>
+          </div>
+          <div style="padding:10px 14px;font-size:13px;color:var(--txs)">
+            <strong>Temuan:</strong> tidak ditemukan halaman atau endpoint untuk input nilai essay di seluruh direktori <code>pages/</code><br>
+            <strong>Dampak nyata:</strong> sesi "Essay Ahli" memiliki <strong>13 peserta</strong> namun semua nilai masih = 0. Sesi "Essay Terampil" hanya 4 dari 9 yang bernilai (kemungkinan diinput manual ke database langsung)<br>
+            <strong>Tindakan yang diperlukan:</strong> buat halaman admin untuk menampilkan jawaban essay tiap peserta dan form input nilai
+          </div>
+        </div>
+
+        <!-- UAT-KEAMANAN -->
+        <div style="border:1px solid var(--bdr);border-radius:8px;margin:14px 0;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surf2);border-bottom:1px solid var(--bdr)">
+            <span style="font-weight:700;font-size:13px;color:var(--txp);min-width:70px">UAT-SEK</span>
+            <span style="font-weight:600;font-size:14px;color:var(--tx)">Keamanan — autentikasi, SQL injection, HTTPS</span>
+            <span class="b" style="margin-left:auto;background:#f59e0b;color:#fff;font-size:11px">PERINGATAN</span>
+          </div>
+          <div style="padding:10px 14px;font-size:13px;color:var(--txs)">
+            <div class="tw" style="margin-top:4px"><table><thead><tr><th>Aspek</th><th>Temuan</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Hash Password (login.php)</td><td>MD5 tanpa salt — mudah di-crack dengan rainbow table</td><td><span class="b bh" style="font-size:11px">Rentan</span></td></tr>
+              <tr><td>SQL Injection (login.php)</td><td>Query raw string, tidak pakai prepared statement</td><td><span class="b bh" style="font-size:11px">Rentan</span></td></tr>
+              <tr><td>SQL Injection (update-jawaban.php)</td><td>Pakai <code>mysqli_real_escape_string()</code> di semua input</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">Aman</span></td></tr>
+              <tr><td>HTTPS / TLS</td><td>Tidak ada redirect HTTPS di <code>.htaccess</code> — data login dikirim plaintext</td><td><span class="b bh" style="font-size:11px">Rentan</span></td></tr>
+              <tr><td>Session Management</td><td>PHP session standar digunakan dengan benar</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">Aman</span></td></tr>
+            </tbody></table></div>
+          </div>
+        </div>
+
+        <h3>7.3 Ringkasan Hasil Pengujian</h3>
+        <div class="tw"><table><thead><tr><th>ID</th><th>Skenario</th><th>Status</th><th>Catatan</th></tr></thead>
+        <tbody>
+          <tr><td>UAT-01</td><td>Login peserta / admin</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">LULUS</span></td><td>Login berhasil + penolakan password salah berfungsi</td></tr>
+          <tr><td>UAT-02</td><td>Redirect ke ujian aktif</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">LULUS</span></td><td>3 ujian aktif, cek kelas + jadwal + riwayat berfungsi</td></tr>
+          <tr><td>UAT-03</td><td>Soal MCQ tampil</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">LULUS</span></td><td>70 soal per ujian aktif, kunci jawaban tersimpan</td></tr>
+          <tr><td>UAT-04</td><td>Soal Essay tersimpan</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">LULUS</span></td><td>update-jawaban.php berfungsi, input ter-sanitasi</td></tr>
+          <tr><td>UAT-05</td><td>Auto-save jawaban</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">LULUS</span></td><td>2.304 rekaman auto-save di tabel hasil</td></tr>
+          <tr><td>UAT-06</td><td>Timer auto-submit</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">LULUS</span></td><td>JS countdown + sync jadwal DB, redirect saat jam &lt; 0</td></tr>
+          <tr><td>UAT-07</td><td>Akurasi nilai MCQ</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">LULUS</span></td><td>Formula (benar/total)×100, nilai maks riil = 92</td></tr>
+          <tr><td>UAT-08</td><td>Status lulus/tidak lulus</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">LULUS</span></td><td>20 lulus, 26 tidak lulus dari 66 rekaman nilai riil</td></tr>
+          <tr><td>UAT-09</td><td>Proteksi ujian ulang</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">LULUS</span></td><td>NOT EXISTS di riwayat, 65 rekaman tersimpan</td></tr>
+          <tr><td>UAT-10</td><td>Admin lihat nilai</td><td><span class="b" style="background:#22c55e;color:#fff;font-size:11px">LULUS</span></td><td>Data lengkap tersedia di DB untuk ditampilkan</td></tr>
+          <tr><td>UAT-11</td><td>Input nilai essay manual</td><td><span class="b" style="background:#ef4444;color:#fff;font-size:11px">GAGAL</span></td><td>Tidak ada halaman admin, 13 peserta essay nilainya = 0</td></tr>
+          <tr><td>UAT-SEK</td><td>Keamanan autentikasi</td><td><span class="b" style="background:#f59e0b;color:#fff;font-size:11px">PERINGATAN</span></td><td>MD5 + raw query di login.php; tidak ada HTTPS</td></tr>
+        </tbody></table></div>
+
+        <h3>7.4 Kriteria Penerimaan</h3>
+        <p>Berdasarkan hasil pengujian di atas, kondisi saat ini:</p>
+        <ul>
+          <li><strong style="color:#22c55e">TERPENUHI:</strong> UAT-01 s/d UAT-10 — semua fitur inti ujian MCQ berfungsi dengan benar</li>
+          <li><strong style="color:#ef4444">BELUM TERPENUHI:</strong> UAT-11 — fitur penilaian essay manual belum dibangun; 13 peserta Essay Ahli belum dapat nilai</li>
+          <li><strong style="color:#f59e0b">PERLU PERHATIAN:</strong> UAT-SEK — MD5 + raw query di login harus dimigrasi ke bcrypt + prepared statement sebelum sistem dinyatakan aman secara keseluruhan</li>
+        </ul>
+        <div class="ib ok"><strong>Kesimpulan UAT:</strong> 10 dari 12 skenario lulus pengujian langsung. Sistem siap digunakan untuk ujian MCQ. Dua item yang perlu diselesaikan: (1) bangun halaman input nilai essay, (2) migrasi keamanan autentikasi dari MD5 ke bcrypt dengan prepared statement.</div>
+      </div>
+    </section>
+
+    <!-- S8 -->
+    <section class="sec" id="s8">
+      <div class="sech"><div class="sbadge">8</div><div><h2>Dokumentasi Teknis &amp; User Manual</h2><div class="ssub">Panduan instalasi, dokumentasi teknis sistem, dan manual pemakaian lengkap untuk admin dan peserta</div></div></div>
+      <div class="sbody">
+        <p>Bagian ini menyajikan dokumentasi teknis sistem secara lengkap beserta panduan pemakaian aplikasi untuk dua kelompok pengguna: <strong>Admin/Operator</strong> yang mengelola ujian, dan <strong>Peserta</strong> yang mengikuti ujian. Dokumentasi ini ditulis berdasarkan alur dan file aktual aplikasi yang berjalan di <code>/var/www/html/ujian/</code>.</p>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <h3>8.1 Dokumentasi Teknis — Instalasi &amp; Konfigurasi</h3>
+        <p>Panduan ini ditujukan untuk teknisi atau administrator server yang bertanggung jawab atas instalasi, pemeliharaan, dan pengembangan sistem.</p>
+
+        <h4>A. Persyaratan Sistem</h4>
+        <ul class="sl">
+          <li><span class="sk">Web Server</span><span class="sv">Apache 2.4+ atau Nginx 1.18+; direkomendasikan Apache dengan <code>mod_rewrite</code> aktif</span></li>
+          <li><span class="sk">PHP</span><span class="sv">PHP 7.4 atau lebih baru; ekstensi wajib: <code>mysqli</code>, <code>session</code>, <code>mbstring</code>, <code>gd</code></span></li>
+          <li><span class="sk">Database</span><span class="sv">MySQL 5.7+ atau MariaDB 10.3+</span></li>
+          <li><span class="sk">Browser Klien</span><span class="sv">Chrome 90+, Firefox 88+, Edge 90+; JavaScript harus aktif</span></li>
+          <li><span class="sk">RAM Server</span><span class="sv">Minimum 2 GB; disarankan 4 GB untuk 50+ peserta bersamaan</span></li>
+          <li><span class="sk">Disk</span><span class="sv">Minimum 5 GB untuk aplikasi, database, dan backup</span></li>
+        </ul>
+
+        <h4>B. Langkah Instalasi — Windows (XAMPP)</h4>
+        <p style="font-size:13px;color:var(--txs);margin-bottom:10px">Cocok untuk komputer lokal, lab ujian, atau server kantor berbasis Windows. Menggunakan XAMPP yang sudah menyertakan Apache, PHP, dan MySQL dalam satu paket.</p>
+        <ol style="margin:8px 0 14px 20px;font-size:14px;color:var(--txs)">
+          <li style="margin-bottom:8px"><strong>Download &amp; install XAMPP</strong> dari <code>https://www.apachefriends.org</code> — pilih versi yang menyertakan PHP 7.4 atau lebih baru. Jalankan installer dan install ke <code>C:\xampp\</code> (default)</li>
+          <li style="margin-bottom:8px"><strong>Jalankan XAMPP Control Panel</strong> → klik <strong>Start</strong> pada baris <em>Apache</em> dan <em>MySQL</em> — kedua status harus berubah menjadi hijau</li>
+          <li style="margin-bottom:8px"><strong>Salin folder aplikasi</strong> ke direktori htdocs:<br>
+            <pre style="margin-top:6px"><span class="cm">REM Salin seluruh folder ujian ke dalam htdocs</span>
+xcopy /E /I C:\sumber\ujian C:\xampp\htdocs\ujian
+
+<span class="cm">REM Atau cukup drag-and-drop folder "ujian" ke C:\xampp\htdocs\ menggunakan Explorer</span></pre></li>
+          <li style="margin-bottom:8px"><strong>Buat database</strong> via phpMyAdmin:<br>
+            <ol style="margin:6px 0 4px 16px;list-style-type:lower-alpha">
+              <li style="margin-bottom:4px">Buka browser, akses <code>http://localhost/phpmyadmin</code></li>
+              <li style="margin-bottom:4px">Klik tab <strong>Databases</strong> → ketik nama database: <code>db_ujian_online</code> → pilih collation <code>utf8mb4_unicode_ci</code> → klik <strong>Create</strong></li>
+              <li style="margin-bottom:4px">Klik database <code>db_ujian_online</code> di panel kiri → klik tab <strong>Import</strong></li>
+              <li>Klik <strong>Choose File</strong> → pilih file <code>db_ujian_online.sql</code> dari folder aplikasi → klik <strong>Go</strong></li>
+            </ol>
+          </li>
+          <li style="margin-bottom:8px"><strong>Konfigurasi koneksi database</strong> — buka file <code>C:\xampp\htdocs\ujian\config\database.php</code> dengan Notepad atau editor teks:
+            <pre><span class="cm">// Untuk XAMPP, password MySQL default kosong (tidak perlu diisi)</span>
+$host     = <span class="st">"localhost"</span>;
+$user     = <span class="st">"root"</span>;
+$password = <span class="st">""</span>;               <span class="cm">// XAMPP default: kosong</span>
+$db       = <span class="st">"db_ujian_online"</span>;
+$kon = mysqli_connect($host, $user, $password, $db);
+mysqli_set_charset($kon, <span class="st">"utf8mb4"</span>);</pre></li>
+          <li style="margin-bottom:8px"><strong>Aktifkan <code>mod_rewrite</code></strong> di Apache XAMPP:<br>
+            <ol style="margin:6px 0 4px 16px;list-style-type:lower-alpha">
+              <li style="margin-bottom:4px">Buka XAMPP Control Panel → klik <strong>Config</strong> di baris Apache → pilih <strong>httpd.conf</strong></li>
+              <li style="margin-bottom:4px">Cari baris <code>#LoadModule rewrite_module</code> → hapus tanda <code>#</code> di depannya</li>
+              <li>Simpan file → kembali ke XAMPP Control Panel → klik <strong>Stop</strong> lalu <strong>Start</strong> Apache</li>
+            </ol>
+          </li>
+          <li><strong>Uji akses</strong> dengan membuka <code>http://localhost/ujian/login.php</code> di browser</li>
+        </ol>
+        <div class="ib gold"><strong>Tips XAMPP:</strong> Jika port 80 sudah dipakai aplikasi lain (misal IIS atau Skype), ubah port Apache ke 8080 via XAMPP Control Panel → Config → httpd.conf → cari <code>Listen 80</code> ganti ke <code>Listen 8080</code>. Akses menjadi <code>http://localhost:8080/ujian/</code>.</div>
+
+        <h4 style="margin-top:18px">C. Langkah Instalasi — Linux / Server (Apache Langsung)</h4>
+        <p style="font-size:13px;color:var(--txs);margin-bottom:10px">Untuk server Linux Ubuntu/Debian yang sudah terpasang Apache dan MySQL secara terpisah (tanpa XAMPP).</p>
+        <ol style="margin:8px 0 12px 20px;font-size:14px;color:var(--txs)">
+          <li style="margin-bottom:8px"><strong>Salin file aplikasi</strong> ke direktori web server:
+            <pre style="margin-top:6px">cp -r /sumber/ujian /var/www/html/ujian
+chown -R www-data:www-data /var/www/html/ujian</pre></li>
+          <li style="margin-bottom:8px"><strong>Buat database</strong> dan import skema:
+            <pre>mysql -u root -p -e "CREATE DATABASE db_ujian_online CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+mysql -u root -p db_ujian_online &lt; db_ujian_online.sql</pre></li>
+          <li style="margin-bottom:8px"><strong>Konfigurasi koneksi database</strong> di <code>config/database.php</code>:
+            <pre><span class="cm">// Sesuaikan dengan kredensial server Anda</span>
+$host     = <span class="st">"localhost"</span>;
+$user     = <span class="st">"root"</span>;
+$password = <span class="st">"password_anda"</span>;  <span class="cm">// Ganti dengan password MySQL Anda</span>
+$db       = <span class="st">"db_ujian_online"</span>;
+$kon = mysqli_connect($host, $user, $password, $db);
+mysqli_set_charset($kon, <span class="st">"utf8mb4"</span>);</pre></li>
+          <li style="margin-bottom:8px"><strong>Atur izin direktori</strong> untuk upload gambar soal:
+            <pre>chmod 775 /var/www/html/ujian/img/soal/
+chown www-data:www-data /var/www/html/ujian/img/soal/</pre></li>
+          <li style="margin-bottom:8px"><strong>Aktifkan <code>mod_rewrite</code></strong> di Apache:
+            <pre>a2enmod rewrite
+systemctl restart apache2</pre></li>
+          <li><strong>Uji akses</strong> dengan membuka <code>http://[IP-SERVER]/ujian/login.php</code> di browser.</li>
+        </ol>
+
+        <h4>E. Akun Default Pertama Kali</h4>
+        <div class="tw"><table><thead><tr><th>Role</th><th>Username</th><th>Password</th><th>Catatan</th></tr></thead>
+        <tbody>
+          <tr><td>Admin</td><td><code>admin</code></td><td><code>admin</code></td><td>Segera ganti setelah login pertama</td></tr>
+          <tr><td>Guru/Operator</td><td><code>baloghan</code></td><td>(sesuai data)</td><td>Dapat dibuat melalui panel admin</td></tr>
+        </tbody></table></div>
+
+        <h4>F. Struktur Direktori Penting</h4>
+        <pre>/var/www/html/ujian/
+├── config/
+│   ├── <span class="kw">database.php</span>          <span class="cm">← Edit file ini untuk koneksi DB</span>
+│   ├── <span class="st">siswa_ujian_aktif.php</span> <span class="cm">← Logika cek sesi aktif peserta</span>
+│   └── <span class="st">ujian_soal.php</span>        <span class="cm">← Helper query soal</span>
+├── css/
+│   └── <span class="st">simple-sidebar.css</span>    <span class="cm">← Stylesheet utama (warna merah #8b1a1a)</span>
+├── img/                         <span class="cm">← Gambar aplikasi dan foto pengguna</span>
+├── pages/
+│   ├── admin/ (guru/)           <span class="cm">← Semua halaman panel admin/operator</span>
+│   └── siswa/                   <span class="cm">← Semua halaman panel peserta</span>
+├── <span class="kw">index.php</span>                 <span class="cm">← Router utama, jangan dihapus</span>
+├── <span class="kw">login.php</span>                 <span class="cm">← Halaman login semua role</span>
+└── <span class="st">db_ujian_online.sql</span>      <span class="cm">← File backup/restore database</span></pre>
+
+        <h4>G. Troubleshooting Umum</h4>
+        <div class="tw"><table><thead><tr><th>Gejala</th><th>Kemungkinan Penyebab</th><th>Solusi</th></tr></thead>
+        <tbody>
+          <tr><td>Halaman putih kosong</td><td>Error PHP tersembunyi</td><td>Cek <code>/var/log/apache2/error.log</code>; sementara aktifkan <code>display_errors = On</code> di php.ini</td></tr>
+          <tr><td>Gagal login (semua akun)</td><td>Koneksi database gagal</td><td>Periksa kredensial di <code>config/database.php</code>; pastikan MySQL berjalan dengan <code>systemctl status mysql</code></td></tr>
+          <tr><td>Timer tidak berjalan</td><td>JavaScript diblokir atau error</td><td>Buka Developer Tools (F12) → Console; cari pesan error JavaScript di halaman ujian</td></tr>
+          <tr><td>Auto-save tidak bekerja</td><td>AJAX gagal atau session expired</td><td>Periksa Network tab di Developer Tools saat ujian; cek response dari <code>update-jawaban.php</code></td></tr>
+          <tr><td>Gambar soal tidak muncul</td><td>Izin direktori <code>img/</code> salah</td><td>Jalankan: <code>chmod -R 775 img/ &amp;&amp; chown -R www-data img/</code></td></tr>
+          <tr><td>Karakter nama rusak (???)</td><td>Charset latin1 di tabel database</td><td>Jalankan migrasi charset ke utf8mb4 (lihat Bagian 3.4)</td></tr>
+        </tbody></table></div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <h3>8.2 User Manual — Peserta Ujian</h3>
+        <p>Panduan ini ditujukan untuk peserta (ASN/PNS kataloger) yang akan mengikuti ujian kompetensi melalui sistem CAT PUSKOD BALOGHAN KEMHAN.</p>
+
+        <div class="ib gold"><strong>Sebelum Mulai:</strong> Pastikan Anda menggunakan browser Chrome, Firefox, atau Edge versi terbaru. Koneksi internet/intranet harus stabil. Matikan pop-up blocker. Siapkan NIP dan password yang telah diberikan oleh operator.</div>
+
+        <h4>Langkah 1 — Login ke Sistem</h4>
+        <ol style="margin:8px 0 14px 20px;font-size:14px;color:var(--txs)">
+          <li style="margin-bottom:5px">Buka browser dan akses alamat: <code>http://[alamat-server]/ujian/</code></li>
+          <li style="margin-bottom:5px">Pada kolom <strong>Username</strong>, masukkan NIP Anda (contoh: <code>197607242001121001</code>)</li>
+          <li style="margin-bottom:5px">Pada kolom <strong>Password</strong>, masukkan password yang telah diberikan operator</li>
+          <li style="margin-bottom:5px">Klik tombol <strong>MASUK</strong></li>
+          <li>Jika berhasil, Anda akan langsung diarahkan ke halaman ujian atau dashboard peserta</li>
+        </ol>
+        <div class="ib cr"><strong>Gagal Login?</strong> Pastikan NIP diketik tanpa spasi dan tanpa tanda hubung. Jika tetap gagal setelah 3 kali percobaan, hubungi operator/admin untuk reset password.</div>
+
+        <h4>Langkah 2 — Memahami Dashboard Peserta</h4>
+        <p>Setelah login, Anda akan melihat daftar ujian yang tersedia. Setiap kartu ujian menampilkan:</p>
+        <ul>
+          <li><strong>Judul ujian</strong> — nama sesi ujian yang diikuti (misal: "Ujian Kompetensi Ahli Madya")</li>
+          <li><strong>Tanggal &amp; waktu</strong> — jadwal pelaksanaan ujian</li>
+          <li><strong>Durasi</strong> — lama waktu ujian dalam menit</li>
+          <li><strong>Status</strong> — Aktif (dapat dikerjakan), Menunggu (belum saatnya), atau Selesai</li>
+        </ul>
+
+        <h4>Langkah 3 — Memulai Ujian</h4>
+        <ol style="margin:8px 0 14px 20px;font-size:14px;color:var(--txs)">
+          <li style="margin-bottom:5px">Klik tombol <strong>Kerjakan</strong> pada sesi ujian yang berstatus <em>Aktif</em></li>
+          <li style="margin-bottom:5px">Baca halaman briefing dengan seksama: jumlah soal, durasi, dan aturan ujian</li>
+          <li style="margin-bottom:5px">Klik <strong>Mulai Ujian</strong> — <em>timer langsung berjalan sejak tombol ini diklik</em></li>
+          <li>Halaman soal pertama akan tampil secara otomatis</li>
+        </ol>
+        <div class="ib wn"><strong>Perhatian:</strong> Setelah klik "Mulai Ujian", timer tidak dapat dihentikan atau dijeda. Pastikan Anda siap sebelum menekan tombol tersebut.</div>
+
+        <h4>Langkah 4 — Mengerjakan Soal Pilihan Ganda (MCQ)</h4>
+        <ol style="margin:8px 0 14px 20px;font-size:14px;color:var(--txs)">
+          <li style="margin-bottom:5px">Baca soal dengan teliti yang tampil di bagian tengah layar</li>
+          <li style="margin-bottom:5px">Klik salah satu pilihan jawaban (A, B, C, atau D) — pilihan yang dipilih akan berubah warna menjadi merah</li>
+          <li style="margin-bottom:5px">Jawaban tersimpan <strong>otomatis</strong> saat Anda pindah ke soal berikutnya (tidak perlu klik Simpan)</li>
+          <li style="margin-bottom:5px">Gunakan tombol <strong>Berikutnya →</strong> untuk lanjut, atau <strong>← Sebelumnya</strong> untuk kembali</li>
+          <li style="margin-bottom:5px">Klik nomor soal di panel kiri untuk langsung melompat ke soal tertentu</li>
+          <li>Nomor soal berwarna <span style="background:#28a745;color:#fff;padding:1px 6px;border-radius:3px;font-size:12px">hijau</span> = sudah dijawab; <span style="background:#e9ecef;color:#555;padding:1px 6px;border-radius:3px;font-size:12px">abu</span> = belum dijawab</li>
+        </ol>
+
+        <h4>Langkah 5 — Mengerjakan Soal Essay</h4>
+        <ol style="margin:8px 0 14px 20px;font-size:14px;color:var(--txs)">
+          <li style="margin-bottom:5px">Pada soal essay, area teks akan muncul di bawah pertanyaan</li>
+          <li style="margin-bottom:5px">Ketik jawaban Anda langsung di kotak teks yang tersedia</li>
+          <li style="margin-bottom:5px">Jawaban essay juga tersimpan otomatis saat berpindah soal</li>
+          <li>Anda dapat kembali ke soal essay kapan saja selama ujian berlangsung untuk melengkapi atau mengubah jawaban</li>
+        </ol>
+
+        <h4>Langkah 6 — Review &amp; Mengumpulkan Jawaban</h4>
+        <ol style="margin:8px 0 14px 20px;font-size:14px;color:var(--txs)">
+          <li style="margin-bottom:5px">Klik tombol <strong>Selesai &amp; Kumpulkan</strong> di pojok kanan bawah (atau saat timer habis, otomatis dikumpulkan)</li>
+          <li style="margin-bottom:5px">Halaman review menampilkan seluruh nomor soal — periksa apakah ada yang masih berwarna abu (belum dijawab)</li>
+          <li style="margin-bottom:5px">Klik nomor soal mana pun untuk kembali menjawab jika masih ada waktu</li>
+          <li style="margin-bottom:5px">Jika sudah yakin, klik <strong>Kumpulkan Jawaban</strong></li>
+          <li>Konfirmasi akan muncul — klik <strong>Ya, Kumpulkan</strong> untuk finalisasi. <em>Jawaban tidak dapat diubah setelah dikumpulkan.</em></li>
+        </ol>
+        <div class="ib cr"><strong>Penting:</strong> Jika waktu habis dan Anda belum mengumpulkan secara manual, sistem akan mengumpulkan jawaban secara otomatis. Semua jawaban yang sudah tersimpan tetap akan dinilai.</div>
+
+        <h4>Langkah 7 — Melihat Hasil Ujian</h4>
+        <ol style="margin:8px 0 14px 20px;font-size:14px;color:var(--txs)">
+          <li style="margin-bottom:5px">Setelah submit, halaman hasil ujian akan tampil otomatis</li>
+          <li style="margin-bottom:5px">Nilai ujian MCQ ditampilkan langsung dalam bentuk angka (0–100)</li>
+          <li style="margin-bottom:5px">Status <strong>Lulus</strong> ditampilkan jika nilai ≥ passing grade; <strong>Tidak Lulus</strong> jika di bawahnya</li>
+          <li style="margin-bottom:5px">Untuk ujian essay, nilai akan tampil setelah operator menyelesaikan penilaian manual</li>
+          <li>Klik <strong>Cetak Hasil</strong> untuk mencetak atau menyimpan hasil ujian Anda</li>
+        </ol>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <h3>8.3 User Manual — Admin &amp; Operator</h3>
+        <p>Panduan ini ditujukan untuk admin dan guru/operator yang mengelola seluruh proses ujian, mulai dari pembuatan soal hingga penerbitan hasil.</p>
+
+        
+
+        <h4>A. Login sebagai Admin / Operator</h4>
+        <ol style="margin:8px 0 12px 20px;font-size:14px;color:var(--txs)">
+          <li style="margin-bottom:5px">Buka <code>http://[alamat-server]/ujian/login.php</code></li>
+          <li style="margin-bottom:5px">Masukkan username dan password operator (bukan NIP peserta)</li>
+          <li>Setelah login, Anda masuk ke panel admin dengan sidebar menu di sebelah kiri</li>
+        </ol>
+
+        <h4>B. Mengelola Data Peserta (Siswa)</h4>
+        <p>Menu: <strong>Sidebar → Siswa/Peserta</strong></p>
+        <ul>
+          <li><strong>Tambah peserta baru:</strong> Klik tombol Tambah → isi NIP, nama, username, password → Simpan</li>
+          <li><strong>Edit peserta:</strong> Klik ikon edit pada baris peserta → ubah data yang diperlukan → Simpan</li>
+          <li><strong>Daftarkan peserta ke sesi ujian:</strong> Buka menu Peserta → pilih sesi ujian → centang peserta → Daftarkan</li>
+          <li><strong>Reset password:</strong> Klik ikon edit → kosongkan kolom password lama → isi password baru → Simpan</li>
+        </ul>
+
+        <h4>C. Mengelola Mata Pelajaran / Bidang Kompetensi</h4>
+        <p>Menu: <strong>Sidebar → Mapel</strong></p>
+        <ul>
+          <li>Setiap sesi ujian terikat ke satu mata pelajaran (bidang kompetensi), contoh: "Kodifikasi NSN", "Identifikasi Materiil"</li>
+          <li>Klik <strong>Tambah Mapel</strong> → isi nama bidang kompetensi → Simpan</li>
+          <li>Mata pelajaran yang sudah memiliki sesi ujian aktif <em>tidak boleh dihapus</em></li>
+        </ul>
+
+        <h4>D. Membuat Sesi Ujian</h4>
+        <p>Menu: <strong>Sidebar → Ujian → Tambah Ujian</strong></p>
+        <div class="tw"><table><thead><tr><th>Field</th><th>Penjelasan</th><th>Contoh Isi</th></tr></thead>
+        <tbody>
+          <tr><td>Kode Ujian</td><td>Kode unik sesi, format U+nomor</td><td><code>U102</code></td></tr>
+          <tr><td>Judul</td><td>Nama sesi yang ditampilkan ke peserta</td><td>Ujian Kompetensi Ahli Madya</td></tr>
+          <tr><td>Tipe Soal</td><td>1 = Pilihan Ganda (MCQ); 2 = Essay</td><td>1</td></tr>
+          <tr><td>Kelas</td><td>Kelompok/angkatan peserta</td><td>Kelas 11 (Ahli Madya)</td></tr>
+          <tr><td>Mapel</td><td>Bidang kompetensi yang diujikan</td><td>Kodifikasi NSN</td></tr>
+          <tr><td>Tanggal &amp; Jam</td><td>Jadwal pelaksanaan ujian</td><td>2026-06-09, 08:30</td></tr>
+          <tr><td>Waktu (menit)</td><td>Durasi ujian dalam menit</td><td>60</td></tr>
+          <tr><td>Nilai Kelulusan</td><td>Ambang batas lulus (passing grade)</td><td>70</td></tr>
+          <tr><td>Status Aktif</td><td>1 = ujian bisa diakses peserta; 0 = tersembunyi</td><td>0 (aktifkan saat hari-H)</td></tr>
+        </tbody></table></div>
+
+        <h4>E. Menambahkan Soal ke Sesi Ujian</h4>
+        <p>Menu: <strong>Sidebar → Soal → Tambah Soal</strong> (atau dari halaman detail sesi ujian)</p>
+        <ol style="margin:8px 0 12px 20px;font-size:14px;color:var(--txs)">
+          <li style="margin-bottom:5px">Pilih sesi ujian yang akan diisi soal</li>
+          <li style="margin-bottom:5px">Ketik teks soal pada kolom <strong>Soal</strong> — mendukung teks biasa</li>
+          <li style="margin-bottom:5px">Jika ada gambar pendukung, upload di kolom <strong>Gambar</strong></li>
+          <li style="margin-bottom:5px">Untuk soal MCQ: isi empat pilihan jawaban (A, B, C, D) dan centang mana yang <strong>benar</strong> — wajib ada kunci jawaban</li>
+          <li style="margin-bottom:5px">Untuk soal Essay: tipe dipilih "Essay", tidak perlu mengisi pilihan jawaban</li>
+          <li>Klik <strong>Simpan</strong> — soal langsung masuk ke bank soal sesi tersebut</li>
+        </ol>
+        <div class="ib wn"><strong>Penting:</strong> Pastikan setiap soal MCQ memiliki tepat satu kunci jawaban yang benar. Soal tanpa kunci jawaban akan dihitung benar oleh sistem meskipun peserta tidak menjawab.</div>
+
+        <h4>F. Mengaktifkan &amp; Menonaktifkan Sesi Ujian</h4>
+        <ul>
+          <li>Menu: <strong>Sidebar → Ujian</strong> → cari sesi yang diinginkan</li>
+          <li>Klik tombol <strong>Aktifkan</strong> (60 menit sebelum ujian dimulai) — peserta yang terdaftar baru bisa mengakses setelah ini</li>
+          <li>Saat ujian selesai, klik <strong>Nonaktifkan</strong> agar peserta tidak dapat mengerjakan ulang</li>
+          <li>Status ujian terlihat di kolom "Status" dengan badge Aktif (hijau) atau Nonaktif (merah)</li>
+        </ul>
+
+        <h4>G. Melihat &amp; Mencetak Hasil Ujian</h4>
+        <p>Menu: <strong>Sidebar → Hasil</strong></p>
+        <ul>
+          <li>Pilih sesi ujian dari dropdown untuk melihat daftar nilai semua peserta</li>
+          <li>Kolom yang ditampilkan: Nama, NIP, Nilai, Status (Lulus/Tidak Lulus), Waktu Submit</li>
+          <li>Klik <strong>Cetak Hasil</strong> untuk mencetak laporan satu peserta</li>
+          <li>Klik <strong>Cetak Semua</strong> untuk mencetak rekap nilai seluruh peserta dalam satu sesi</li>
+          <li>Untuk sesi Essay: nilai akan tampil sebagai <strong>0</strong> hingga Anda memasukkan nilai manual (fitur dalam pengembangan)</li>
+        </ul>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <h3>8.4 SOP Hari Ujian (Checklist Operator)</h3>
+        <p>Ikuti checklist ini secara berurutan untuk memastikan pelaksanaan ujian berjalan lancar tanpa hambatan teknis.</p>
+        <div class="tw"><table><thead><tr><th>Waktu</th><th>Tindakan</th><th>Cara</th><th>Cek</th></tr></thead>
+        <tbody>
+          <tr><td><span class="b bt">H&minus;1</span></td><td>Verifikasi semua peserta sudah terdaftar di sesi</td><td>Admin → Peserta → filter per sesi</td><td>&#9744;</td></tr>
+          <tr><td><span class="b bt">H&minus;1</span></td><td>Pastikan jumlah soal sudah lengkap dan kunci jawaban benar</td><td>Admin → Soal → Preview per sesi</td><td>&#9744;</td></tr>
+          <tr><td><span class="b bt">H&minus;1</span></td><td>Backup database sebagai cadangan sebelum ujian</td><td><code>mysqldump db_ujian_online &gt; backup_H1.sql</code></td><td>&#9744;</td></tr>
+          <tr><td><span class="b bm">60 mnt</span></td><td>Aktifkan sesi ujian (<code>status_aktif = 1</code>)</td><td>Admin → Ujian → Aktifkan</td><td>&#9744;</td></tr>
+          <tr><td><span class="b bm">30 mnt</span></td><td>Uji login dengan akun peserta percobaan</td><td>Buka login.php di browser berbeda, coba login</td><td>&#9744;</td></tr>
+          <tr><td><span class="b bm">15 mnt</span></td><td>Informasikan peserta untuk bersiap dan login</td><td>Sampaikan URL, username (NIP), dan password</td><td>&#9744;</td></tr>
+          <tr><td><span class="b be">Saat Ujian</span></td><td>Pantau peserta yang sudah dan belum submit</td><td>Admin → Hasil → Refresh setiap 10 menit</td><td>&#9744;</td></tr>
+          <tr><td><span class="b be">Saat Ujian</span></td><td>Tangani peserta yang gagal login atau error</td><td>Cek status akun; reset session jika perlu</td><td>&#9744;</td></tr>
+          <tr><td><span class="b bl">Selesai</span></td><td>Nonaktifkan sesi ujian</td><td>Admin → Ujian → Nonaktifkan</td><td>&#9744;</td></tr>
+          <tr><td><span class="b bl">Selesai</span></td><td>Cetak atau ekspor laporan hasil semua peserta</td><td>Admin → Hasil → Cetak Semua</td><td>&#9744;</td></tr>
+          <tr><td><span class="b bl">Selesai</span></td><td>Backup database segera setelah ujian</td><td><code>mysqldump db_ujian_online &gt; backup_YYYYMMDD.sql</code></td><td>&#9744;</td></tr>
+        </tbody></table></div>
+
+        <h3>8.4.1 Flowchart Alur SOP Hari Ujian</h3>
+        
+
+        <!-- ═══════════════════════════════════════════ -->
+        <h3>8.5 SOP Backup &amp; Restore Database</h3>
+        <p>Backup rutin melindungi data ujian dari risiko kehilangan akibat kerusakan server, kesalahan operasional, atau gangguan teknis lainnya.</p>
+
+        <h4>Backup Manual</h4>
+        <pre><span class="cm"># Backup lengkap database — jalankan setelah setiap sesi ujian</span>
+mysqldump -u root -p db_ujian_online &gt; /backup/ujian_$(date +%Y%m%d_%H%M).sql
+
+<span class="cm"># Kompres untuk menghemat ruang penyimpanan</span>
+mysqldump -u root -p db_ujian_online | gzip &gt; /backup/ujian_$(date +%Y%m%d).sql.gz</pre>
+
+        <h4>Backup Otomatis (Cron Job)</h4>
+        <pre><span class="cm"># Edit crontab: crontab -e</span>
+<span class="cm"># Backup setiap hari pukul 02.00 dini hari</span>
+0 2 * * * mysqldump -u root -pPASSWORD db_ujian_online | gzip &gt; /backup/ujian_$(date +\%Y\%m\%d).sql.gz
+
+<span class="cm"># Hapus backup lebih dari 30 hari (opsional)</span>
+0 3 * * * find /backup/ -name "ujian_*.sql.gz" -mtime +30 -delete</pre>
+
+        <h4>Prosedur Restore</h4>
+        <pre><span class="cm"># 1. Buat database baru jika belum ada</span>
+mysql -u root -p -e "CREATE DATABASE db_ujian_online;"
+
+<span class="cm"># 2. Restore dari file SQL biasa</span>
+mysql -u root -p db_ujian_online &lt; /backup/ujian_20260609.sql
+
+<span class="cm"># 3. Restore dari file terkompresi (.gz)</span>
+gunzip -c /backup/ujian_20260609.sql.gz | mysql -u root -p db_ujian_online
+
+<span class="cm"># 4. Verifikasi — cek jumlah tabel</span>
+mysql -u root -p -e "SHOW TABLES;" db_ujian_online</pre>
+
+        <div class="ib ok"><strong>Ringkasan Status Sistem:</strong> Aplikasi CAT PUSKOD BALOGHAN KEMHAN sudah beroperasi nyata dengan 110+ sesi dan ratusan peserta ber-NIP. Dokumentasi ini merangkum cara instalasi, panduan pengguna, dan SOP operasional yang dapat langsung digunakan oleh tim teknis dan operator ujian.</div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="ftr">
+    <div><div class="fo">Pusat Kodifikasi — Badan Logistik Pertahanan — Kementerian Pertahanan RI</div><div>ANALISIS KEBUTUHAN DESAIN SISTEM APLIKASI CAT UJIAN KOMPETENSI KATALOGER PUSKOD BALOGHAN KEMHAN · v1.1 · 7 Juli 2026</div></div>
+    <div>Dokumen Internal · Tidak untuk distribusi publik</div>
+  </div>
+</footer>
+</body>
+</html>

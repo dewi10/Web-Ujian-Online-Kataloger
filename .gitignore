@@ -1,0 +1,8 @@
+/config/database.local.php
+/db_ujian_online.sql
+/github-private/
+/github-public/
+/.git/
+/.codex/
+/.claude/
+/.agents/

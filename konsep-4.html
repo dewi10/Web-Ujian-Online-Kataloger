@@ -1,0 +1,322 @@
+<!DOCTYPE html><html lang="id"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ANALISIS KEBUTUHAN DESAIN SISTEM APLIKASI CAT UJIAN KOMPETENSI KATALOGER PUSKOD BALOGHAN KEMHAN</title>
+<style>
+:root {
+  --navy:#1A2B4A;--navy2:#0F1C30;--steel:#3D6096;--gold:#BF9B2F;--gold-l:#F5EAC8;--gold-d:#8A6F1E;
+  --bg:#F5F7FA;--surf:#FFFFFF;--surf2:#ECF0F7;--bdr:#CDD5E3;
+  --tx:#1A2B4A;--txs:#3D5068;--txm:#637085;
+  --ok:#1A6B3C;--okb:#E6F5ED;--wn:#8A4F00;--wnb:#FFF3E0;--cr:#8A1A1A;--crb:#FDEAEA;
+  --r:6px;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0C1520;--surf:#142030;--surf2:#1C2D42;--bdr:#2A3D56;
+  --tx:#DDE5F0;--txs:#9BB4D0;--txm:#6A88A8;
+  --gold:#CFA832;--gold-l:#2A2010;--gold-d:#9A7A20;--steel:#5A88C8;
+  --ok:#3DA86A;--okb:#0A2018;--wn:#CCA04A;--wnb:#201500;--cr:#E05050;--crb:#200808;
+}}
+:root[data-theme=dark]{--bg:#0C1520;--surf:#142030;--surf2:#1C2D42;--bdr:#2A3D56;--tx:#DDE5F0;--txs:#9BB4D0;--txm:#6A88A8;--gold:#CFA832;--gold-l:#2A2010;--gold-d:#9A7A20;--steel:#5A88C8;--ok:#3DA86A;--okb:#0A2018;--wn:#CCA04A;--wnb:#201500;--cr:#E05050;--crb:#200808;}
+:root[data-theme=light]{--bg:#F5F7FA;--surf:#FFFFFF;--surf2:#ECF0F7;--bdr:#CDD5E3;--tx:#1A2B4A;--txs:#3D5068;--txm:#637085;--gold:#BF9B2F;--gold-l:#F5EAC8;--gold-d:#8A6F1E;--steel:#3D6096;--ok:#1A6B3C;--okb:#E6F5ED;--wn:#8A4F00;--wnb:#FFF3E0;--cr:#8A1A1A;--crb:#FDEAEA;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;font-size:15px;line-height:1.7;color:var(--tx);background:var(--bg)}
+/* Header */
+.hdr{background:linear-gradient(165deg,var(--navy2) 0%,var(--navy) 65%,#223A6A 100%);color:#fff;position:relative;overflow:hidden}
+.hdr::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(255,255,255,.015) 80px,rgba(255,255,255,.015) 81px);pointer-events:none}
+.hband{background:var(--gold);height:4px}
+.hinner{max-width:1200px;margin:0 auto;padding:32px 40px 36px;display:flex;align-items:flex-start;gap:22px;position:relative;z-index:1}
+.emblem{flex-shrink:0;width:64px;height:64px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:var(--navy2);font-family:Georgia,serif;box-shadow:0 0 0 3px rgba(255,255,255,.15);text-align:center;line-height:1.2}
+.htxt{}
+.orglbl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:6px;font-weight:500}
+.dtitle{font-family:Georgia,'Times New Roman',serif;font-size:clamp(17px,2vw,24px);font-weight:700;line-height:1.3;color:#fff;text-wrap:balance;margin-bottom:10px}
+.dtitle em{color:var(--gold);font-style:normal}
+.dmeta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.mchip{font-size:11px;letter-spacing:.04em;color:rgba(255,255,255,.65);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:3px;padding:3px 9px}
+.mchip strong{color:rgba(255,255,255,.9);font-weight:600}
+/* Status bar */
+.sbar{background:var(--navy);border-bottom:2px solid var(--gold)}
+.sbinner{max-width:1200px;margin:0 auto;padding:10px 40px;display:flex;gap:24px;flex-wrap:wrap}
+.si{display:flex;align-items:center;gap:7px}
+.sdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sdot.ok{background:#4ADE80}.sdot.wn{background:#FCD34D}.sdot.cr{background:#F87171}
+.slbl{font-size:11px;color:rgba(255,255,255,.7)}.slbl strong{color:#fff;font-weight:600}
+/* Layout */
+.wrap{max-width:1200px;margin:0 auto;padding:32px 20px;display:grid;grid-template-columns:230px 1fr;gap:32px;align-items:start}
+/* TOC */
+.toc{position:sticky;top:16px;background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden}
+.toch{background:var(--surf2);padding:10px 15px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--txm);border-bottom:1px solid var(--bdr)}
+.tocl{list-style:none;padding:5px 0}
+.tocl li a{display:flex;align-items:center;gap:8px;padding:6px 13px;text-decoration:none;color:var(--txs);font-size:12.5px;line-height:1.4;transition:background .12s,color .12s}
+.tocl li a:hover{background:var(--surf2);color:var(--tx)}
+.tnum{display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;border-radius:50%;background:var(--surf2);color:var(--txm);font-size:10px;font-weight:700;flex-shrink:0;border:1px solid var(--bdr)}
+.tocl li a:hover .tnum{background:var(--gold);color:var(--navy2);border-color:var(--gold)}
+/* Main */
+.main{min-width:0}
+.sec{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;margin-bottom:22px}
+.sech{padding:17px 24px 15px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:13px}
+.sbadge{display:inline-flex;align-items:center;justify-content:center;width:33px;height:33px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:700;font-family:Georgia,serif;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.sech h2{font-family:Georgia,'Times New Roman',serif;font-size:16px;font-weight:700;color:var(--tx);line-height:1.3;text-wrap:balance}
+.sech .ssub{font-size:12px;color:var(--txm);font-weight:400}
+.sbody{padding:20px 24px}
+/* Typography */
+.sbody h3{font-family:Georgia,serif;font-size:14px;font-weight:700;color:var(--steel);margin:20px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--bdr)}
+.sbody h3:first-child{margin-top:0}
+.sbody p{color:var(--txs);font-size:14px;margin-bottom:10px;max-width:72ch}
+.sbody ul,.sbody ol{margin:6px 0 12px 20px;color:var(--txs);font-size:14px}
+.sbody li{margin-bottom:4px}
+/* Tables */
+.tw{overflow-x:auto;margin:10px 0 16px;border-radius:var(--r);border:1px solid var(--bdr)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead tr{background:var(--navy)}
+thead th{padding:9px 12px;color:#fff;font-weight:600;text-align:left;letter-spacing:.04em;font-size:11px;text-transform:uppercase;white-space:nowrap}
+tbody tr{border-bottom:1px solid var(--bdr)}
+tbody tr:last-child{border-bottom:none}
+tbody tr:nth-child(even){background:var(--surf2)}
+tbody tr:hover{background:var(--gold-l)}
+td{padding:8px 12px;color:var(--txs);vertical-align:top;line-height:1.5}
+td:first-child{font-weight:500;color:var(--tx)}
+/* Badges */
+.b{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:.04em;vertical-align:middle}
+.bh{background:var(--crb);color:var(--cr)}
+.bm{background:var(--wnb);color:var(--wn)}
+.bl{background:var(--okb);color:var(--ok)}
+.bt{background:var(--surf2);color:var(--steel);border:1px solid var(--bdr)}
+.be{background:#E0F0FF;color:#1A5A8A}
+.bg2{background:#FFF0D8;color:#7A4A00}
+/* Info boxes */
+.ib{border-left:3px solid var(--steel);background:var(--surf2);padding:10px 14px;border-radius:0 var(--r) var(--r) 0;margin:10px 0;font-size:13.5px;color:var(--txs)}
+.ib.gold{border-color:var(--gold)}.ib.ok{border-color:var(--ok);background:var(--okb);color:var(--ok)}
+.ib.cr{border-color:var(--cr);background:var(--crb)}.ib.wn{border-color:var(--wn);background:var(--wnb)}
+.ib strong{color:var(--tx)}
+/* Cards */
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px;margin:10px 0}
+.card{background:var(--surf2);border:1px solid var(--bdr);border-radius:var(--r);padding:12px 14px}
+.ci{font-size:18px;margin-bottom:6px}.ct{font-weight:700;font-size:13px;color:var(--tx);margin-bottom:3px}.cd{font-size:12px;color:var(--txm);line-height:1.5}
+.twoc{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+/* Compare */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.cbox{border-radius:var(--r);overflow:hidden;border:1px solid var(--bdr)}
+.chead{padding:7px 12px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.chead.ex{background:#1A5A8A;color:#fff}.chead.gp{background:var(--gold-d);color:#fff}
+.cbody{padding:11px 13px;font-size:13px;color:var(--txs)}
+.cbody li{margin-bottom:4px}
+/* Spec list */
+.sl{list-style:none;margin:6px 0}
+.sl li{display:flex;gap:11px;padding:6px 0;border-bottom:1px solid var(--bdr);font-size:13px;align-items:flex-start}
+.sl li:last-child{border-bottom:none}
+.sk{min-width:170px;color:var(--txm);font-size:12px;font-weight:500;letter-spacing:.02em;flex-shrink:0}
+.sv{color:var(--txs)}
+/* Phase */
+.ph{display:flex;border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;margin:10px 0;font-size:12px}
+.pi{flex:1;padding:8px 10px;background:var(--surf2);border-right:1px solid var(--bdr);text-align:center}
+.pi:last-child{border-right:none}
+.pn{font-weight:800;color:var(--gold);font-size:13px;display:block}.pm{color:var(--txs);font-weight:500;font-size:11px}
+/* Code */
+code{font-family:'Courier New',Consolas,monospace;font-size:12.5px;background:var(--surf2);border:1px solid var(--bdr);padding:1px 5px;border-radius:3px;color:var(--steel)}
+pre{background:var(--navy2);color:#A8D8F0;border-radius:var(--r);padding:14px 17px;overflow-x:auto;font-size:12px;font-family:'Courier New',Consolas,monospace;line-height:1.6;margin:10px 0;border:1px solid rgba(255,255,255,.06)}
+pre .kw{color:#7DD3FC}pre .st{color:#86EFAC}pre .cm{color:#6B7A8A;font-style:italic}
+/* Footer */
+.ftr{max-width:1200px;margin:0 auto;padding:16px 20px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;border-top:1px solid var(--bdr);font-size:12px;color:var(--txm)}
+.fo{font-weight:600;color:var(--txs)}
+/* Responsive */
+@media(max-width:820px){
+  .wrap{grid-template-columns:1fr;padding:16px 12px}
+  .toc{position:static}.hinner{padding:22px 16px 26px;flex-direction:column;gap:12px}
+  .sbinner{padding:8px 16px;gap:10px}.twoc,.cmp{grid-template-columns:1fr}
+  .ph{flex-wrap:wrap}.pi{flex:none;width:50%}
+  .cg{grid-template-columns:1fr}.sbody{padding:14px 14px}
+}
+@media print{
+  :root{
+    --navy:#1A2B4A;--navy2:#0F1C30;--steel:#3D6096;--gold:#BF9B2F;--gold-l:#F5EAC8;--gold-d:#8A6F1E;
+    --bg:#fff;--surf:#fff;--surf2:#F0F3F8;--bdr:#C8D0DC;
+    --tx:#111;--txs:#333;--txm:#555;
+    --ok:#1A6B3C;--okb:#E6F5ED;--wn:#8A4F00;--wnb:#FFF3E0;--cr:#8A1A1A;--crb:#FDEAEA;
+  }
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  body{background:#fff;font-size:11pt;line-height:1.6}
+  .hdr,.sbar,aside,.toc,.ftr{display:none!important}
+  .wrap{display:block;max-width:100%;padding:0;margin:0}
+  .main{width:100%;max-width:100%}
+  .sec{page-break-inside:auto;break-inside:auto;border:none;margin-bottom:20pt;border-radius:0;overflow:visible}
+  .sech{padding:10px 0 8px;border-bottom:2px solid #1A2B4A;margin-bottom:10pt}
+  .sech h2{font-size:14pt;font-weight:700;color:#1A2B4A}
+  .sech .ssub{font-size:9pt;color:#555}
+  .sbadge{width:26px;height:26px;font-size:12px}
+  .sbody{padding:8pt 0}
+  .sbody h3{font-size:12pt!important;font-weight:700!important;color:#1A2B4A!important;margin:14pt 0 6pt!important;border-bottom:1px solid #C8D0DC;padding-bottom:3pt}
+  .sbody p,.sbody li{font-size:10.5pt}
+  h2,h3{page-break-after:avoid;break-after:avoid}
+  img,.card,.cbox,.ib,.sbody ul,.sbody ol{page-break-inside:avoid;break-inside:avoid}
+  .sbody p+ul,.sbody p+ol{page-break-before:avoid;break-before:avoid}
+  .mock-grid{grid-template-columns:1fr!important;gap:12pt}
+  .mock-frame,.mock-wrap{page-break-inside:avoid;break-inside:avoid;overflow:visible!important}
+  .mock-frame{box-shadow:none!important;border:1px solid #ccc!important}
+  .tw{overflow-x:visible}
+  table{font-size:9pt;page-break-inside:auto}
+  thead{display:table-header-group}
+  tr{page-break-inside:avoid;break-inside:avoid}
+  pre{white-space:pre-wrap;word-break:break-all;background:#F0F3F8!important;color:#1A2B4A!important;border:1px solid #C8D0DC;font-size:8.5pt;page-break-inside:avoid}
+  pre .kw{color:#1A5080!important}pre .st{color:#1A6B3C!important}pre .cm{color:#666!important}
+  code{background:#F0F3F8!important;color:#3D6096!important;border:1px solid #C8D0DC}
+  svg{max-width:100%!important;height:auto!important;display:block;page-break-inside:avoid}
+  .cg{grid-template-columns:repeat(3,1fr)!important}
+  .twoc,.cmp{grid-template-columns:1fr 1fr!important}
+  .ph{flex-wrap:wrap;overflow:visible!important}
+  .pi{flex:none;width:calc(100%/4);min-width:100px}
+  div[style*="overflow-x"]{overflow:visible!important}
+  div[style*="page-break"]{page-break-before:always;break-before:page}
+  a{color:inherit;text-decoration:none}
+  @page{margin:20mm 18mm 20mm 22mm;size:A4}
+}
+</style>
+
+<style>
+body{margin:0;padding:0}
+.wrap{display:block;max-width:100%;padding:24px 32px;margin:0 auto}
+.main{display:block;width:100%}
+aside,.hdr,.sbar,.ftr{display:none}
+</style>
+</head><body>
+<div class="wrap"><main class="main">
+<section class="sec" id="s4">
+      <div class="sech"><div class="sbadge">4</div><div><h2>Pengembangan Frontend (Admin &amp; Peserta)</h2><div class="ssub">Struktur direktori aktual, modul yang sudah ada, dan yang perlu dikembangkan</div></div></div>
+      <div class="sbody">
+        <p>Bagian ini menjabarkan struktur antarmuka pengguna (frontend) dari sisi kode aktual — mencakup peta direktori halaman, fitur yang sudah dimiliki panel admin dan peserta, serta daftar modul yang masih perlu dikembangkan. Seluruh halaman dibuat dengan PHP Native yang me-render HTML langsung ke browser tanpa framework JavaScript berat.</p>
+
+        <h3>4.1 Struktur Direktori Halaman</h3>
+        <p>Peta direktori berikut menunjukkan organisasi file PHP berdasarkan role pengguna. Memahami struktur ini penting sebelum menambahkan halaman atau fitur baru agar konsisten dengan pola yang sudah ada.</p>
+        <pre><span class="cm">C:\xampp\htdocs\ujian\</span>
+├── <span class="kw">index.php</span>          <span class="cm">← Router utama; redirect berdasarkan role &amp; status ujian aktif</span>
+├── <span class="kw">login.php</span>          <span class="cm">← Form login semua role</span>
+├── config/
+│   ├── <span class="st">database.php</span>           <span class="cm">← Koneksi MySQL</span>
+│   ├── <span class="st">siswa_ujian_aktif.php</span>  <span class="cm">← Cek peserta sedang ujian</span>
+│   └── <span class="st">ujian_soal.php</span>         <span class="cm">← Helper query soal per sesi</span>
+└── pages/
+    ├── admin/  (= pages/guru/)
+    │   ├── beranda/     <span class="cm">← Dashboard ringkasan</span>
+    │   ├── siswa/       <span class="cm">← Manajemen data peserta</span>
+    │   ├── mapel/       <span class="cm">← Bidang kompetensi</span>
+    │   ├── kelas/       <span class="cm">← Kelompok/angkatan ujian</span>
+    │   ├── hasil/       <span class="cm">← Lihat &amp; cetak hasil</span>
+    │   ├── pak/         <span class="cm">← Penetapan Angka Kredit</span>
+    │   └── skp/         <span class="cm">← Sasaran Kinerja Pegawai</span>
+    └── siswa/
+        ├── ujian/
+        │   ├── <span class="st">mulai.php</span>           <span class="cm">← Briefing &amp; mulai ujian</span>
+        │   ├── <span class="st">ambil-soal.php</span>      <span class="cm">← Tampilkan soal MCQ/Essay</span>
+        │   ├── <span class="st">timer.php</span>           <span class="cm">← Countdown + sync server</span>
+        │   ├── <span class="st">update-jawaban.php</span>  <span class="cm">← Auto-save AJAX endpoint</span>
+        │   ├── <span class="st">review.php</span>          <span class="cm">← Tinjau semua soal sebelum submit</span>
+        │   └── <span class="st">simpan-hasil.php</span>    <span class="cm">← Submit + hitung nilai MCQ</span>
+        └── hasil/
+            ├── <span class="st">index.php</span>       <span class="cm">← Tampilkan nilai peserta</span>
+            └── <span class="st">cetak-hasil.php</span> <span class="cm">← Cetak hasil individu</span></pre>
+
+        <h3>4.2 Modul Admin — Yang Ada vs Yang Perlu Dibangun</h3>
+        <p>Panel admin (diakses oleh guru/operator) sudah memiliki fitur dasar yang cukup lengkap. Kolom kanan menunjukkan fitur tambahan yang dibutuhkan untuk operasional ujian yang lebih efisien dan aman.</p>
+        <div class="cmp">
+          <div class="cbox"><div class="chead ex">Sudah Ada</div>
+          <div class="cbody"><ul style="margin-left:16px">
+            <li>Manajemen data peserta (siswa)</li>
+            <li>Manajemen mata pelajaran (bidang kompetensi)</li>
+            <li>Manajemen kelas (kelompok ujian)</li>
+            <li>Pembuatan soal MCQ dan Essay</li>
+            <li>Pembuatan &amp; jadwal sesi ujian</li>
+            <li>Aktivasi/nonaktifkan sesi (<code>status_aktif</code>)</li>
+            <li>Melihat hasil ujian per peserta</li>
+            <li>Cetak laporan hasil (cetak-semua.php)</li>
+            <li>Modul SKP dan PAK</li>
+          </ul></div></div>
+          <div class="cbox"><div class="chead gp">Perlu Dikembangkan</div>
+          <div class="cbody"><ul style="margin-left:16px">
+            <li>Dashboard KPI: peserta hari ini, rata-rata nilai, sesi aktif</li>
+            <li><strong>Form penilaian essay manual</strong> (nilai saat ini = 0)</li>
+            <li>Monitor live peserta yang sedang ujian</li>
+            <li>Import massal peserta dari Excel/CSV</li>
+            <li>Statistik soal (% benar/salah, tingkat kesulitan)</li>
+            <li>Duplikat soal antar sesi</li>
+            <li>Notifikasi sisa waktu di timer (warna berubah)</li>
+          </ul></div></div>
+        </div>
+
+        <h3>4.3 Filosofi &amp; Strategi Visual Frontend</h3>
+        <p>Desain antarmuka sistem CAT dirancang untuk mencerminkan identitas PUSKOD BALOGHAN KEMHAN yang tegas dan profesional melalui pendekatan <em>minimalist interface</em> — menghilangkan elemen yang tidak perlu sehingga peserta dapat fokus penuh pada soal ujian.</p>
+        <ul class="sl">
+          <li><span class="sk">Palet Warna</span><span class="sv">Merah marun bukan sekadar estetika — melambangkan urgensi dan keberanian instansi. Diaplikasikan pada tombol submit, header, dan penanda waktu krusial agar peserta selalu sadar konteks.</span></li>
+          <li><span class="sk">Layout Grid</span><span class="sv">Sistem grid konsisten memastikan keterbacaan soal yang padat dan teknis tanpa menimbulkan beban kognitif berlebih — penting untuk soal berbasis terminologi kodifikasi materiil NSN.</span></li>
+          <li><span class="sk">Tipografi</span><span class="sv">Font sans-serif dengan keterbacaan tinggi (Segoe UI / system-ui) meminimalkan kesalahan baca saat peserta menghadapi istilah teknis kodifikasi seperti NATO Stock Number dan kode NSN.</span></li>
+          <li><span class="sk">Whitespace</span><span class="sv">Ruang kosong digunakan secara strategis untuk memisahkan soal, pilihan jawaban, dan kontrol navigasi — mengurangi risiko klik tidak sengaja.</span></li>
+        </ul>
+
+        <h3>4.4 Antarmuka Peserta (Participant UI)</h3>
+        <p>Antarmuka peserta dioptimalkan untuk meminimalkan distraksi selama ujian berlangsung. Setiap elemen dirancang dengan prinsip <em>one task at a time</em>:</p>
+        <div class="cg">
+          <div class="card"><div class="ci">🔐</div><div class="ct">Modul Login</div><div class="cd">Validasi NIP real-time, tampilan bersih tanpa distraksi, pesan error yang jelas dan spesifik</div></div>
+          <div class="card"><div class="ci">📋</div><div class="ct">Card-Based Soal</div><div class="cd">Satu soal per kartu — membatasi ruang pandang pada satu persoalan untuk mencegah kebingungan navigasi</div></div>
+          <div class="card"><div class="ci">⏱️</div><div class="ct">Timer Dinamis</div><div class="cd">Sticky di atas layar, berubah warna putih → kuning → merah seiring waktu berkurang untuk memberi urgensi visual</div></div>
+          <div class="card"><div class="ci">👍</div><div class="ct">Navigasi Jempol</div><div class="cd">Tombol Sebelumnya, Tandai Ragu, Selanjutnya di area bawah — thumb-friendly zone untuk perangkat mobile</div></div>
+          <div class="card"><div class="ci">✅</div><div class="ct">Konfirmasi Submit</div><div class="cd">Dua lapisan modal konfirmasi mencegah pengiriman jawaban tidak sengaja sebelum peserta siap</div></div>
+          <div class="card"><div class="ci">🚫</div><div class="ct">Proteksi Konten</div><div class="cd">Pembatasan right-click, copy-paste, dan pindah tab pada halaman ujian untuk menjaga kerahasiaan soal</div></div>
+        </div>
+        <div style="overflow-x:auto;margin:14px 0">
+        <svg viewBox="0 0 640 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:640px;display:block;font-family:Calibri,'Segoe UI',Arial,sans-serif">
+          <defs><marker id="fc15ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#1A2B4A"/></marker></defs>
+          <rect width="640" height="130" fill="#f8fafc" rx="8" stroke="#e2e8f0" stroke-width="1"/>
+          <text x="320" y="13" text-anchor="middle" fill="#94a3b8" font-size="10" font-style="italic">Alur Antarmuka Peserta — Login hingga Nilai</text>
+          <rect x="14" y="22" width="88" height="36" rx="4" fill="#8b1a1a"/><text x="58" y="37" text-anchor="middle" fill="white" font-size="9.5" font-weight="bold">Login</text><text x="58" y="50" text-anchor="middle" fill="#fca5a5" font-size="8.5">NIP + Password</text>
+          <line x1="102" y1="40" x2="118" y2="40" stroke="#1A2B4A" stroke-width="1.5" marker-end="url(#fc15ah)"/>
+          <rect x="120" y="22" width="88" height="36" rx="4" fill="#1A2B4A"/><text x="164" y="37" text-anchor="middle" fill="white" font-size="9.5" font-weight="bold">Daftar Ujian</text><text x="164" y="50" text-anchor="middle" fill="#94a3c8" font-size="8.5">Pilih sesi aktif</text>
+          <line x1="208" y1="40" x2="224" y2="40" stroke="#1A2B4A" stroke-width="1.5" marker-end="url(#fc15ah)"/>
+          <rect x="226" y="22" width="88" height="36" rx="4" fill="#1A2B4A"/><text x="270" y="37" text-anchor="middle" fill="white" font-size="9.5" font-weight="bold">Briefing</text><text x="270" y="50" text-anchor="middle" fill="#94a3c8" font-size="8.5">mulai.php</text>
+          <line x1="314" y1="40" x2="330" y2="40" stroke="#1A2B4A" stroke-width="1.5" marker-end="url(#fc15ah)"/>
+          <rect x="332" y="22" width="88" height="36" rx="4" fill="#BF9B2F"/><text x="376" y="37" text-anchor="middle" fill="#1A2B4A" font-size="9.5" font-weight="bold">Ruang Ujian</text><text x="376" y="50" text-anchor="middle" fill="#4A3800" font-size="8.5">ambil-soal.php</text>
+          <line x1="420" y1="40" x2="436" y2="40" stroke="#1A2B4A" stroke-width="1.5" marker-end="url(#fc15ah)"/>
+          <rect x="438" y="22" width="88" height="36" rx="4" fill="#1A2B4A"/><text x="482" y="37" text-anchor="middle" fill="white" font-size="9.5" font-weight="bold">Review</text><text x="482" y="50" text-anchor="middle" fill="#94a3c8" font-size="8.5">review.php</text>
+          <line x1="526" y1="40" x2="542" y2="40" stroke="#1A2B4A" stroke-width="1.5" marker-end="url(#fc15ah)"/>
+          <rect x="544" y="22" width="82" height="36" rx="4" fill="#16a34a"/><text x="585" y="37" text-anchor="middle" fill="white" font-size="9.5" font-weight="bold">Nilai</text><text x="585" y="50" text-anchor="middle" fill="#dcfce7" font-size="8.5">hasil-ujian</text>
+          <text x="58" y="80" text-anchor="middle" fill="#8b1a1a" font-size="8">● Validasi NIP</text><text x="58" y="91" text-anchor="middle" fill="#8b1a1a" font-size="8">● Error jelas</text>
+          <text x="376" y="80" text-anchor="middle" fill="#4A3800" font-size="8">● Card soal</text><text x="376" y="91" text-anchor="middle" fill="#4A3800" font-size="8">● Timer sticky</text><text x="376" y="102" text-anchor="middle" fill="#4A3800" font-size="8">● Auto-save</text>
+          <text x="482" y="80" text-anchor="middle" fill="#64748b" font-size="8">● Cek jawaban</text><text x="482" y="91" text-anchor="middle" fill="#64748b" font-size="8">● 2× konfirmasi</text>
+        </svg></div>
+
+        <h3>4.5 Antarmuka Administrator (Dashboard Admin)</h3>
+        <p>Dashboard Admin dirancang sebagai pusat kendali operasional yang informatif dan responsif, memungkinkan operator mengelola seluruh siklus ujian dari satu antarmuka terpadu:</p>
+        <div class="twoc">
+          <div>
+            <p><strong>Pusat Kendali (Control Center)</strong></p>
+            <ul>
+              <li>Status peserta real-time: <em>Sedang Menguji</em>, <em>Selesai</em>, <em>Koneksi Terputus</em></li>
+              <li>Akses cepat manajemen sesi — buka/tutup ujian, atur jadwal</li>
+              <li>Grafik ringkasan hasil langsung tersedia setelah sesi selesai</li>
+            </ul>
+          </div>
+          <div>
+            <p><strong>Manajemen Data &amp; Audit</strong></p>
+            <ul>
+              <li>Panel backup/restore database — antarmuka intuitif, prosedur aman</li>
+              <li>Log aktivitas pengguna — deteksi kejanggalan akses selama ujian</li>
+              <li>One-click export PDF hasil penilaian untuk administrasi instansi</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>4.6 Keunggulan Teknis Frontend</h3>
+        <div class="tw"><table><thead><tr><th>Fitur</th><th>Implementasi</th><th>Manfaat</th></tr></thead>
+        <tbody>
+          <tr><td>Responsivitas Adaptif</td><td>CSS media queries, flexible grid</td><td>Berfungsi di smartphone, tablet, laptop tanpa instalasi tambahan</td></tr>
+          <tr><td>Auto-Save Asinkron</td><td>AJAX silent background save</td><td>Progres jawaban tersimpan setiap perubahan — tanpa gangguan pada tampilan</td></tr>
+          <tr><td>Proteksi Konten</td><td>Disable right-click, copy-paste, tab-switch detection</td><td>Menjaga kerahasiaan soal dan integritas ujian</td></tr>
+          <tr><td>Timer Dinamis</td><td>JS countdown + server sync via <code>timer.php</code></td><td>Waktu akurat dan konsisten meski koneksi sempat terputus</td></tr>
+          <tr><td>Konfirmasi Berlapis</td><td>Modal dialog dua langkah</td><td>Mencegah submit tidak sengaja — insiden human error diminimalkan</td></tr>
+        </tbody></table></div>
+
+        <h3>4.7 Kesimpulan Frontend</h3>
+        <div class="ib ok"><strong>Pernyataan Implementasi:</strong> Pengembangan frontend ini memastikan peserta maupun admin memiliki alat kerja yang efisien, aman, dan mencerminkan citra profesional PUSKOD BALOGHAN KEMHAN. Dengan menyatukan elemen visual tegas (merah marun) dan arsitektur yang fokus pada pengguna, sistem mendukung tercapainya objektivitas penilaian kataloger yang <strong>kredibel</strong> dan <strong>bebas hambatan teknis</strong>.</div>
+      </div>
+    </section>
+</main></div>
+</body></html>
